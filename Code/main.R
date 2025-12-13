@@ -73,7 +73,9 @@ for (name in dataset_names) {
 # 
 # unique(events3$Player_ID_2)
 
-events3$Player_Id_2 <- as.double(events3$Player_Id_2)
+#change player id2 in events 1 and 2 dataset to character
+events1$Player_Id_2 <- as.character(events1$Player_Id_2)
+events2$Player_Id_2 <- as.character(events2$Player_Id_2)
 
 #put events, shifts and tracking data into separate lists then row bind them
 events_list   <- list(events1, events2, events3)
@@ -183,4 +185,8 @@ tracking_data_clean <- tracking_data_clean %>%            #removing the intermed
 View(data.frame(tracking_data_clean$game_clock, tracking_data_clean$running_clock_seconds,  tracking_data_clean$period, tracking_data_clean$game_id))
 
 # clean tracking data by aggregating/averaging the players coordinates at each second
-
+agg_tracking <- tracking_data_clean %>%
+  filter(!(is.na(rink_location_x_feet) | is.na(rink_location_y_feet | is.na(rink_location_z_feet)))) %>%
+  select(-image_id, -game_clock) %>%
+  group_by(game_id, running_clock_seconds, player_or_puck, team, player_id) %>%
+  summarise(across(where(is.numeric), mean), .groups = "drop")
