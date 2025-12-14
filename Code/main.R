@@ -205,15 +205,76 @@ agg_tracking <- tracking_data_clean %>%
 
 #### CREATING POSSESSION ID ####
 
+end_poss_events <- c("Shot", "Goal", "Penalty Taken")
+
 #drop unnecessary columns and ensure data is ordered
 events_poss_id <- events_data_clean %>%
   select(-date,-clock) %>%
   arrange(game_id, period, running_clock_seconds) %>%
-  mutate(new_possession = team != lag(team) |
-           period != lag(period) |
-           game_id != lag(game_id),
-         new_possession = if_else(is.na(new_possession), TRUE, new_possession)) %>%
-  group_by(game_id, period) %>%
-  mutate(possession_id = cumsum(new_possession)) %>%
-  ungroup()
+  mutate(end_prev = lag(event %in% end_poss_events, default = FALSE),
+         new_possession = team != lag(team) | period != lag(period) |
+           game_id != lag(game_id) | end_prev,
+         new_possession = if_else(is.na(new_possession), TRUE, new_possession),
+         possession_id = cumsum(new_possession)) %>%
+  select(-new_possession)
 
+#check number of distinct poss ids
+n_distinct(events_poss_id$possession_id)
+
+#### CLEAN INTO SEQUENCE DATASET ####
+library(arulesSequences) # run the sequence mining algorithm
+
+
+events_seq <- events_poss_id %>% 
+  group_by(possession_id) %>% 
+  arrange(running_clock_seconds) %>% 
+  #Create Item ID Within Customer ID
+  mutate(itemset_id = row_number()) %>% 
+  unite(col = "itemset", event, detail_1, detail_2, detail_3, detail_4,
+        sep = ",", na.rm = TRUE)  %>%
+  select(possession_id, running_clock_seconds, itemset_id, itemset) %>% 
+  ungroup() %>% 
+  #Convert Everything to Factor
+  mutate(across(.cols = c("possession_id", "itemset"), .f = as.factor))
+
+events_seq <- events_seq[order(events_seq$possession_id),] # descending order
+head(events_seq)
+
+#view all the unique itemsets
+View(events_seq%>% count(itemset) %>% arrange(desc(n)))
+
+#### cSpade Pre-process ####
+
+#convert the itemset variable into a transactions object
+sessions <-  as(events_seq %>% transmute(items = itemset), "transactions")
+#set sequenceID to be the possession ID
+transactionInfo(sessions)$sequenceID <- events_seq$possession_id
+#set eventID to be the itemset_id
+transactionInfo(sessions)$eventID <- events_seq$itemset_id
+#remove the "items=" prefix from the items
+itemLabels(sessions) <- str_replace_all(itemLabels(sessions), "items=", "")
+
+inspect(head(sessions,10))
+
+#### APPLY CSPADE AND VIEW RESULTS ####
+
+#apply cSPADE algorithm with support = 0.001
+itemsets_seq <- cspade(sessions, 
+                   parameter = list(support = 0.001), #freq sequs that occurs in at least 0.1% of all sequs
+                   control = list(verbose = FALSE))
+inspect(head(itemsets_seq,10))
+
+#convert cSPADE results to a tibble
+feq_seq <- as(itemsets_seq, "data.frame") %>% as_tibble()
+
+#add a column containing the length of the pattern
+feq_seq$pattern.length <- (str_count(feq_seq$sequence, ",") + 1)
+
+#sort by highest to lowest support
+feq_seq <- feq_seq[order(-feq_seq$support),] # descending
+
+head(feq_seq,10)
+
+#keep the top 2 patterns with highest support for each pattern length
+c <- feq_seq %>% group_by(pattern.length) %>% slice_max(order_by = support, n = 2)
+c
