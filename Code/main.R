@@ -35,6 +35,14 @@ View(tracking3)
 
 View(camera_orientations)
 
+##view missing clock data
+View(tracking1[303550:303970,])
+View(events1[events1$Period==2,])
+
+View(tracking1[625560:626700,])
+View(events1[events1$Period==3,])
+
+
 ##create game_id variable for each dataset
 
 #list of datasets
@@ -110,6 +118,10 @@ tracking_data_clean <- tracking_data %>% rename(image_id = "Image Id",
 
 events_data_clean <- events_data %>% rename_all(tolower)
 shifts_data_clean <- shifts_data %>% rename_all(tolower)
+
+##extract image id
+tracking_data_clean$image_id <- as.numeric(str_extract(tracking_data_clean$image_id, "\\d+$"))
+
 
 ##convert clock to seconds counting up
 
@@ -187,6 +199,21 @@ View(data.frame(tracking_data_clean$game_clock, tracking_data_clean$running_cloc
 # clean tracking data by aggregating/averaging the players coordinates at each second
 agg_tracking <- tracking_data_clean %>%
   filter(!(is.na(rink_location_x_feet) | is.na(rink_location_y_feet | is.na(rink_location_z_feet)))) %>%
-  select(-image_id, -game_clock) %>%
-  group_by(game_id, running_clock_seconds, player_or_puck, team, player_id) %>%
+  select(-image_id) %>%
+  group_by(game_id, period, running_clock_seconds, game_clock, player_or_puck, team, player_id) %>%
   summarise(across(where(is.numeric), mean), .groups = "drop")
+
+#### CREATING POSSESSION ID ####
+
+#drop unnecessary columns and ensure data is ordered
+events_poss_id <- events_data_clean %>%
+  select(-date,-clock) %>%
+  arrange(game_id, period, running_clock_seconds) %>%
+  mutate(new_possession = team != lag(team) |
+           period != lag(period) |
+           game_id != lag(game_id),
+         new_possession = if_else(is.na(new_possession), TRUE, new_possession)) %>%
+  group_by(game_id, period) %>%
+  mutate(possession_id = cumsum(new_possession)) %>%
+  ungroup()
+
