@@ -463,7 +463,7 @@ events_poss_id <- events_data_clean %>%
            game_id != lag(game_id) | end_prev,
          new_possession = if_else(is.na(new_possession), TRUE, new_possession),
          possession_id = cumsum(new_possession)) %>%
-  select(-new_possession)
+  select(-new_possession, -end_prev)
 
 #check number of distinct poss ids
 n_distinct(events_poss_id$possession_id)
@@ -471,6 +471,10 @@ n_distinct(events_poss_id$possession_id)
 #### CLEAN INTO SEQUENCE DATASET ####
 library(arulesSequences) # run the sequence mining algorithm
 
+<<<<<<< HEAD
+=======
+#clean
+>>>>>>> 93c2ac5e4ff74ec66c0c193be8a66b530c786259
 events_seq <- events_poss_id %>% 
   group_by(possession_id) %>% 
   arrange(running_clock_seconds) %>% 
