@@ -4,7 +4,7 @@
 library(tidyverse)
 library(lubridate)
 
-#import datasets
+#### Import datasets ####
 
 events1 <- read_csv("https://github.com/bigdatacup/Big-Data-Cup-2025/releases/download/Data/2024-10-25.Team.H.@.Team.G.-.Events.csv")
 shifts1 <- read_csv("https://github.com/bigdatacup/Big-Data-Cup-2025/releases/download/Data/2024-10-25.Team.H.@.Team.G.-.Shifts.csv")
@@ -20,29 +20,29 @@ tracking3 <- read_csv("https://github.com/bigdatacup/Big-Data-Cup-2025/releases/
 
 camera_orientations <- read_csv("https://github.com/bigdatacup/Big-Data-Cup-2025/releases/download/Data/camera_orientations.csv")
 
-#view datasets
-View(events1)
-View(shifts1)
-View(tracking1)
-
-View(events2)
-View(shifts2)
-View(tracking2)
-
-View(events3)
-View(shifts3)
-View(tracking3)
-
-View(camera_orientations)
+##view datasets
+# View(events1)
+# View(shifts1)
+# View(tracking1)
+# 
+# View(events2)
+# View(shifts2)
+# View(tracking2)
+# 
+# View(events3)
+# View(shifts3)
+# View(tracking3)
+#
+#View(camera_orientations)
 
 ##view missing clock data
-View(tracking1[303550:303970,])
-View(events1[events1$Period==2,])
+# View(tracking1[303550:303970,])
+# View(events1[events1$Period==2,])
+# 
+# View(tracking1[625560:626700,])
+# View(events1[events1$Period==3,])
 
-View(tracking1[625560:626700,])
-View(events1[events1$Period==3,])
-
-
+#### MERGE DATASETS ####
 ##create game_id variable for each dataset
 
 #list of datasets
@@ -96,9 +96,9 @@ shifts_data   <- bind_rows(shifts_list)
 tracking_data <- bind_rows(tracking_list)
 
 #view datasets
-View(events_data)
-View(shifts_data)
-View(tracking_data)
+# View(events_data)
+# View(shifts_data)
+# View(tracking_data)
 
 glimpse(events_data)
 glimpse(shifts_data)
@@ -119,6 +119,8 @@ tracking_data_clean <- tracking_data %>% rename(image_id = "Image Id",
 events_data_clean <- events_data %>% rename_all(tolower)
 shifts_data_clean <- shifts_data %>% rename_all(tolower)
 
+
+#### ADD RUNNING SECONDS VARIABLE ####
 ##extract image id
 tracking_data_clean$image_id <- as.numeric(str_extract(tracking_data_clean$image_id, "\\d+$"))
 
@@ -196,6 +198,7 @@ tracking_data_clean <- tracking_data_clean %>%            #removing the intermed
 
 View(data.frame(tracking_data_clean$game_clock, tracking_data_clean$running_clock_seconds,  tracking_data_clean$period, tracking_data_clean$game_id))
 
+#### AGGREGATE TRACKING DATA ####
 # clean tracking data by aggregating/averaging the players coordinates at each second
 agg_tracking <- tracking_data_clean %>%
   filter(!(is.na(rink_location_x_feet) | is.na(rink_location_y_feet | is.na(rink_location_z_feet)))) %>%
@@ -203,6 +206,8 @@ agg_tracking <- tracking_data_clean %>%
   group_by(game_id, period, running_clock_seconds, game_clock, player_or_puck, team, player_id) %>%
   summarise(across(where(is.numeric), mean), .groups = "drop")
 
+
+#### FEATURE ENGINEERING ####
 ##create zones as locations using the x, y coordinates (zones in a hockey rink: defending zone, neutral zone, attacking zone)
 
 #from camera_orientations.csv - teams switch sides each period
@@ -449,6 +454,22 @@ events_distance <- events_distance %>%
   ) 
 
 View(events_distance)
+
+
+## create direction variable for passes
+events_distance <- events_distance %>%
+  mutate(
+    line1_y = (x_coodinate_2 - x_coodinate_1) + y_coodinate_1,
+    line2_y = -(x_coodinate_2) + y_coodinate_1,
+    
+    pass_direction = case_when(
+      y_coodinate_2 > line1_y & y_coodinate_2 < line2_y ~ "forward",
+      y_coodinate_2 < line1_y & y_coodinate_2 > line2_y ~ "backward",
+      TRUE                        ~ "lateral"
+    )
+  ) %>%
+  select(-line1_y, -line2_y)
+
 
 #### CREATING POSSESSION ID ####
 
