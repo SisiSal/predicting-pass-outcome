@@ -203,6 +203,253 @@ agg_tracking <- tracking_data_clean %>%
   group_by(game_id, period, running_clock_seconds, game_clock, player_or_puck, team, player_id) %>%
   summarise(across(where(is.numeric), mean), .groups = "drop")
 
+##create zones as locations using the x, y coordinates (zones in a hockey rink: defending zone, neutral zone, attacking zone)
+
+#from camera_orientations.csv - teams switch sides each period
+# Game 1: Team G (home team) and Team H (away team)
+# Period 1 - Team G on right side and Team H on left side
+# Period 2 - Team H on right side and Team G on left side
+# Period 3 - Team G on right side and Team H on left side
+# 
+# Game 2: Team C (home team) and Team D (away team)
+# Period 1 - Team D on right side and Team C on left side
+# Period 2 - Team C on right side and Team D on left side
+# Period 3 - Team D on right side and Team C on left side
+# 
+# Game 3: Team E (home team) and Team F (away team)
+# Period 1 - Team F on right side and Team E on left side
+# Period 2 - Team E on right side and Team F on left side
+# Period 3 - Team F on right side and Team E on left side
+
+#create table for team on right in period 1 (based on camera_orientations.csv)
+game_orientation <- tibble(
+  game_id = c(1, 2, 3),
+  team_on_right_p1 = c("Team G", "Team D", "Team F")
+)
+
+#events data
+#create variable indicating which direction the teams are moving in (attacking_direction) and create transformed x coordinate so all teams attack towards +x
+events_zones <- events_data_clean %>%
+  left_join(game_orientation, by = "game_id") %>%
+  mutate(
+    attacking_direction = case_when(
+      #Periods 1 & 3
+      period %in% c(1, 3) & team == team_on_right_p1 ~ "left",
+      period %in% c(1, 3) & team != team_on_right_p1 ~ "right",
+      #Period 2 (flipped)
+      period == 2 & team == team_on_right_p1 ~ "right",
+      period == 2 & team != team_on_right_p1 ~ "left",
+      TRUE ~ NA_character_)    #for any row that didn’t match any of the conditions above, assign NA (just in case)
+    ) %>%
+    mutate( #if team is attacking towards left, multiply x coordinate by -1
+      x1_attacking = if_else(attacking_direction == "left", -x_coordinate, x_coordinate),
+      x2_attacking = if_else(attacking_direction == "left", -x_coordinate_2, x_coordinate_2)
+    ) %>%
+  mutate(
+    x1_zone = case_when(
+      x1_attacking <= -25 ~ "Defensive Zone",
+      x1_attacking <  25  ~ "Neutral Zone",
+      x1_attacking >= 25  ~ "Offensive Zone"),
+    x2_zone = case_when(
+      x2_attacking <= -25 ~ "Defensive Zone",
+      x2_attacking <  25  ~ "Neutral Zone",
+      x2_attacking >= 25  ~ "Offensive Zone")
+    ) %>%
+  select(-team_on_right_p1, -x1_attacking, -x2_attacking) #keeping attacking_direction in dataset since it will be used when calculating the distance for shots and goals
+
+View(events_zones)
+
+#tracking data
+
+#add new variable called team_name for which team the row is referring to
+game_teams <- tibble(
+  game_id = c(1, 2, 3),
+  home_team = c("Team G", "Team C", "Team E"),
+  away_team = c("Team H", "Team D", "Team F")
+)
+
+agg_tracking_zones <- agg_tracking %>%
+  left_join(game_teams, by = "game_id") %>%
+  mutate(
+    team_name = case_when(
+      team == "Home" ~ home_team,
+      team == "Away" ~ away_team,
+      TRUE ~ NA_character_
+    )
+  )
+
+#create variable indicating which direction the teams are moving in (attacking_direction) and create transformed x coordinate so all teams attack towards +x
+agg_tracking_zones <- agg_tracking_zones %>%
+  left_join(game_orientation, by = "game_id") %>%
+  mutate(
+    attacking_direction = case_when(
+      #Periods 1 & 3
+      period %in% c(1, 3) & team_name == team_on_right_p1 ~ "left",
+      period %in% c(1, 3) & team_name != team_on_right_p1 ~ "right",
+      #Period 2 (flipped)
+      period == 2 & team_name == team_on_right_p1 ~ "right",
+      period == 2 & team_name != team_on_right_p1 ~ "left",
+      TRUE ~ NA_character_)    #for any row that didn’t match any of the conditions above, assign NA (just in case)
+  ) %>%
+  mutate( #if team is attacking towards left, multiply x coordinate by -1
+    x_attacking = if_else(attacking_direction == "left", -rink_location_x_feet, rink_location_x_feet)
+  ) %>%
+  mutate(
+    zone = case_when(
+      x_attacking <= -25 ~ "Defensive Zone",
+      x_attacking <  25  ~ "Neutral Zone",
+      x_attacking >= 25  ~ "Offensive Zone")
+  ) %>%
+ select(-home_team, -away_team, -team_on_right_p1, -attacking_direction, -x_attacking)
+
+View(agg_tracking_zones)
+#in tracking data, difficult to put what location puck is in since zones depend on what team we are looking at (offensive or defensive zone)
+
+#double check length and width of rink ()
+agg_tracking_zones %>%
+  filter(player_or_puck == "Puck") %>%
+  ggplot(aes(x = rink_location_x_feet,
+             y = rink_location_y_feet)) +
+  geom_point(alpha = 0.05) +
+  coord_fixed()
+
+##calculate distance for passes and shots
+
+calculate_distance_coordinates <- function(x1, y1, x2, y2) {
+  diff_sqr_x <- (x2 - x1)^2
+  diff_sqr_y <- (y2 - y1)^2
+  distance <- sqrt(diff_sqr_x + diff_sqr_y)
+  
+  return(distance)
+}
+
+#distance of passes, shots and goals
+
+#need to add coordinates of goal nets to shots and goals - goal line is 11 feet from the end boards so left net is (-89, 0) and right net is at (89, 0)
+#creating two new variables called new_x_coords_2 and new_y_coords_2 that incorporates both goal net coordinates and x_coordinate_2, y_coordinate_2
+events_distance <- events_zones %>% 
+  mutate(
+    new_x_coords_2 = case_when(
+      #creating new variable which takes on coordinates of left net if team's playing direction is left and right net if team's playing direction is right
+      event %in% c("Shot", "Goal") & attacking_direction == "left"  ~ -89,
+      event %in% c("Shot", "Goal") & attacking_direction == "right" ~  89,
+      
+      #copies over x_coordinate_2 from events play and incomplete play
+      event %in% c("Play", "Incomplete Play") ~ x_coordinate_2,
+      
+      TRUE ~ NA_real_
+    ),
+    new_y_coords_2 = case_when(
+      #y coordinate of nets are 0 (centre)
+      event %in% c("Shot", "Goal") ~ 0,
+      
+      #copies over y_coordinate_2 from events play and incomplete play
+      event %in% c("Play", "Incomplete Play") ~ y_coordinate_2,
+      
+      TRUE ~ NA_real_
+    )
+  )
+
+#calculating distance for shots, goals, plays and incomplete plays
+events_distance <- events_distance %>%
+  rowwise() %>%
+  mutate(
+    distance = if (
+      event %in% c("Shot", "Goal", "Play", "Incomplete Play") &&
+      !is.na(new_x_coords_2) &&
+      !is.na(new_y_coords_2)
+    ) {
+      calculate_distance_coordinates(
+        x1 = x_coordinate,
+        y1 = y_coordinate,
+        x2 = new_x_coords_2,
+        y2 = new_y_coords_2
+      )
+    } else {
+      NA_real_
+    }
+  ) %>%
+  ungroup()
+	
+View(events_distance)
+
+#create threshold variables for distance for shots and goals, and for passes and incomplete passes
+
+events_play <- events_distance %>%
+  filter(event %in% c("Play", "Incomplete Play"))
+
+events_shots_goals <- events_distance %>%
+  filter(event %in% c("Shot", "Goal"))
+
+#histogram of distances for passes and incomplete passes distance
+ggplot(events_play, aes(x = distance)) +
+  geom_histogram(binwidth = 5, fill = "steelblue", color = "black") +
+  labs(
+    title = "Distribution of Distance for Plays and Incomplete Plays",
+    x = "Distance",
+    y = "Count"
+  ) +
+  theme_minimal()
+
+#histogram of distances for shots and goals distance
+ggplot(events_shots_goals, aes(x = distance)) +
+  geom_histogram(binwidth = 5, fill = "steelblue", color = "black") +
+  labs(
+    title = "Distribution of Distance for Shots and Goals",
+    x = "Distance",
+    y = "Count"
+  ) +
+  theme_minimal()
+
+#events_distance_thresholds <- events_zones 
+
+quantiles_passes <- quantile(events_play$distance, probs = c(0, 0.33, 0.66, 1), na.rm = TRUE)
+quantiles_shots_goals <- quantile(events_shots_goals$distance, probs = c(0, 0.33, 0.66, 1), na.rm = TRUE)
+
+quantiles_passes
+quantiles_shots_goals
+
+events_distance <- events_distance %>%
+  mutate(
+    pass_dist_threshold = case_when(
+      event %in% c("Play", "Incomplete Play") ~ cut(
+        distance,
+        breaks = quantiles_passes,
+        labels = c("Short", "Medium", "Long"),
+        include.lowest = TRUE
+      ),
+      TRUE ~ NA_character_
+    )) %>%
+    mutate(
+      shots_dist_threshold = case_when(
+        event %in% c("Shot", "Goal") ~ cut(
+          distance,
+          breaks = quantiles_shots_goals,
+          labels = c("Short", "Medium", "Long"),
+          include.lowest = TRUE
+        ),
+        TRUE ~ NA_character_
+      ))
+
+View(events_distance)
+
+#Fix True and False values in detail_3 and detail_4
+events_distance <- events_distance %>%
+  mutate(
+  new_detail_3 = case_when(
+    event %in% c("Shot", "Goal") & detail_3 == TRUE ~ "traffic",
+    event %in% c("Shot", "Goal") & detail_3 == FALSE ~ "no_traffic",
+    TRUE ~ NA_character_)    #for any row that didn’t match any of the conditions above, assign NA (just in case)
+  ) %>%
+  mutate(
+    new_detail_4 = case_when(
+      event %in% c("Shot", "Goal") & detail_4 == TRUE ~ "one_timer",
+      event %in% c("Shot", "Goal") & detail_4 == FALSE ~ "not_one_timer",
+      TRUE ~ NA_character_)    #for any row that didn’t match any of the conditions above, assign NA (just in case)
+  ) 
+
+View(events_distance)
+
 #### CREATING POSSESSION ID ####
 
 end_poss_events <- c("Shot", "Goal", "Penalty Taken")
@@ -223,7 +470,6 @@ n_distinct(events_poss_id$possession_id)
 
 #### CLEAN INTO SEQUENCE DATASET ####
 library(arulesSequences) # run the sequence mining algorithm
-
 
 events_seq <- events_poss_id %>% 
   group_by(possession_id) %>% 
