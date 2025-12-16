@@ -170,7 +170,7 @@ events_data_clean <- events_data_clean %>%            #removing the intermediate
   select(-clock_seconds_remaining, -period_length, -clock_seconds_elapsed) %>%
   mutate(running_clock_seconds = as.double(running_clock_seconds))   #converting from seconds format/type to a number
 
-View(data.frame(events_data_clean$clock, events_data_clean$running_clock_seconds,  events_data_clean$period, events_data_clean$game_id))
+#View(data.frame(events_data_clean$clock, events_data_clean$running_clock_seconds,  events_data_clean$period, events_data_clean$game_id))
 
 #for shifts data - just converting everything to seconds (not calculating a running clock since shifts are in intervals of time)
 shifts_data_clean <- shifts_data_clean %>%
@@ -196,7 +196,7 @@ tracking_data_clean <- tracking_data_clean %>%            #removing the intermed
   select(-clock_seconds_remaining, -period_length, -clock_seconds_elapsed) %>%
   mutate(running_clock_seconds = as.double(running_clock_seconds))   #converting from seconds format/type to a number
 
-View(data.frame(tracking_data_clean$game_clock, tracking_data_clean$running_clock_seconds,  tracking_data_clean$period, tracking_data_clean$game_id))
+#View(data.frame(tracking_data_clean$game_clock, tracking_data_clean$running_clock_seconds,  tracking_data_clean$period, tracking_data_clean$game_id))
 
 #### AGGREGATE TRACKING DATA ####
 # clean tracking data by aggregating/averaging the players coordinates at each second
@@ -268,7 +268,7 @@ events_zones <- events_data_clean %>%
     ) %>%
   select(-team_on_right_p1, -x1_attacking, -x2_attacking) #keeping attacking_direction in dataset since it will be used when calculating the distance for shots and goals
 
-View(events_zones)
+#View(events_zones)
 
 #tracking data
 
@@ -316,7 +316,7 @@ agg_tracking_zones <- agg_tracking_zones %>%
   ) %>%
  select(-home_team, -away_team, -team_on_right_p1, -attacking_direction, -x_attacking)
 
-View(agg_tracking_zones)
+#View(agg_tracking_zones)
 #in tracking data, difficult to put what location puck is in since zones depend on what team we are looking at (offensive or defensive zone)
 
 #double check length and width of rink ()
@@ -385,7 +385,7 @@ events_distance <- events_distance %>%
   ) %>%
   ungroup()
 	
-View(events_distance)
+#View(events_distance)
 
 #create threshold variables for distance for shots and goals, and for passes and incomplete passes
 
@@ -445,7 +445,7 @@ events_distance <- events_distance %>%
         TRUE ~ NA_character_
       ))
 
-View(events_distance)
+#View(events_distance)
 
 #Fix True and False values in detail_3 and detail_4
 events_distance <- events_distance %>%
@@ -462,7 +462,7 @@ events_distance <- events_distance %>%
       TRUE ~ NA_character_)    #for any row that didn’t match any of the conditions above, assign NA (just in case)
   ) 
 
-View(events_distance)
+#View(events_distance)
 
 
 ## create direction variable for passes
@@ -590,8 +590,9 @@ inspect(head(sessions,10))
 #apply cSPADE algorithm with support = 0.001
 itemsets_seq <- cspade(sessions, 
                    parameter = list(support = 0.001), #freq sequs that occurs in at least 0.1% of all sequs
-                   control = list(verbose = FALSE))
+                   control = list(verbose = TRUE))
 inspect(head(itemsets_seq,10))
+summary(itemsets_seq)
 
 #convert cSPADE results to a tibble
 feq_seq <- as(itemsets_seq, "data.frame") %>% as_tibble()
@@ -606,13 +607,14 @@ head(feq_seq,10)
 
 #keep the top 2 patterns with highest support for each pattern length
 c <- feq_seq %>% group_by(pattern.length) %>% slice_max(order_by = support, n = 2)
-
+head(c,10)
 
 #add a column containing the number of events in the pattern
 feq_seq$seq.event.length <- (str_count(feq_seq$sequence, "\\}") + 1)
 
 #keep the top 2 patterns with highest support for each pattern length
 c2 <- feq_seq %>% group_by(seq.event.length) %>% slice_max(order_by = support, n = 2)
+head(c2,10)
 
 
 
