@@ -252,13 +252,19 @@ events_zones <- events_data_clean %>%
     ) %>%
   mutate(
     x1_zone = case_when(
-      x1_attacking <= -25 ~ "Defensive Zone",
-      x1_attacking <  25  ~ "Neutral Zone",
-      x1_attacking >= 25  ~ "Offensive Zone"),
+      x1_attacking < -89 ~ "Behind Net (Def)",
+      x1_attacking >= -89 & x1_attacking < -25 ~ "Defensive Zone",
+      x1_attacking >= -25 & x1_attacking <  25 ~ "Neutral Zone",
+      x1_attacking >=  25 & x1_attacking <= 89 ~ "Offensive Zone",
+      x1_attacking > 89 ~ "Behind Net (Off)",
+      TRUE ~ NA_character_),
     x2_zone = case_when(
-      x2_attacking <= -25 ~ "Defensive Zone",
-      x2_attacking <  25  ~ "Neutral Zone",
-      x2_attacking >= 25  ~ "Offensive Zone")
+      x2_attacking < -89 ~ "Behind Net (Def)",
+      x2_attacking >= -89 & x2_attacking < -25 ~ "Defensive Zone",
+      x2_attacking >= -25 & x2_attacking <  25 ~ "Neutral Zone",
+      x2_attacking >=  25 & x2_attacking <= 89 ~ "Offensive Zone",
+      x2_attacking > 89 ~ "Behind Net (Off)",
+      TRUE ~ NA_character_)
     ) %>%
   select(-team_on_right_p1, -x1_attacking, -x2_attacking) #keeping attacking_direction in dataset since it will be used when calculating the distance for shots and goals
 
@@ -301,9 +307,12 @@ agg_tracking_zones <- agg_tracking_zones %>%
   ) %>%
   mutate(
     zone = case_when(
-      x_attacking <= -25 ~ "Defensive Zone",
-      x_attacking <  25  ~ "Neutral Zone",
-      x_attacking >= 25  ~ "Offensive Zone")
+      x_attacking < -89 ~ "Behind Net (Def)",
+      x_attacking >= -89 & x_attacking < -25 ~ "Defensive Zone",
+      x_attacking >= -25 & x_attacking <  25 ~ "Neutral Zone",
+      x_attacking >=  25 & x_attacking <= 89 ~ "Offensive Zone",
+      x_attacking > 89 ~ "Behind Net (Off)",
+      TRUE ~ NA_character_)
   ) %>%
  select(-home_team, -away_team, -team_on_right_p1, -attacking_direction, -x_attacking)
 
@@ -459,16 +468,58 @@ View(events_distance)
 ## create direction variable for passes
 events_distance <- events_distance %>%
   mutate(
-    line1_y = (x_coodinate_2 - x_coodinate_1) + y_coodinate_1,
-    line2_y = -(x_coodinate_2) + y_coodinate_1,
+    x1_att = if_else(attacking_direction == "left", -x_coordinate,  x_coordinate),
+    y1_att = if_else(attacking_direction == "left", -y_coordinate,  y_coordinate),
+    x2_att = if_else(attacking_direction == "left", -x_coordinate_2, x_coordinate_2),
+    y2_att = if_else(attacking_direction == "left", -y_coordinate_2, y_coordinate_2),
+    
+    line1_y =  (x2_att - x1_att) + y1_att,
+    line2_y = -(x2_att - x1_att) + y1_att,
     
     pass_direction = case_when(
-      y_coodinate_2 > line1_y & y_coodinate_2 < line2_y ~ "forward",
-      y_coodinate_2 < line1_y & y_coodinate_2 > line2_y ~ "backward",
-      TRUE                        ~ "lateral"
+      !event %in% c("Play", "Incomplete Play") ~ NA_character_, 
+      x1_att == x2_att & y1_att == y2_att ~ "nm",
+      x1_att == x2_att ~ "lat",
+      y2_att < line1_y & y2_att > line2_y ~ "fw",
+      y2_att > line1_y & y2_att < line2_y ~ "bw",
+      x2_att > x1_att ~ "lfw",
+      x2_att < x1_att ~ "lbw",
+      TRUE ~ NA_character_
     )
   ) %>%
   select(-line1_y, -line2_y)
+
+#add score state variable
+events_distance <- events_distance %>%
+  mutate(
+    score_state = case_when(
+      team == home_team & home_team_goals > away_team_goals ~ "leading",
+      team == home_team & home_team_goals < away_team_goals ~ "trailing",
+      team == away_team & away_team_goals > home_team_goals ~ "leading",
+      team == away_team & away_team_goals < home_team_goals ~ "trailing",
+      TRUE                                                  ~ "tied"
+    )
+  )
+
+
+##add angle of shots
+events_distance <- events_distance %>%
+  mutate(post_angle = case_when(
+    event %in% c("Shot", "Goal") ~ {
+      up_dis <- calculate_distance_coordinates(x1_att, y1_att, 89,  3)
+      down_dis <- calculate_distance_coordinates(x1_att, y1_att, 89, -3)
+      posts_dis <- 6
+        
+      cos_value <- ((up_dis^2 + down_dis^2 - posts_dis^2) /
+                        (2 * up_dis * down_dis))
+      
+      ifelse(x1_att == 89 & y1_att >= -3 & y1_att <= 3, 180,
+             ifelse(x1_att == 89 & (y1_att < -3 | y1_att > 3), 0,
+                    acos(cos_value) * 180 / pi))
+      },
+    TRUE ~ NA_real_))
+
+summary(events_distance$post_angle)
 
 
 #### CREATING POSSESSION ID ####
@@ -476,7 +527,7 @@ events_distance <- events_distance %>%
 end_poss_events <- c("Shot", "Goal", "Penalty Taken")
 
 #drop unnecessary columns and ensure data is ordered
-events_poss_id <- events_data_clean %>%
+events_poss_id <- events_distance %>%
   select(-date,-clock) %>%
   arrange(game_id, period, running_clock_seconds) %>%
   mutate(end_prev = lag(event %in% end_poss_events, default = FALSE),
@@ -492,27 +543,34 @@ n_distinct(events_poss_id$possession_id)
 #### CLEAN INTO SEQUENCE DATASET ####
 library(arulesSequences) # run the sequence mining algorithm
 
-<<<<<<< HEAD
-=======
-#clean
->>>>>>> 93c2ac5e4ff74ec66c0c193be8a66b530c786259
+events_seq <- events_poss_id %>% 
+  group_by(possession_id) %>% arrange(running_clock_seconds) %>%
+  mutate(itemset_id = row_number()) %>% 
+  unite(col = "itemset", event, x1_zone, x2_zone, 
+        pass_dist_threshold, shots_dist_threshold, pass_direction, score_state, 
+        detail_1, detail_2, new_detail_3, new_detail_4, sep = ",", na.rm = TRUE) %>% 
+  select(possession_id, running_clock_seconds, itemset_id, itemset) %>% 
+  ungroup() %>%  
+  mutate(across(.cols = c("possession_id", "itemset"), .f = as.factor))
+
+############this code below is being tested############
 events_seq <- events_poss_id %>% 
   group_by(possession_id) %>% 
   arrange(running_clock_seconds) %>% 
   #Create Item ID Within Customer ID
   mutate(itemset_id = row_number()) %>% 
-  unite(col = "itemset", event, detail_1, detail_2, detail_3, detail_4,
-        sep = ",", na.rm = TRUE)  %>%
-  select(possession_id, running_clock_seconds, itemset_id, itemset) %>% 
   ungroup() %>% 
-  #Convert Everything to Factor
-  mutate(across(.cols = c("possession_id", "itemset"), .f = as.factor))
+  select(possession_id, itemset_id, event, x1_zone, x2_zone, 
+         pass_dist_threshold, shots_dist_threshold, pass_direction,
+         score_state, detail_1, detail_2, new_detail_3, new_detail_4) %>%
+  pivot_longer(cols = -c(possession_id, itemset_id), 
+               names_to = "item_name", values_to = "item", 
+               values_drop_na = TRUE) %>%
+  mutate(across(.cols = c("item_name", "item"), .f = as.factor))
+############this code above is being tested############
 
-events_seq <- events_seq[order(events_seq$possession_id),] # descending order
+events_seq <- events_seq[order(events_seq$possession_id, events_seq$itemset_id),] # descending order
 head(events_seq)
-
-#view all the unique itemsets
-View(events_seq%>% count(itemset) %>% arrange(desc(n)))
 
 #### cSpade Pre-process ####
 
@@ -548,4 +606,13 @@ head(feq_seq,10)
 
 #keep the top 2 patterns with highest support for each pattern length
 c <- feq_seq %>% group_by(pattern.length) %>% slice_max(order_by = support, n = 2)
-c
+
+
+#add a column containing the number of events in the pattern
+feq_seq$seq.event.length <- (str_count(feq_seq$sequence, "\\}") + 1)
+
+#keep the top 2 patterns with highest support for each pattern length
+c2 <- feq_seq %>% group_by(seq.event.length) %>% slice_max(order_by = support, n = 2)
+
+
+
