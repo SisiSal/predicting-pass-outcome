@@ -572,8 +572,7 @@ test2 <- possession_gaps %>% filter(gap_seconds >= 9)
 test2 <- test2 %>% 
   select(game_id, possession_id, period, event, gap_seconds) %>%
   arrange(gap_seconds)
-
-test2 <- possession_gaps %>% filter(gap_seconds >= 9)
+#View(test2)
 
 #check number of distinct poss ids
 n_distinct(events_poss_id$possession_id)
