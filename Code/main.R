@@ -621,7 +621,7 @@ head(as(seq_matrix, "data.frame"))
 
 #apply cSPADE algorithm with support = 0.01
 itemsets_seq <- cspade(seq_matrix, 
-                   parameter = list(support = 0.01), #freq sequs that occurs in at least 1% of all sequs
+                   parameter = list(support = 0.1), #freq sequs that occurs in at least 1% of all sequs
                    control = list(verbose = TRUE))
 inspect(head(itemsets_seq,10))
 
