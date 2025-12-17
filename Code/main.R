@@ -252,18 +252,18 @@ events_zones <- events_data_clean %>%
     ) %>%
   mutate(
     x1_zone = case_when(
-      x1_attacking < -89 ~ "Behind Net (Def)",
-      x1_attacking >= -89 & x1_attacking < -25 ~ "Defensive Zone",
-      x1_attacking >= -25 & x1_attacking <  25 ~ "Neutral Zone",
-      x1_attacking >=  25 & x1_attacking <= 89 ~ "Offensive Zone",
-      x1_attacking > 89 ~ "Behind Net (Off)",
+      x1_attacking < -89 ~ "BND",
+      x1_attacking >= -89 & x1_attacking < -25 ~ "DZ",
+      x1_attacking >= -25 & x1_attacking <  25 ~ "NZ",
+      x1_attacking >=  25 & x1_attacking <= 89 ~ "OZ",
+      x1_attacking > 89 ~ "BNO",
       TRUE ~ NA_character_),
     x2_zone = case_when(
-      x2_attacking < -89 ~ "Behind Net (Def)",
-      x2_attacking >= -89 & x2_attacking < -25 ~ "Defensive Zone",
-      x2_attacking >= -25 & x2_attacking <  25 ~ "Neutral Zone",
-      x2_attacking >=  25 & x2_attacking <= 89 ~ "Offensive Zone",
-      x2_attacking > 89 ~ "Behind Net (Off)",
+      x2_attacking < -89 ~ "BND",
+      x2_attacking >= -89 & x2_attacking < -25 ~ "DZ",
+      x2_attacking >= -25 & x2_attacking <  25 ~ "NZ",
+      x2_attacking >=  25 & x2_attacking <= 89 ~ "OZ",
+      x2_attacking > 89 ~ "BNO",
       TRUE ~ NA_character_)
     ) %>%
   select(-team_on_right_p1, -x1_attacking, -x2_attacking) #keeping attacking_direction in dataset since it will be used when calculating the distance for shots and goals
@@ -307,11 +307,11 @@ agg_tracking_zones <- agg_tracking_zones %>%
   ) %>%
   mutate(
     zone = case_when(
-      x_attacking < -89 ~ "Behind Net (Def)",
-      x_attacking >= -89 & x_attacking < -25 ~ "Defensive Zone",
-      x_attacking >= -25 & x_attacking <  25 ~ "Neutral Zone",
-      x_attacking >=  25 & x_attacking <= 89 ~ "Offensive Zone",
-      x_attacking > 89 ~ "Behind Net (Off)",
+      x_attacking < -89 ~ "BND",
+      x_attacking >= -89 & x_attacking < -25 ~ "DZ",
+      x_attacking >= -25 & x_attacking <  25 ~ "NZ",
+      x_attacking >=  25 & x_attacking <= 89 ~ "OZ",
+      x_attacking > 89 ~ "BNO",
       TRUE ~ NA_character_)
   ) %>%
  select(-home_team, -away_team, -team_on_right_p1, -attacking_direction, -x_attacking)
@@ -493,10 +493,10 @@ events_distance <- events_distance %>%
 events_distance <- events_distance %>%
   mutate(
     score_state = case_when(
-      team == home_team & home_team_goals > away_team_goals ~ "leading",
-      team == home_team & home_team_goals < away_team_goals ~ "trailing",
-      team == away_team & away_team_goals > home_team_goals ~ "leading",
-      team == away_team & away_team_goals < home_team_goals ~ "trailing",
+      team == home_team & home_team_goals > away_team_goals ~ "lead",
+      team == home_team & home_team_goals < away_team_goals ~ "trail",
+      team == away_team & away_team_goals > home_team_goals ~ "lead",
+      team == away_team & away_team_goals < home_team_goals ~ "trail",
       TRUE                                                  ~ "tied"
     )
   )
@@ -543,52 +543,46 @@ n_distinct(events_poss_id$possession_id)
 #### CLEAN INTO SEQUENCE DATASET ####
 library(arulesSequences) # run the sequence mining algorithm
 
-events_seq <- events_poss_id %>% 
+#quick values cleanup
+events_poss_abbr <- events_poss_id %>%
+  mutate(event = dplyr::recode(event,
+                               "Faceoff Win"     = "FoW",
+                               "Puck Recovery"   = "PRec",
+                               "Zone Entry"      = "ZEnt",
+                               "Incomplete Play" = "IPlay",
+                               "Dump In/Out"     = "DIO",
+                               "Takeaway"        = "TAw",
+                               "Penalty Taken"   = "PenT")) %>%
+  mutate(across(c(detail_1, detail_2), ~ str_replace_all(., " ", "_")))
+
+#group together all event items and add event size
+events_seq <- events_poss_abbr %>% 
   group_by(possession_id) %>% arrange(running_clock_seconds) %>%
-  mutate(itemset_id = row_number()) %>% 
-  unite(col = "itemset", event, x1_zone, x2_zone, 
+  mutate(eventID = row_number()) %>% 
+  unite(col = "items", event, x1_zone, x2_zone, 
         pass_dist_threshold, shots_dist_threshold, pass_direction, score_state, 
         detail_1, detail_2, new_detail_3, new_detail_4, sep = ",", na.rm = TRUE) %>% 
-  select(possession_id, running_clock_seconds, itemset_id, itemset) %>% 
-  ungroup() %>%  
-  mutate(across(.cols = c("possession_id", "itemset"), .f = as.factor))
+  ungroup() %>%
+  mutate(SIZE = str_count(items, ",") + 1) %>%
+  select(possession_id, eventID, SIZE, items) %>%
+  mutate(across(everything(), as.factor)) %>%
+  rename(sequenceID = possession_id) %>%
+  arrange(sequenceID, eventID)
 
-############this code below is being tested############
-events_seq <- events_poss_id %>% 
-  group_by(possession_id) %>% 
-  arrange(running_clock_seconds) %>% 
-  #Create Item ID Within Customer ID
-  mutate(itemset_id = row_number()) %>% 
-  ungroup() %>% 
-  select(possession_id, itemset_id, event, x1_zone, x2_zone, 
-         pass_dist_threshold, shots_dist_threshold, pass_direction,
-         score_state, detail_1, detail_2, new_detail_3, new_detail_4) %>%
-  pivot_longer(cols = -c(possession_id, itemset_id), 
-               names_to = "item_name", values_to = "item", 
-               values_drop_na = TRUE) %>%
-  mutate(across(.cols = c("item_name", "item"), .f = as.factor))
-############this code above is being tested############
-
-events_seq <- events_seq[order(events_seq$possession_id, events_seq$itemset_id),] # descending order
-head(events_seq)
+head(events_seq, 10)
 
 #### cSpade Pre-process ####
 
-#convert the itemset variable into a transactions object
-sessions <-  as(events_seq %>% transmute(items = itemset), "transactions")
-#set sequenceID to be the possession ID
-transactionInfo(sessions)$sequenceID <- events_seq$possession_id
-#set eventID to be the itemset_id
-transactionInfo(sessions)$eventID <- events_seq$itemset_id
-#remove the "items=" prefix from the items
-itemLabels(sessions) <- str_replace_all(itemLabels(sessions), "items=", "")
-
-inspect(head(sessions,10))
+# Convert to transaction matrix data type
+write.table(events_seq, "hockey_seq.txt", sep=",", row.names = FALSE, col.names = FALSE, quote = FALSE)
+seq_matrix <- read_baskets("hockey_seq.txt", sep = ",", info = c("sequenceID","eventID","SIZE"))
+inspect(head(seq_matrix,10))
+head(as(seq_matrix, "data.frame"))
 
 #### APPLY CSPADE AND VIEW RESULTS ####
 
 #apply cSPADE algorithm with support = 0.001
-itemsets_seq <- cspade(sessions, 
+itemsets_seq <- cspade(seq_matrix, 
                    parameter = list(support = 0.001), #freq sequs that occurs in at least 0.1% of all sequs
                    control = list(verbose = TRUE))
 inspect(head(itemsets_seq,10))
@@ -615,6 +609,4 @@ feq_seq$seq.event.length <- (str_count(feq_seq$sequence, "\\}") + 1)
 #keep the top 2 patterns with highest support for each pattern length
 c2 <- feq_seq %>% group_by(seq.event.length) %>% slice_max(order_by = support, n = 2)
 head(c2,10)
-
-
 
