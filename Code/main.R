@@ -531,8 +531,9 @@ events_poss_id <- events_distance %>%
   select(-date,-clock) %>%
   arrange(game_id, period, running_clock_seconds) %>%
   mutate(end_prev = lag(event %in% end_poss_events, default = FALSE),
+         time_gap = running_clock_seconds - lag(running_clock_seconds),
          new_possession = team != lag(team) | period != lag(period) |
-           game_id != lag(game_id) | end_prev,
+           game_id != lag(game_id) | end_prev | time_gap > 10,
          new_possession = if_else(is.na(new_possession), TRUE, new_possession),
          possession_id = cumsum(new_possession)) %>%
   select(-new_possession, -end_prev)
