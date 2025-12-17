@@ -537,6 +537,43 @@ events_poss_id <- events_distance %>%
          possession_id = cumsum(new_possession)) %>%
   select(-new_possession, -end_prev)
 
+#check for max time gap between events in a possession chain
+possession_gaps <- events_poss_id %>%
+  arrange(game_id, possession_id, running_clock_seconds) %>%
+  group_by(game_id, possession_id) %>%
+  mutate(
+    gap_seconds = running_clock_seconds - lag(running_clock_seconds)
+  ) %>%
+  ungroup()
+
+####TEST - looking at gaps in events per possession#########
+#get the max gap per possession
+max_gap_per_possession <- possession_gaps %>%
+  group_by(game_id, possession_id) %>%
+  summarise(
+    max_gap_seconds = max(gap_seconds, na.rm = TRUE),
+    .groups = "drop"
+  )
+
+#look at the max gap
+max(max_gap_per_possession$max_gap_seconds, na.rm = TRUE)
+
+#look at all the gaps
+test1 <- max_gap_per_possession %>%
+  arrange(max_gap_seconds)
+
+#look at events where gap seconds >= 9
+problem_possessions <- max_gap_per_possession %>%
+  filter(max_gap_seconds >= 9)
+
+test2 <- possession_gaps %>% filter(gap_seconds >= 9)
+
+test2 <- test2 %>% 
+  select(game_id, possession_id, period, event, gap_seconds) %>%
+  arrange(gap_seconds)
+
+test2 <- possession_gaps %>% filter(gap_seconds >= 9)
+
 #check number of distinct poss ids
 n_distinct(events_poss_id$possession_id)
 
