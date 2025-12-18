@@ -259,11 +259,11 @@ events_zones <- events_data_clean %>%
       x1_attacking > 89 ~ "BNO",
       TRUE ~ NA_character_),
     x2_zone = case_when(
-      x2_attacking < -89 ~ "BND",
-      x2_attacking >= -89 & x2_attacking < -25 ~ "DZ",
-      x2_attacking >= -25 & x2_attacking <  25 ~ "NZ",
-      x2_attacking >=  25 & x2_attacking <= 89 ~ "OZ",
-      x2_attacking > 89 ~ "BNO",
+      x2_attacking < -89 ~ "BND2",
+      x2_attacking >= -89 & x2_attacking < -25 ~ "DZ2",
+      x2_attacking >= -25 & x2_attacking <  25 ~ "NZ2",
+      x2_attacking >=  25 & x2_attacking <= 89 ~ "OZ2",
+      x2_attacking > 89 ~ "BNO2",
       TRUE ~ NA_character_)
     ) %>%
   select(-team_on_right_p1, -x1_attacking, -x2_attacking) #keeping attacking_direction in dataset since it will be used when calculating the distance for shots and goals
@@ -547,7 +547,7 @@ possession_gaps <- events_poss_id %>%
   ) %>%
   ungroup()
 
-####TEST - looking at gaps in events per possession#########
+#### TEST - looking at gaps in events per possession #########
 #get the max gap per possession
 max_gap_per_possession <- possession_gaps %>%
   group_by(game_id, possession_id) %>%
@@ -614,22 +614,62 @@ head(events_seq, 10)
 write.table(events_seq, "hockey_seq.txt", sep=",", row.names = FALSE, col.names = FALSE, quote = FALSE)
 seq_matrix <- read_baskets("hockey_seq.txt", sep = ",", info = c("sequenceID","eventID","SIZE"))
 inspect(head(seq_matrix,10))
-head(as(seq_matrix, "data.frame"))
 
 #### APPLY CSPADE AND VIEW RESULTS ####
 
-#apply cSPADE algorithm with support = 0.01
+#apply cSPADE algorithm with support = 0.1
 itemsets_seq <- cspade(seq_matrix, 
-                   parameter = list(support = 0.1), #freq sequs that occurs in at least 1% of all sequs
+                   parameter = list(support = 0.1), #freq sequs that occurs in at least 10% of all sequs
                    control = list(verbose = TRUE))
 inspect(head(itemsets_seq,10))
-
-itemsets_seq_df <- as(itemsets_seq, "data.frame")
-head(itemsets_seq_df)
 summary(itemsets_seq)
 
+#### FIND AND INTERPRETE TEMPORAL RULES ####
 # Get induced temporal rules from frequent itemsets
 r1 <- as(ruleInduction(itemsets_seq, confidence = 0.5, control = list(verbose = TRUE)), "data.frame")
+head(r1)
+
+# Separate LHS and RHS rules
+r1$rulecount <- as.character(r1$rule)
+max_col <- max(sapply(strsplit(r1$rulecount,' => '),length))
+r_sep <- separate(data = r1, col = rule, into = paste0("Time",1:max_col), sep = " => ")
+r_sep$Time2 <- substring(r_sep$Time2,3,nchar(r_sep$Time2)-2)
+head(r_sep)
+
+# Strip LHS baskets
+max_time1 <- max(sapply(strsplit(r_sep$Time1,'},'),length))
+r_sep$TimeClean <- substring(r_sep$Time1,3,nchar(r_sep$Time1)-2)
+r_sep$TimeClean <- gsub("\\},\\{", "zzz", r_sep$TimeClean)
+r_sep_items <- separate(data = r_sep, col = TimeClean, into = paste0("Previous_Items",1:max_time1), sep = "zzz")
+head(r_sep_items)
+
+# Get cleaned temporal rules: time reads sequentially from left to right
+
+r_shift_na <- r_sep_items
+
+for (i in seq(1, nrow(r_shift_na))){
+  for (col in seq(8, (6+max_time1))){
+    if (is.na(r_shift_na[i,col])==TRUE){
+      r_shift_na[i,col] <- r_shift_na[i,col-1]
+      r_shift_na[i,col-1] <- NA  
+    }
+  }
+}
+names(r_shift_na)[2] <- "Predicted_Items"
+
+cols <- c(7:(6+max_time1), 2:5)
+temporal_rules <- r_shift_na[,cols]
+temporal_rules <- temporal_rules[order(-temporal_rules$lift, -temporal_rules$confidence, 
+                                       -temporal_rules$support, temporal_rules$Predicted_Items),]
+
+write.csv(as.data.frame(temporal_rules), file = "TemporalRules.csv", row.names = FALSE, na="")
+
+# Get unique frequent itemsets existing in rules (subset of those in s1.df)
+baskets_only <- temporal_rules[,1:(ncol(temporal_rules)-3)]
+basket_mat <- as.vector(as.matrix(baskets_only))
+freq_itemsets_in_rules <- unique(basket_mat[!is.na(basket_mat)])
+write.csv(as.data.frame(freq_itemsets_in_rules), file = "FreqItemsetsInRules.csv", row.names = FALSE)
+
 
 #### RESULTS ####
 #convert cSPADE results to a tibble
