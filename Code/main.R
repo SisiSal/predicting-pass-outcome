@@ -502,7 +502,7 @@ events_distance <- events_distance %>%
     angle_theshold = case_when(
       post_angle <= 10 ~ "Ang(N)",
       post_angle <= 20 ~ "Ang(M)",
-      post_angle > 25  ~ "Ang(W)",
+      post_angle > 20  ~ "Ang(W)",
       TRUE ~ NA_character_
     )
   )
