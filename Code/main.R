@@ -119,7 +119,6 @@ tracking_data_clean <- tracking_data %>% rename(image_id = "Image Id",
 events_data_clean <- events_data %>% rename_all(tolower)
 shifts_data_clean <- shifts_data %>% rename_all(tolower)
 
-
 #### ADD RUNNING SECONDS VARIABLE ####
 ##extract image id
 tracking_data_clean$image_id <- as.numeric(str_extract(tracking_data_clean$image_id, "\\d+$"))
@@ -502,115 +501,6 @@ events_distance <- events_distance %>%
     )
   )
 
-#### EXPLORATORY DATA ANALYSIS ####
-
-#histogram of distances for passes and incomplete passes distance
-ggplot(events_play, aes(x = distance)) +
-  geom_histogram(binwidth = 5, fill = "steelblue", color = "black") +
-  labs(
-    title = "Distribution of Distance for Plays and Incomplete Plays",
-    x = "Distance",
-    y = "Frequency"
-  ) +
-  theme_minimal()
-
-#histogram of distances for shots and goals distance
-ggplot(events_shots_goals, aes(x = distance)) +
-  geom_histogram(binwidth = 5, fill = "steelblue", color = "black") +
-  labs(
-    title = "Distribution of Distance for Shots and Goals",
-    x = "Distance",
-    y = "Frequency"
-  ) +
-  theme_minimal()
-
-#histogram of angles for passes and incomplete passes
-ggplot((events_distance %>% filter(event %in% c("Shot", "Goal"))), 
-       aes(x = post_angle)) +
-  geom_histogram(binwidth = 1, fill = "steelblue", color = "black") +
-  labs(title = "Distribution of Shot Angles",
-       x = "Angle",
-       y = "Frequency") +
-  theme_minimal()
-
- 
-#plot shots and goals location
-ggplot(events_distance %>% filter(event %in% c("Shot", "Goal")),
-       aes(x = x1_att, y = y1_att)) +
-  #shots in background
-  geom_point(data = events_distance %>% filter(event == "Shot"),
-             color = "grey40", alpha = 0.5, size = 1) +
-  #goals on top
-  geom_point(data = events_distance %>% filter(event == "Goal"),
-             color = "blue", alpha = 0.8, size = 2) +
-  #rink outline
-  geom_rect(xmin = -100, xmax = 100,
-            ymin = -42.5, ymax = 42.5,
-            fill = NA, color = "black") +
-  #goal mouth
-  geom_segment(x = 89, xend = 89,
-               y = -3, yend = 3,
-               color = "red",
-               linewidth = 0.8) +
-  coord_fixed() +
-  theme_minimal() +
-  labs(title = "Shot and Goal Locations",
-       x = "X coordinate",
-       y = "Y coordinate")
-
-#plot shot location by angle category
-ggplot(events_distance %>% filter(event %in% c("Shot", "Goal")),
-       aes(x = x1_att, y = y1_att, color = angle_theshold)) +
-  geom_point(alpha = 0.6, size = 1) +
-  geom_rect(
-    xmin = -100, xmax = 100,
-    ymin = -42.5, ymax = 42.5,
-    fill = NA, color = "black"
-  ) +
-  geom_segment(
-    x = 89, xend = 89,
-    y = -3, yend = 3,
-    color = "red",
-    linewidth = 0.8
-  ) +
-  coord_fixed() +
-  theme_minimal() +
-  labs(
-    title = "Shot Locations by Angle Category",
-    x = "X coordinate",
-    y = "Y coordinate",
-    color = "Shot angle"
-  )
-
-#plot shot location by distance category
-ggplot(events_distance %>% filter(event %in% c("Shot", "Goal")),
-       aes(x = x1_att, y = y1_att, color = shots_dist_threshold)) +
-  geom_point(alpha = 0.6, size = 1) +
-  geom_rect(
-    xmin = -100, xmax = 100,
-    ymin = -42.5, ymax = 42.5,
-    fill = NA, color = "black"
-  ) +
-  geom_segment(
-    x = 89, xend = 89,
-    y = -3, yend = 3,
-    color = "red",
-    linewidth = 0.8
-  ) +
-  coord_fixed() +
-  theme_minimal() +
-  labs(
-    title = "Shot Locations by Distance Category",
-    x = "X coordinate",
-    y = "Y coordinate",
-    color = "Shot Distance"
-  )
-
-#check correlation between angle and distance
-cor(events_distance$post_angle, events_distance$distance,
-    use = "complete.obs") #cor = -0.68 (strong negative correlation)
-
-
 #### CREATING POSSESSION ID ####
 
 end_poss_events <- c("Shot", "Goal", "Penalty Taken")
@@ -665,6 +555,254 @@ test2 <- test2 %>%
 
 #check number of distinct poss ids
 n_distinct(events_poss_id$possession_id)
+
+#### EXPLORATORY DATA ANALYSIS ####
+
+#install.packages("patchwork")
+library(patchwork)
+
+#events categories
+event_counts <- events_distance %>%
+  count(event, sort = TRUE)
+
+event_categories <- ggplot(event_counts, aes(x = reorder(event, n), y = n)) +
+  geom_bar(stat = "identity", fill = "#53B8B8") +
+  geom_text(aes(label = n), hjust = -0.1, size = 3.5) +  # Add counts
+  coord_flip() +  # Flip for horizontal bars
+  theme_minimal() +
+  labs(
+    title = "Number of Events by Type",
+    x = "Event",
+    y = "Count"
+  ) +
+  theme(
+    plot.title = element_text(hjust = 0.5, face = "bold"),
+    axis.text = element_text(size = 10),
+    axis.title = element_text(size = 12, face = "bold")
+  ) +
+  expand_limits(y = max(event_counts$n) * 1.1)  # Make space for labels
+
+event_categories
+
+#histogram of distances for passes and incomplete passes distance
+hist_distance_passes <- ggplot(events_play, aes(x = distance)) +
+  geom_histogram(binwidth = 5, fill = "steelblue", color = "black") +
+  labs(
+    title = "Distribution of Distances for Plays and Incomplete Plays",
+    x = "Distance",
+    y = "Frequency"
+  ) +
+  theme_minimal() +
+  theme(
+    plot.title = element_text(hjust = 0.5)
+  )
+
+hist_distance_passes
+
+#histogram of distances for shots and goals distance
+hist_distance_shots <- ggplot(events_shots_goals, aes(x = distance)) +
+  geom_histogram(binwidth = 5, fill = "steelblue", color = "black") +
+  labs(
+    title = "Distribution of Distances for Shots and Goals",
+    x = "Distance",
+    y = "Frequency"
+  ) +
+  theme_minimal() +
+  theme(
+    plot.title = element_text(hjust = 0.5)
+  )
+
+hist_distance_shots
+
+#histogram of angles for shots and goals
+hist_angles_shots <- ggplot((events_distance %>% filter(event %in% c("Shot", "Goal"))), 
+       aes(x = post_angle)) +
+  geom_histogram(binwidth = 1, fill = "steelblue", color = "black") +
+  labs(title = "Distribution of Shot Angles",
+       x = "Angle",
+       y = "Frequency") +
+  theme_minimal()  +
+  theme(
+    plot.title = element_text(hjust = 0.5)
+  )
+
+hist_angles_shots
+
+distribution_charts <- hist_distance_passes + hist_distance_shots + hist_angles_shots
+
+#plot shots and goals location
+location_shots <- ggplot(events_distance %>% filter(event %in% c("Shot", "Goal")),
+                         aes(x = x1_att, y = y1_att)) +
+  # shots in background
+  geom_point(
+    data = events_distance %>% filter(event == "Shot"),
+    aes(color = "Shot"),
+    alpha = 0.5, size = 1
+  ) +
+  # goals on top
+  geom_point(
+    data = events_distance %>% filter(event == "Goal"),
+    aes(color = "Goal"),
+    alpha = 0.8, size = 2
+  ) +
+  # rink outline (no legend)
+  geom_rect(xmin = 25, xmax = 100,
+            ymin = -42.5, ymax = 42.5,
+            fill = NA, color = "black") +
+  # goal mouth -> include in legend
+  geom_segment(
+    aes(color = "Net"),
+    x = 89, xend = 89,
+    y = -3, yend = 3,
+    linewidth = 0.8
+  ) +
+  coord_fixed() +
+  theme_minimal() +
+  scale_color_manual(
+    values = c("Shot" = "grey40",
+               "Goal" = "blue",
+               "Net"  = "red"),
+    breaks = c("Shot", "Goal"),
+    name = NULL
+  ) +
+  labs(
+    title = "Shot and Goal Locations",
+    x = "X coordinate",
+    y = "Y coordinate",
+  ) +
+  theme(
+    plot.title = element_text(hjust = 0.5),
+    legend.position = "bottom",
+    legend.title = element_text(face = "bold")
+  )
+
+location_shots
+
+#plot shot location by angle category
+location_angle_shots <- ggplot(events_distance %>% filter(event %in% c("Shot", "Goal")),
+       aes(x = x1_att, y = y1_att, color = angle_theshold)) +
+  geom_point(alpha = 0.6, size = 1) +
+  geom_rect(
+    xmin = 25, xmax = 100,
+    ymin = -42.5, ymax = 42.5,
+    fill = NA, color = "black"
+  ) +
+  geom_segment(
+    x = 89, xend = 89,
+    y = -3, yend = 3,
+    color = "red",
+    linewidth = 0.8
+  ) +
+  coord_fixed() +
+  theme_minimal() +
+  labs(
+    title = "Shot Locations by Angle Category",
+    x = "X coordinate",
+    y = "Y coordinate",
+    color = NULL
+  ) +
+  theme(
+    plot.title = element_text(hjust = 0.5),
+    legend.position = "bottom",
+    legend.title = element_text(face = "bold")
+  )
+
+location_angle_shots
+
+#plot shot location by distance category
+shot_distance <- ggplot(events_distance %>% filter(event %in% c("Shot", "Goal")),
+       aes(x = x1_att, y = y1_att, color = shots_dist_threshold)) +
+  geom_point(alpha = 0.6, size = 1) +
+  geom_rect(
+    xmin = 25, xmax = 100,
+    ymin = -42.5, ymax = 42.5,
+    fill = NA, color = "black"
+  ) +
+  geom_segment(
+    x = 89, xend = 89,
+    y = -3, yend = 3,
+    color = "red",
+    linewidth = 0.8
+  ) +
+  coord_fixed() +
+  theme_minimal() +
+  labs(
+    title = "Shot Locations by Distance Category",
+    x = "X coordinate",
+    y = "Y coordinate",
+    color = NULL
+  ) +
+  theme(
+    plot.title = element_text(hjust = 0.5),
+    legend.position = "bottom",
+    legend.title = element_text(face = "bold")
+  )
+
+shot_distance
+
+location_charts <- location_shots + location_angle_shots + shot_distance
+location_charts
+
+#check correlation between angle and distance
+cor(events_distance$post_angle, events_distance$distance,
+    use = "complete.obs") #cor = -0.68 (strong negative correlation)
+
+#look at number of events in a possession chain
+possession_counts <- events_poss_id %>%
+  count(possession_id) %>%     
+  arrange(possession_id)      
+
+possession_events <- ggplot(possession_counts, aes(x = n)) +
+  geom_histogram(binwidth = 1, fill = "#6C88C4", color = "black") +
+  theme_minimal() +
+  labs(
+    title = "Distribution of Events per Possession",
+    x = "Number of Events in Possession",
+    y = "Count of Possessions"
+  ) +
+  theme(
+    plot.title = element_text(hjust = 0.5, face = "bold"),
+    axis.title = element_text(size = 12, face = "bold"),
+    axis.text = element_text(size = 10)
+  )
+
+possession_events
+
+#visualize a possession chain
+
+library(jpeg)
+library(grid)
+
+#Filter events for possession 1
+possession1 <- events_poss_id %>%
+  filter(possession_id == 1)
+
+rink_img <- readJPEG("/Users/alyssalavergne/Documents/hockey_rink.jpg")
+rink_grob <- rasterGrob(rink_img, width=unit(1,"npc"), height=unit(1,"npc"))
+
+ggplot(possession1, aes(x = x_coordinate, y = y_coordinate)) +
+  # rink background
+  annotation_custom(rink_grob, xmin = -100, xmax = 100, ymin = -42.5, ymax = 42.5) +
+  # events
+  geom_point(aes(color = event), size = 3) +
+  geom_path(aes(group = possession_id), color = "black",
+            arrow = arrow(type = "closed", length = unit(0.15, "inches"))) +
+  # optional: label events
+  geom_text(aes(label = event), vjust = -1, size = 3) +
+  coord_fixed() +
+  scale_x_continuous(limits = c(-100, 100)) +
+  scale_y_continuous(limits = c(-42.5, 42.5)) +
+  theme_minimal() +
+  labs(
+    title = "Possession Chain: Possession 1",
+    x = "X coordinate",
+    y = "Y coordinate",
+    color = "Event"
+  ) +
+  theme(
+    plot.title = element_text(hjust = 0.5, face = "bold"),
+    legend.position = "bottom"
+  )
 
 #### CLEAN INTO SEQUENCE DATASET ####
 library(arulesSequences) # run the sequence mining algorithm
@@ -759,7 +897,6 @@ basket_mat <- as.vector(as.matrix(baskets_only))
 freq_itemsets_in_rules <- unique(basket_mat[!is.na(basket_mat)])
 write.csv(as.data.frame(freq_itemsets_in_rules), file = "FreqItemsetsInRules.csv", row.names = FALSE)
 
-
 #### RESULTS ####
 #convert cSPADE results to a tibble
 feq_seq <- as(itemsets_seq, "data.frame") %>% as_tibble()
@@ -782,4 +919,3 @@ feq_seq$seq.event.length <- (str_count(feq_seq$sequence, "\\}") + 1)
 #keep the top 2 patterns with highest support for each pattern length
 c2 <- feq_seq %>% group_by(seq.event.length) %>% slice_max(order_by = support, n = 2)
 head(c2,10)
-
