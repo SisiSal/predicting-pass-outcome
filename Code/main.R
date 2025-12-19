@@ -493,7 +493,7 @@ summary(events_distance$post_angle)
 
 events_distance <- events_distance %>%
   mutate(
-    angle_theshold = case_when(
+    angle_threshold = case_when(
       post_angle <= 10 ~ "Ang(N)",
       post_angle <= 20 ~ "Ang(M)",
       post_angle > 20  ~ "Ang(W)",
@@ -680,7 +680,7 @@ location_shots
 
 #plot shot location by angle category
 location_angle_shots <- ggplot(events_distance %>% filter(event %in% c("Shot", "Goal")),
-       aes(x = x1_att, y = y1_att, color = angle_theshold)) +
+       aes(x = x1_att, y = y1_att, color = angle_threshold)) +
   geom_point(alpha = 0.6, size = 1) +
   geom_rect(
     xmin = 25, xmax = 100,
@@ -823,7 +823,7 @@ events_poss_abbr <- events_poss_id %>%
 events_seq <- events_poss_abbr %>% 
   group_by(possession_id) %>% arrange(running_clock_seconds) %>%
   mutate(eventID = row_number()) %>% 
-  unite(col = "items", event, x1_zone, x2_zone, 
+  unite(col = "items", event, x1_zone, x2_zone, angle_threshold,
         pass_dist_threshold, shots_dist_threshold, pass_direction, score_state, 
         detail_1, detail_2, new_detail_3, new_detail_4, sep = ",", na.rm = TRUE) %>% 
   ungroup() %>%
