@@ -515,7 +515,7 @@ ggplot(events_play, aes(x = distance)) +
   labs(
     title = "Distribution of Distance for Plays and Incomplete Plays",
     x = "Distance",
-    y = "Count"
+    y = "Frequency"
   ) +
   theme_minimal()
 
@@ -525,7 +525,7 @@ ggplot(events_shots_goals, aes(x = distance)) +
   labs(
     title = "Distribution of Distance for Shots and Goals",
     x = "Distance",
-    y = "Count"
+    y = "Frequency"
   ) +
   theme_minimal()
 
@@ -535,7 +535,7 @@ ggplot((events_distance %>% filter(event %in% c("Shot", "Goal"))),
   geom_histogram(binwidth = 1, fill = "steelblue", color = "black") +
   labs(title = "Distribution of Shot Angles",
        x = "Angle",
-       y = "Count") +
+       y = "Frequency") +
   theme_minimal()
 
 
