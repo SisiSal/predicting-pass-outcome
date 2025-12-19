@@ -444,11 +444,6 @@ events_distance <- events_distance %>%
 ## create direction variable for passes
 events_distance <- events_distance %>%
   mutate(
-    x1_att = if_else(attacking_direction == "left", -x_coordinate,  x_coordinate),
-    y1_att = if_else(attacking_direction == "left", -y_coordinate,  y_coordinate),
-    x2_att = if_else(attacking_direction == "left", -x_coordinate_2, x_coordinate_2),
-    y2_att = if_else(attacking_direction == "left", -y_coordinate_2, y_coordinate_2),
-    
     line1_y =  (x2_att - x1_att) + y1_att,
     line2_y = -(x2_att - x1_att) + y1_att,
     
@@ -456,8 +451,8 @@ events_distance <- events_distance %>%
       !event %in% c("Play", "Incomplete Play") ~ NA_character_, 
       x1_att == x2_att & y1_att == y2_att ~ "nm",
       x1_att == x2_att ~ "lat",
-      y2_att < line1_y & y2_att > line2_y ~ "fw",
-      y2_att > line1_y & y2_att < line2_y ~ "bw",
+      y2_att <= line1_y & y2_att >= line2_y ~ "fw",
+      y2_att >= line1_y & y2_att <= line2_y ~ "bw",
       x2_att > x1_att ~ "lfw",
       x2_att < x1_att ~ "lbw",
       TRUE ~ NA_character_
