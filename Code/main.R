@@ -4,7 +4,7 @@
 library(tidyverse)
 library(lubridate)
 
-#### Import datasets ####
+#### IMPORT DATASETS ####
 
 events1 <- read_csv("https://github.com/bigdatacup/Big-Data-Cup-2025/releases/download/Data/2024-10-25.Team.H.@.Team.G.-.Events.csv")
 shifts1 <- read_csv("https://github.com/bigdatacup/Big-Data-Cup-2025/releases/download/Data/2024-10-25.Team.H.@.Team.G.-.Shifts.csv")
@@ -246,29 +246,29 @@ events_zones <- events_data_clean %>%
       period == 2 & team != team_on_right_p1 ~ "left",
       TRUE ~ NA_character_)    #for any row that didn’t match any of the conditions above, assign NA (just in case)
     ) %>%
-    mutate( #if team is attacking towards left, multiply x coordinate by -1
-      x1_attacking = if_else(attacking_direction == "left", -x_coordinate, x_coordinate),
-      x2_attacking = if_else(attacking_direction == "left", -x_coordinate_2, x_coordinate_2)
+    mutate( #if team is attacking towards left, multiply x and y coordinate by -1
+      x1_att = if_else(attacking_direction == "left", -x_coordinate,  x_coordinate),
+      y1_att = if_else(attacking_direction == "left", -y_coordinate,  y_coordinate),
+      x2_att = if_else(attacking_direction == "left", -x_coordinate_2, x_coordinate_2),
+      y2_att = if_else(attacking_direction == "left", -y_coordinate_2, y_coordinate_2)
     ) %>%
   mutate(
     x1_zone = case_when(
-      x1_attacking < -89 ~ "BND",
-      x1_attacking >= -89 & x1_attacking < -25 ~ "DZ",
-      x1_attacking >= -25 & x1_attacking <  25 ~ "NZ",
-      x1_attacking >=  25 & x1_attacking <= 89 ~ "OZ",
-      x1_attacking > 89 ~ "BNO",
+      x1_att < -89 ~ "BND",
+      x1_att >= -89 & x1_att < -25 ~ "DZ",
+      x1_att >= -25 & x1_att <  25 ~ "NZ",
+      x1_att >=  25 & x1_att <= 89 ~ "OZ",
+      x1_att > 89 ~ "BNO",
       TRUE ~ NA_character_),
     x2_zone = case_when(
-      x2_attacking < -89 ~ "BND2",
-      x2_attacking >= -89 & x2_attacking < -25 ~ "DZ2",
-      x2_attacking >= -25 & x2_attacking <  25 ~ "NZ2",
-      x2_attacking >=  25 & x2_attacking <= 89 ~ "OZ2",
-      x2_attacking > 89 ~ "BNO2",
+      x2_att < -89 ~ "BND2",
+      x2_att >= -89 & x2_att < -25 ~ "DZ2",
+      x2_att >= -25 & x2_att <  25 ~ "NZ2",
+      x2_att >=  25 & x2_att <= 89 ~ "OZ2",
+      x2_att > 89 ~ "BNO2",
       TRUE ~ NA_character_)
     ) %>%
-  select(-team_on_right_p1, -x1_attacking, -x2_attacking) #keeping attacking_direction in dataset since it will be used when calculating the distance for shots and goals
-
-#View(events_zones)
+  select(-team_on_right_p1) #keeping attacking_direction in dataset since it will be used when calculating the distance for shots and goals
 
 #tracking data
 
@@ -302,21 +302,21 @@ agg_tracking_zones <- agg_tracking_zones %>%
       period == 2 & team_name != team_on_right_p1 ~ "left",
       TRUE ~ NA_character_)    #for any row that didn’t match any of the conditions above, assign NA (just in case)
   ) %>%
-  mutate( #if team is attacking towards left, multiply x coordinate by -1
-    x_attacking = if_else(attacking_direction == "left", -rink_location_x_feet, rink_location_x_feet)
+  mutate( #if team is attacking towards left, multiply x and y coordinate by -1
+    x_att = if_else(attacking_direction == "left", -rink_location_x_feet, rink_location_x_feet),
+    y_att = if_else(attacking_direction == "left", -rink_location_y_feet, rink_location_y_feet)
   ) %>%
   mutate(
     zone = case_when(
-      x_attacking < -89 ~ "BND",
-      x_attacking >= -89 & x_attacking < -25 ~ "DZ",
-      x_attacking >= -25 & x_attacking <  25 ~ "NZ",
-      x_attacking >=  25 & x_attacking <= 89 ~ "OZ",
-      x_attacking > 89 ~ "BNO",
+      x_att < -89 ~ "BND",
+      x_att >= -89 & x_att < -25 ~ "DZ",
+      x_att >= -25 & x_att <  25 ~ "NZ",
+      x_att >=  25 & x_att <= 89 ~ "OZ",
+      x_att > 89 ~ "BNO",
       TRUE ~ NA_character_)
   ) %>%
- select(-home_team, -away_team, -team_on_right_p1, -attacking_direction, -x_attacking)
+ select(-home_team, -away_team, -team_on_right_p1, -attacking_direction)
 
-#View(agg_tracking_zones)
 #in tracking data, difficult to put what location puck is in since zones depend on what team we are looking at (offensive or defensive zone)
 
 #double check length and width of rink ()
@@ -383,9 +383,9 @@ events_distance <- events_distance %>%
       NA_real_
     }
   ) %>%
-  ungroup()
-	
-#View(events_distance)
+  ungroup() %>%
+  select(-new_x_coords_2, -new_y_coords_2)
+
 
 #create threshold variables for distance for shots and goals, and for passes and incomplete passes
 
@@ -394,26 +394,6 @@ events_play <- events_distance %>%
 
 events_shots_goals <- events_distance %>%
   filter(event %in% c("Shot", "Goal"))
-
-#histogram of distances for passes and incomplete passes distance
-ggplot(events_play, aes(x = distance)) +
-  geom_histogram(binwidth = 5, fill = "steelblue", color = "black") +
-  labs(
-    title = "Distribution of Distance for Plays and Incomplete Plays",
-    x = "Distance",
-    y = "Count"
-  ) +
-  theme_minimal()
-
-#histogram of distances for shots and goals distance
-ggplot(events_shots_goals, aes(x = distance)) +
-  geom_histogram(binwidth = 5, fill = "steelblue", color = "black") +
-  labs(
-    title = "Distribution of Distance for Shots and Goals",
-    x = "Distance",
-    y = "Count"
-  ) +
-  theme_minimal()
 
 #events_distance_thresholds <- events_zones 
 
@@ -445,8 +425,6 @@ events_distance <- events_distance %>%
         TRUE ~ NA_character_
       ))
 
-#View(events_distance)
-
 #Fix True and False values in detail_3 and detail_4
 events_distance <- events_distance %>%
   mutate(
@@ -461,8 +439,6 @@ events_distance <- events_distance %>%
       event %in% c("Shot", "Goal") & detail_4 == FALSE ~ "not_one_timer",
       TRUE ~ NA_character_)    #for any row that didn’t match any of the conditions above, assign NA (just in case)
   ) 
-
-#View(events_distance)
 
 
 ## create direction variable for passes
@@ -520,6 +496,124 @@ events_distance <- events_distance %>%
     TRUE ~ NA_real_))
 
 summary(events_distance$post_angle)
+
+events_distance <- events_distance %>%
+  mutate(
+    angle_theshold = case_when(
+      post_angle <= 10 ~ "Ang(N)",
+      post_angle <= 20 ~ "Ang(M)",
+      post_angle > 05  ~ "Ang(W)",
+      TRUE ~ NA_character_
+    )
+  )
+
+#### EXPLORATORY DATA ANALYSIS ####
+
+#histogram of distances for passes and incomplete passes distance
+ggplot(events_play, aes(x = distance)) +
+  geom_histogram(binwidth = 5, fill = "steelblue", color = "black") +
+  labs(
+    title = "Distribution of Distance for Plays and Incomplete Plays",
+    x = "Distance",
+    y = "Count"
+  ) +
+  theme_minimal()
+
+#histogram of distances for shots and goals distance
+ggplot(events_shots_goals, aes(x = distance)) +
+  geom_histogram(binwidth = 5, fill = "steelblue", color = "black") +
+  labs(
+    title = "Distribution of Distance for Shots and Goals",
+    x = "Distance",
+    y = "Count"
+  ) +
+  theme_minimal()
+
+#histogram of angles for passes and incomplete passes
+ggplot((events_distance %>% filter(event %in% c("Shot", "Goal"))), 
+       aes(x = post_angle)) +
+  geom_histogram(binwidth = 1, fill = "steelblue", color = "black") +
+  labs(title = "Distribution of Shot Angles",
+       x = "Angle",
+       y = "Count") +
+  theme_minimal()
+
+
+#plot shots and goals location
+ggplot(events_distance %>% filter(event %in% c("Shot", "Goal")),
+       aes(x = x1_att, y = y1_att)) +
+  #shots in background
+  geom_point(data = events_distance %>% filter(event == "Shot"),
+             color = "grey40", alpha = 0.5, size = 1) +
+  #goals on top
+  geom_point(data = events_distance %>% filter(event == "Goal"),
+             color = "blue", alpha = 0.8, size = 2) +
+  #rink outline
+  geom_rect(xmin = -100, xmax = 100,
+            ymin = -42.5, ymax = 42.5,
+            fill = NA, color = "black") +
+  #goal mouth
+  geom_segment(x = 89, xend = 89,
+               y = -3, yend = 3,
+               color = "red",
+               linewidth = 0.8) +
+  coord_fixed() +
+  theme_minimal() +
+  labs(title = "Shot and Goal Locations",
+       x = "X coordinate",
+       y = "Y coordinate")
+
+#plot angles of shots
+ggplot(events_distance %>% filter(event %in% c("Shot", "Goal")),
+       aes(x = x1_att, y = y1_att, color = angle_theshold)) +
+  geom_point(alpha = 0.6, size = 1) +
+  geom_rect(
+    xmin = -100, xmax = 100,
+    ymin = -42.5, ymax = 42.5,
+    fill = NA, color = "black"
+  ) +
+  geom_segment(
+    x = 89, xend = 89,
+    y = -3, yend = 3,
+    color = "red",
+    linewidth = 0.8
+  ) +
+  coord_fixed() +
+  theme_minimal() +
+  labs(
+    title = "Shot Locations by Angle Category",
+    x = "X coordinate",
+    y = "Y coordinate",
+    color = "Shot angle"
+  )
+
+#plot shot locations by distance
+ggplot(events_distance %>% filter(event %in% c("Shot", "Goal")),
+       aes(x = x1_att, y = y1_att, color = shots_dist_threshold)) +
+  geom_point(alpha = 0.6, size = 1) +
+  geom_rect(
+    xmin = -100, xmax = 100,
+    ymin = -42.5, ymax = 42.5,
+    fill = NA, color = "black"
+  ) +
+  geom_segment(
+    x = 89, xend = 89,
+    y = -3, yend = 3,
+    color = "red",
+    linewidth = 0.8
+  ) +
+  coord_fixed() +
+  theme_minimal() +
+  labs(
+    title = "Shot Locations by Distance Category",
+    x = "X coordinate",
+    y = "Y coordinate",
+    color = "Shot Distance"
+  )
+
+#check correlation between angle and distance
+cor(events_distance$post_angle, events_distance$distance,
+    use = "complete.obs") #cor = -0.68 (strong negative correlation)
 
 
 #### CREATING POSSESSION ID ####
@@ -662,7 +756,7 @@ temporal_rules <- r_shift_na[,cols]
 temporal_rules <- temporal_rules[order(-temporal_rules$lift, -temporal_rules$confidence, 
                                        -temporal_rules$support, temporal_rules$Predicted_Items),]
 
-write.csv(as.data.frame(temporal_rules), file = "TemporalRules.csv", row.names = FALSE, na="")
+#write.csv(as.data.frame(temporal_rules), file = "TemporalRules.csv", row.names = FALSE, na="")
 
 # Get unique frequent itemsets existing in rules (subset of those in s1.df)
 baskets_only <- temporal_rules[,1:(ncol(temporal_rules)-3)]
