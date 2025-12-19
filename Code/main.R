@@ -502,7 +502,7 @@ events_distance <- events_distance %>%
     angle_theshold = case_when(
       post_angle <= 10 ~ "Ang(N)",
       post_angle <= 20 ~ "Ang(M)",
-      post_angle > 05  ~ "Ang(W)",
+      post_angle > 25  ~ "Ang(W)",
       TRUE ~ NA_character_
     )
   )
@@ -538,7 +538,7 @@ ggplot((events_distance %>% filter(event %in% c("Shot", "Goal"))),
        y = "Frequency") +
   theme_minimal()
 
-
+ 
 #plot shots and goals location
 ggplot(events_distance %>% filter(event %in% c("Shot", "Goal")),
        aes(x = x1_att, y = y1_att)) +
