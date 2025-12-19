@@ -563,7 +563,7 @@ ggplot(events_distance %>% filter(event %in% c("Shot", "Goal")),
        x = "X coordinate",
        y = "Y coordinate")
 
-#plot angles of shots
+#plot shot location by angle category
 ggplot(events_distance %>% filter(event %in% c("Shot", "Goal")),
        aes(x = x1_att, y = y1_att, color = angle_theshold)) +
   geom_point(alpha = 0.6, size = 1) +
@@ -587,7 +587,7 @@ ggplot(events_distance %>% filter(event %in% c("Shot", "Goal")),
     color = "Shot angle"
   )
 
-#plot shot locations by distance
+#plot shot location by distance category
 ggplot(events_distance %>% filter(event %in% c("Shot", "Goal")),
        aes(x = x1_att, y = y1_att, color = shots_dist_threshold)) +
   geom_point(alpha = 0.6, size = 1) +
