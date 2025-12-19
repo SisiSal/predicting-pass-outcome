@@ -588,13 +588,15 @@ event_categories
 hist_distance_passes <- ggplot(events_play, aes(x = distance)) +
   geom_histogram(binwidth = 5, fill = "steelblue", color = "black") +
   labs(
-    title = "Distribution of Distances for Plays and Incomplete Plays",
+    title = "(a)",
+    subtitle = "Distribution of Distances \nfor Plays and Incomplete Plays",
     x = "Distance",
     y = "Frequency"
   ) +
   theme_minimal() +
   theme(
-    plot.title = element_text(hjust = 0.5)
+    plot.title = element_text(hjust = 0.5, size = 14, face = "bold"),
+    plot.subtitle = element_text(hjust = 0.5, size = 14)
   )
 
 hist_distance_passes
@@ -603,13 +605,15 @@ hist_distance_passes
 hist_distance_shots <- ggplot(events_shots_goals, aes(x = distance)) +
   geom_histogram(binwidth = 5, fill = "steelblue", color = "black") +
   labs(
-    title = "Distribution of Distances for Shots and Goals",
+    title = "(b)",
+    subtitle = "Distribution of Distances for Shots and Goals",
     x = "Distance",
     y = "Frequency"
   ) +
   theme_minimal() +
   theme(
-    plot.title = element_text(hjust = 0.5)
+    plot.title = element_text(hjust = 0.5, size = 14, face = "bold"),
+    plot.subtitle = element_text(hjust = 0.5, size = 14)
   )
 
 hist_distance_shots
@@ -618,17 +622,21 @@ hist_distance_shots
 hist_angles_shots <- ggplot((events_distance %>% filter(event %in% c("Shot", "Goal"))), 
        aes(x = post_angle)) +
   geom_histogram(binwidth = 1, fill = "steelblue", color = "black") +
-  labs(title = "Distribution of Shot Angles",
+  labs(
+    title = "(c)",
+    subtitle = "Distribution of Shot Angles",
        x = "Angle",
        y = "Frequency") +
   theme_minimal()  +
   theme(
-    plot.title = element_text(hjust = 0.5)
+    plot.title = element_text(hjust = 0.5, size = 14, face = "bold"),
+    plot.subtitle = element_text(hjust = 0.5, size = 14)
   )
 
 hist_angles_shots
 
 distribution_charts <- hist_distance_passes + hist_distance_shots + hist_angles_shots
+distribution_charts
 
 #plot shots and goals location
 location_shots <- ggplot(events_distance %>% filter(event %in% c("Shot", "Goal")),
