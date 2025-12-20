@@ -714,7 +714,7 @@ location_angle_shots <- ggplot(events_distance %>% filter(event %in% c("Shot", "
   theme_minimal() +
   labs(
     title = "(b)", 
-    subtitle = "Shot Locations by Angle Category",
+    subtitle = "Shot and Goal Locations \nby Angle Category",
     x = "X coordinate",
     y = "Y coordinate",
     color = NULL
@@ -747,7 +747,7 @@ shot_distance <- ggplot(events_distance %>% filter(event %in% c("Shot", "Goal"))
   theme_minimal() +
   labs(
     title = "(c)",
-    subtitle = "Shot Locations by Distance Category",
+    subtitle = "Shot and Goal Locations \nby Distance Category",
     x = "X coordinate",
     y = "Y coordinate",
     color = NULL
