@@ -93,9 +93,9 @@ itset_seq_ip <- cspade(seq_matrix_ip,
                        control = list(verbose = TRUE))
 summary(itset_seq_ip)
 
-# apply cSPADE algorithm to tied with support = 0.1
+# apply cSPADE algorithm to tied with support = 0.2
 itset_seq_sh <- cspade(seq_matrix_sh, 
-                         parameter = list(support = 0.1),
+                         parameter = list(support = 0.2),# freq seqs that occur in at least 20% of all seqs
                          control = list(verbose = TRUE))
 summary(itset_seq_sh)
 
@@ -165,7 +165,7 @@ allowed_events <- c(
 
 event_pattern <- paste(allowed_events, collapse = "|")
 
-temporal_rules_ip <- as.data.frame(temporal_rules_ip) %>%
+temporal_rules_ip1 <- as.data.frame(temporal_rules_ip) %>%
   filter(
     if_all(
       starts_with("Previous_Items"),
@@ -174,7 +174,7 @@ temporal_rules_ip <- as.data.frame(temporal_rules_ip) %>%
     grepl("IPlay", Predicted_Items)
   )
 
-write.csv(as.data.frame(temporal_rules_ip),
+write.csv(as.data.frame(temporal_rules_ip1),
           file = "TemporalRulesIP.csv",
           row.names = FALSE,
           na = "")
@@ -240,7 +240,7 @@ temporal_rules_sh <- temporal_rules_sh[
         temporal_rules_sh$Predicted_Items), ]
 
 #keep only those that contain event name in prev items and Shot in predicted items
-temporal_rules_sh <- as.data.frame(temporal_rules_sh) %>%
+temporal_rules_sh1 <- as.data.frame(temporal_rules_sh) %>%
   filter(
     if_all(
       starts_with("Previous_Items"),
@@ -250,7 +250,7 @@ temporal_rules_sh <- as.data.frame(temporal_rules_sh) %>%
   )
 
 
-write.csv(as.data.frame(temporal_rules_sh),
+write.csv(as.data.frame(temporal_rules_sh1),
           file = "TemporalRulesSH.csv",
           row.names = FALSE,
           na = "")
@@ -314,7 +314,7 @@ temporal_rules_go <- temporal_rules_go[
         temporal_rules_go$Predicted_Items), ]
 
 #keep only those that contain event name in prev items and Goal in predicted items
-temporal_rules_go <- as.data.frame(temporal_rules_go) %>%
+temporal_rules_go1 <- as.data.frame(temporal_rules_go) %>%
   filter(
     if_all(
       starts_with("Previous_Items"),
@@ -323,8 +323,72 @@ temporal_rules_go <- as.data.frame(temporal_rules_go) %>%
     grepl("Goal", Predicted_Items)
   )
 
+library(purrr)
+#convert LHS into sets
+temporal_rules_go2 <- temporal_rules_go1 %>%
+  mutate(
+    lhs_items = pmap(
+      select(., starts_with("Previous_Items")),
+      ~ na.omit(c(...))
+    ),
+    lhs_size = lengths(lhs_items)
+  )
+head(temporal_rules_go2)
 
-write.csv(as.data.frame(temporal_rules_go),
+#remove nested frequent sequences with same rule values since they are redundant
+temporal_rules_go_filtered <- temporal_rules_go2 %>%
+  group_by(Predicted_Items, support, confidence, lift) %>%
+  arrange(desc(lhs_size)) %>%   # keep more specific rules first
+  mutate(
+    is_nested = map_lgl(
+      seq_along(lhs_items),
+      function(i) {
+        any(
+          map_lgl(
+            lhs_items[-i],
+            ~ all(lhs_items[[i]] %in% .x)
+          )
+        )
+      }
+    )
+  ) %>%
+  filter(!is_nested) %>%
+  ungroup() %>%
+  select(-lhs_items, -lhs_size, -is_nested)
+
+#now for RHS nesting
+temporal_rules_go_filteredRHS <- temporal_rules_go_filtered %>%
+  mutate(
+    # ordered LHS key so we only compare identical sequences
+    lhs_key = pmap_chr(
+      select(., starts_with("Previous_Items")),
+      ~ paste(na.omit(c(...)), collapse = " → ")
+    ),
+    
+    # RHS items as sets
+    rhs_items = strsplit(Predicted_Items, ",")
+  ) %>%
+  group_by(lhs_key, support, confidence, lift) %>%
+  mutate(
+    rhs_size = lengths(rhs_items),
+    rhs_nested = map_lgl(
+      seq_along(rhs_items),
+      function(i) {
+        any(
+          map_lgl(
+            rhs_items[-i],
+            ~ length(rhs_items[[i]]) < length(.x) &&
+              all(rhs_items[[i]] %in% .x)
+          )
+        )
+      }
+    )
+  ) %>%
+  filter(!rhs_nested) %>%
+  ungroup() %>%
+  select(-lhs_key, -rhs_items, -rhs_size, -rhs_nested)
+
+write.csv(as.data.frame(temporal_rules_go_filteredRHS),
           file = "TemporalRulesGO.csv",
           row.names = FALSE,
           na = "")
