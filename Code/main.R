@@ -503,7 +503,7 @@ events_distance <- events_distance %>%
 
 #### CREATING POSSESSION ID ####
 
-end_poss_events <- c("Shot", "Goal", "Penalty Taken")
+end_poss_events <- c("Shot", "Goal", "Penalty Taken", "Incomplete Play")
 
 #drop unnecessary columns and ensure data is ordered
 events_poss_id <- events_distance %>%
@@ -517,6 +517,19 @@ events_poss_id <- events_distance %>%
          possession_id = cumsum(new_possession)) %>%
   select(-new_possession, -end_prev)
 
+#check number of distinct poss ids
+n_distinct(events_poss_id$possession_id)
+
+#remove rows with a unique possession ID so that each possession chain has at least two events
+events_poss_id <- events_poss_id %>%
+  group_by(possession_id) %>%
+  filter(n() >= 2) %>%
+  ungroup()
+
+#check number of distinct poss ids
+n_distinct(events_poss_id$possession_id)
+
+#### TEST - looking at gaps in events per possession #########
 #check for max time gap between events in a possession chain
 possession_gaps <- events_poss_id %>%
   arrange(game_id, possession_id, running_clock_seconds) %>%
@@ -526,7 +539,6 @@ possession_gaps <- events_poss_id %>%
   ) %>%
   ungroup()
 
-#### TEST - looking at gaps in events per possession #########
 #get the max gap per possession
 max_gap_per_possession <- possession_gaps %>%
   group_by(game_id, possession_id) %>%
@@ -901,7 +913,7 @@ events_seq <- events_poss_abbr %>%
   group_by(possession_id) %>% arrange(running_clock_seconds) %>%
   mutate(eventID = row_number()) %>% 
   unite(col = "items", event, x1_zone, x2_zone, angle_threshold,
-        pass_dist_threshold, shots_dist_threshold, pass_direction, score_state, 
+        pass_dist_threshold, shots_dist_threshold, pass_direction, 
         detail_1, detail_2, new_detail_3, new_detail_4, sep = ",", na.rm = TRUE) %>% 
   ungroup() %>%
   mutate(SIZE = str_count(items, ",") + 1) %>%
@@ -930,7 +942,7 @@ summary(itemsets_seq)
 
 #### FIND AND INTERPRETE TEMPORAL RULES ####
 # Get induced temporal rules from frequent itemsets
-r1 <- as(ruleInduction(itemsets_seq, confidence = 0.5, control = list(verbose = TRUE)), "data.frame")
+r1 <- as(ruleInduction(itemsets_seq, confidence = 0.8, control = list(verbose = TRUE)), "data.frame")
 head(r1)
 
 # Separate LHS and RHS rules
