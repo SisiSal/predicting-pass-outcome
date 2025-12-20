@@ -914,6 +914,8 @@ events_poss_abbr <- events_poss_id %>%
                                "Penalty Taken"   = "PenT")) %>%
   mutate(across(c(detail_1, detail_2), ~ str_replace_all(., " ", "_")))
 
+saveRDS(events_poss_abbr, file="events_poss")
+
 #group together all event items and add event size
 events_seq <- events_poss_abbr %>% 
   group_by(possession_id) %>% arrange(running_clock_seconds) %>%
@@ -1284,7 +1286,7 @@ write.csv(as.data.frame(freq_itemsets_in_rules_lead),
 
 ##### SPLIT BY END OF POSSESSION EVENTS #####
 
-#create df with score state at the start of each possession
+#create df with event at the end of each possession
 poss_end_event <- events_poss_id %>%
   arrange(game_id, period, running_clock_seconds) %>%
   group_by(possession_id) %>%
@@ -1292,7 +1294,7 @@ poss_end_event <- events_poss_id %>%
     last_poss_event = last(event),
     .groups = "drop"
   )
-
+ 
 #join back to data
 poss_poss_end_event <- events_poss_id %>%
   left_join(poss_end_event, by = "possession_id")
