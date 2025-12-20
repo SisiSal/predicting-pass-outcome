@@ -520,7 +520,12 @@ events_poss_id <- events_distance %>%
 #check number of distinct poss ids
 n_distinct(events_poss_id$possession_id)
 
-#remove rows with a unique possession ID so that each possession chain has at least two events
+#number of possession chains of each size
+events_poss_id %>% group_by(possession_id) %>%
+  summarise(chain_size = n(), .groups = "drop") %>%
+  count(chain_size, name = "num_possessions")
+
+#keep only possession chains with at least two events
 events_poss_id <- events_poss_id %>%
   group_by(possession_id) %>%
   filter(n() >= 2) %>%
@@ -893,6 +898,7 @@ ggplot(possession1, aes(x = x_coordinate, y = y_coordinate)) +
     legend.position = "bottom"
   )
 
+##### WHOLE DATASET SPADE #####
 #### CLEAN INTO SEQUENCE DATASET ####
 library(arulesSequences) # run the sequence mining algorithm
 
@@ -984,7 +990,7 @@ temporal_rules <- temporal_rules[order(-temporal_rules$lift, -temporal_rules$con
 baskets_only <- temporal_rules[,1:(ncol(temporal_rules)-3)]
 basket_mat <- as.vector(as.matrix(baskets_only))
 freq_itemsets_in_rules <- unique(basket_mat[!is.na(basket_mat)])
-write.csv(as.data.frame(freq_itemsets_in_rules), file = "FreqItemsetsInRules.csv", row.names = FALSE)
+#write.csv(as.data.frame(freq_itemsets_in_rules), file = "FreqItemsetsInRules.csv", row.names = FALSE)
 
 #### RESULTS ####
 #convert cSPADE results to a tibble
@@ -1008,3 +1014,271 @@ feq_seq$seq.event.length <- (str_count(feq_seq$sequence, "\\}") + 1)
 #keep the top 2 patterns with highest support for each pattern length
 c2 <- feq_seq %>% group_by(seq.event.length) %>% slice_max(order_by = support, n = 2)
 head(c2,10)
+
+
+##### SPLIT BY SCORE STATE #####
+
+#create df with score state at the start of each possession
+poss_start_state <- events_poss_id %>%
+  arrange(game_id, period, running_clock_seconds) %>%
+  group_by(possession_id) %>%
+  summarise(
+    start_score_state = first(score_state),
+    .groups = "drop"
+  )
+
+#join back to data
+events_poss_state <- events_poss_id %>%
+  left_join(poss_start_state, by = "possession_id")
+
+#split by score state
+poss_trail  <- events_poss_state %>% filter(start_score_state == "trail")
+poss_tied <- events_poss_state %>% filter(start_score_state == "tied")
+poss_lead <- events_poss_state %>% filter(start_score_state == "lead")
+
+
+#group together all event items and add event size
+poss_trail_seq <- poss_trail %>% 
+  group_by(possession_id) %>% arrange(running_clock_seconds) %>%
+  mutate(eventID = row_number()) %>% 
+  unite(col = "items", event, x1_zone, x2_zone, angle_threshold,
+        pass_dist_threshold, shots_dist_threshold, pass_direction, 
+        detail_1, detail_2, new_detail_3, new_detail_4, sep = ",", na.rm = TRUE) %>% 
+  ungroup() %>%
+  mutate(SIZE = str_count(items, ",") + 1) %>%
+  select(possession_id, eventID, SIZE, items) %>%
+  mutate(across(everything(), as.factor)) %>%
+  rename(sequenceID = possession_id) %>%
+  arrange(sequenceID, eventID)
+
+poss_tied_seq <- poss_tied %>% 
+  group_by(possession_id) %>% arrange(running_clock_seconds) %>%
+  mutate(eventID = row_number()) %>% 
+  unite(col = "items", event, x1_zone, x2_zone, angle_threshold,
+        pass_dist_threshold, shots_dist_threshold, pass_direction, 
+        detail_1, detail_2, new_detail_3, new_detail_4, sep = ",", na.rm = TRUE) %>% 
+  ungroup() %>%
+  mutate(SIZE = str_count(items, ",") + 1) %>%
+  select(possession_id, eventID, SIZE, items) %>%
+  mutate(across(everything(), as.factor)) %>%
+  rename(sequenceID = possession_id) %>%
+  arrange(sequenceID, eventID)
+
+poss_lead_seq <- poss_lead %>% 
+  group_by(possession_id) %>% arrange(running_clock_seconds) %>%
+  mutate(eventID = row_number()) %>% 
+  unite(col = "items", event, x1_zone, x2_zone, angle_threshold,
+        pass_dist_threshold, shots_dist_threshold, pass_direction, 
+        detail_1, detail_2, new_detail_3, new_detail_4, sep = ",", na.rm = TRUE) %>% 
+  ungroup() %>%
+  mutate(SIZE = str_count(items, ",") + 1) %>%
+  select(possession_id, eventID, SIZE, items) %>%
+  mutate(across(everything(), as.factor)) %>%
+  rename(sequenceID = possession_id) %>%
+  arrange(sequenceID, eventID)
+
+#### cSpade Pre-process ####
+
+# Convert trail to transaction matrix data type
+write.table(poss_trail_seq, "hockey_seq_trail.txt", sep=",", row.names = FALSE, col.names = FALSE, quote = FALSE)
+seq_matrix_trail <- read_baskets("hockey_seq_trail.txt", sep = ",", info = c("sequenceID","eventID","SIZE"))
+
+# Convert tied to transaction matrix data type
+write.table(poss_tied_seq, "hockey_seq_tied.txt", sep=",", row.names = FALSE, col.names = FALSE, quote = FALSE)
+seq_matrix_tied <- read_baskets("hockey_seq_tied.txt", sep = ",", info = c("sequenceID","eventID","SIZE"))
+
+# Convert lead to transaction matrix data type
+write.table(poss_lead_seq, "hockey_seq_lead.txt", sep=",", row.names = FALSE, col.names = FALSE, quote = FALSE)
+seq_matrix_lead <- read_baskets("hockey_seq_lead.txt", sep = ",", info = c("sequenceID","eventID","SIZE"))
+
+
+#### APPLY CSPADE AND VIEW RESULTS ####
+
+#apply cSPADE algorithm to trail with support = 0.1
+itset_seq_trail <- cspade(seq_matrix_trail, 
+                       parameter = list(support = 0.1), #freq sequs that occurs in at least 10% of all sequs
+                       control = list(verbose = TRUE))
+summary(itset_seq_trail)
+
+#apply cSPADE algorithm to tied with support = 0.1
+itset_seq_tied <- cspade(seq_matrix_tied, 
+                          parameter = list(support = 0.1), #freq sequs that occurs in at least 10% of all sequs
+                          control = list(verbose = TRUE))
+summary(itset_seq_tied)
+
+#apply cSPADE algorithm to lead with support = 0.1
+itset_seq_lead <- cspade(seq_matrix_lead, 
+                          parameter = list(support = 0.1), #freq sequs that occurs in at least 10% of all sequs
+                          control = list(verbose = TRUE))
+summary(itset_seq_lead)
+
+
+#### FIND AND INTERPRETE TEMPORAL RULES ####
+
+## FOR TRAIL POSSESSIONS
+
+# Get induced temporal rules from frequent itemsets
+r1_trail <- as(ruleInduction(itset_seq_trail, confidence = 0.8, control = list(verbose = TRUE)), "data.frame")
+head(r1_trail)
+
+# Separate LHS and RHS rules
+r1_trail$rulecount <- as.character(r1_trail$rule)
+max_col_trail <- max(sapply(strsplit(r1_trail$rulecount,' => '),length))
+r_sep_trail <- separate(data = r1_trail, col = rule, into = paste0("Time",1:max_col_trail), sep = " => ")
+r_sep_trail$Time2 <- substring(r_sep_trail$Time2,3,nchar(r_sep_trail$Time2)-2)
+head(r_sep_trail)
+
+# Strip LHS baskets
+max_time1_trail <- max(sapply(strsplit(r_sep_trail$Time1,'},'),length))
+r_sep_trail$TimeClean <- substring(r_sep_trail$Time1,3,nchar(r_sep_trail$Time1)-2)
+r_sep_trail$TimeClean <- gsub("\\},\\{", "zzz", r_sep_trail$TimeClean)
+r_sep_items_trail <- separate(data = r_sep_trail, col = TimeClean, into = paste0("Previous_Items",1:max_time1_trail), sep = "zzz")
+head(r_sep_items_trail)
+
+# Get cleaned temporal rules: time reads sequentially from left to right
+
+r_shift_na_trail <- r_sep_items_trail
+
+for (i in seq(1, nrow(r_shift_na_trail))){
+  for (col in seq(8, (6+max_time1_trail))){
+    if (is.na(r_shift_na_trail[i,col])==TRUE){
+      r_shift_na_trail[i,col] <- r_shift_na_trail[i,col-1]
+      r_shift_na_trail[i,col-1] <- NA  
+    }
+  }
+}
+names(r_shift_na_trail)[2] <- "Predicted_Items"
+
+cols <- c(7:(6+max_time1_trail), 2:5)
+temporal_rules_trail <- r_shift_na_trail[,cols]
+temporal_rules_trail <- temporal_rules_trail[order(-temporal_rules_trail$lift, -temporal_rules_trail$confidence, 
+                                       -temporal_rules_trail$support, temporal_rules_trail$Predicted_Items),]
+
+write.csv(as.data.frame(temporal_rules_trail), file = "TemporalRulesTrail.csv", row.names = FALSE, na="")
+
+# Get unique frequent itemsets existing in rules (subset of those in s1.df)
+baskets_only_trail <- temporal_rules_trail[,1:(ncol(temporal_rules_trail)-3)]
+basket_mat_trail <- as.vector(as.matrix(baskets_only_trail))
+freq_itemsets_in_rules_trail <- unique(basket_mat_trail[!is.na(basket_mat_trail)])
+write.csv(as.data.frame(freq_itemsets_in_rules_trail), file = "FreqItemsetsInRulesTrail.csv", row.names = FALSE)
+
+
+
+## FOR TIED POSSESSIONS
+
+# Get induced temporal rules from frequent itemsets
+r1_tied <- as(ruleInduction(itset_seq_tied, confidence = 0.8, control = list(verbose = TRUE)), "data.frame")
+head(r1_tied)
+
+# Separate LHS and RHS rules
+r1_tied$rulecount <- as.character(r1_tied$rule)
+max_col_tied <- max(sapply(strsplit(r1_tied$rulecount,' => '), length))
+r_sep_tied <- separate(data = r1_tied, col = rule, into = paste0("Time", 1:max_col_tied), sep = " => ")
+r_sep_tied$Time2 <- substring(r_sep_tied$Time2, 3, nchar(r_sep_tied$Time2) - 2)
+head(r_sep_tied)
+
+# Strip LHS baskets
+max_time1_tied <- max(sapply(strsplit(r_sep_tied$Time1,'},'), length))
+r_sep_tied$TimeClean <- substring(r_sep_tied$Time1, 3, nchar(r_sep_tied$Time1) - 2)
+r_sep_tied$TimeClean <- gsub("\\},\\{", "zzz", r_sep_tied$TimeClean)
+r_sep_items_tied <- separate(data = r_sep_tied, col = TimeClean,
+                             into = paste0("Previous_Items", 1:max_time1_tied),
+                             sep = "zzz")
+head(r_sep_items_tied)
+
+# Get cleaned temporal rules: time reads sequentially from left to right
+r_shift_na_tied <- r_sep_items_tied
+
+for (i in seq(1, nrow(r_shift_na_tied))) {
+  for (col in seq(8, (6 + max_time1_tied))) {
+    if (is.na(r_shift_na_tied[i, col]) == TRUE) {
+      r_shift_na_tied[i, col] <- r_shift_na_tied[i, col - 1]
+      r_shift_na_tied[i, col - 1] <- NA  
+    }
+  }
+}
+
+names(r_shift_na_tied)[2] <- "Predicted_Items"
+
+cols <- c(7:(6 + max_time1_tied), 2:5)
+temporal_rules_tied <- r_shift_na_tied[, cols]
+temporal_rules_tied <- temporal_rules_tied[
+  order(-temporal_rules_tied$lift,
+        -temporal_rules_tied$confidence,
+        -temporal_rules_tied$support,
+        temporal_rules_tied$Predicted_Items), ]
+
+write.csv(as.data.frame(temporal_rules_tied),
+          file = "TemporalRulesTied.csv",
+          row.names = FALSE,
+          na = "")
+
+# Get unique frequent itemsets existing in rules (subset of those in s1.df)
+baskets_only_tied <- temporal_rules_tied[, 1:(ncol(temporal_rules_tied) - 3)]
+basket_mat_tied <- as.vector(as.matrix(baskets_only_tied))
+freq_itemsets_in_rules_tied <- unique(basket_mat_tied[!is.na(basket_mat_tied)])
+
+write.csv(as.data.frame(freq_itemsets_in_rules_tied),
+          file = "FreqItemsetsInRulesTied.csv",
+          row.names = FALSE)
+
+
+
+## FOR LEAD POSSESSIONS
+
+# Get induced temporal rules from frequent itemsets
+r1_lead <- as(ruleInduction(itset_seq_lead, confidence = 0.8, control = list(verbose = TRUE)), "data.frame")
+head(r1_lead)
+
+# Separate LHS and RHS rules
+r1_lead$rulecount <- as.character(r1_lead$rule)
+max_col_lead <- max(sapply(strsplit(r1_lead$rulecount,' => '), length))
+r_sep_lead <- separate(data = r1_lead, col = rule, into = paste0("Time", 1:max_col_lead), sep = " => ")
+r_sep_lead$Time2 <- substring(r_sep_lead$Time2, 3, nchar(r_sep_lead$Time2) - 2)
+head(r_sep_lead)
+
+# Strip LHS baskets
+max_time1_lead <- max(sapply(strsplit(r_sep_lead$Time1,'},'), length))
+r_sep_lead$TimeClean <- substring(r_sep_lead$Time1, 3, nchar(r_sep_lead$Time1) - 2)
+r_sep_lead$TimeClean <- gsub("\\},\\{", "zzz", r_sep_lead$TimeClean)
+r_sep_items_lead <- separate(data = r_sep_lead, col = TimeClean,
+                             into = paste0("Previous_Items", 1:max_time1_lead),
+                             sep = "zzz")
+head(r_sep_items_lead)
+
+# Get cleaned temporal rules: time reads sequentially from left to right
+r_shift_na_lead <- r_sep_items_lead
+
+for (i in seq(1, nrow(r_shift_na_lead))) {
+  for (col in seq(8, (6 + max_time1_lead))) {
+    if (is.na(r_shift_na_lead[i, col]) == TRUE) {
+      r_shift_na_lead[i, col] <- r_shift_na_lead[i, col - 1]
+      r_shift_na_lead[i, col - 1] <- NA  
+    }
+  }
+}
+
+names(r_shift_na_lead)[2] <- "Predicted_Items"
+
+cols <- c(7:(6 + max_time1_lead), 2:5)
+temporal_rules_lead <- r_shift_na_lead[, cols]
+temporal_rules_lead <- temporal_rules_lead[
+  order(-temporal_rules_lead$lift,
+        -temporal_rules_lead$confidence,
+        -temporal_rules_lead$support,
+        temporal_rules_lead$Predicted_Items), ]
+
+write.csv(as.data.frame(temporal_rules_lead),
+          file = "TemporalRulesLead.csv",
+          row.names = FALSE,
+          na = "")
+
+# Get unique frequent itemsets existing in rules (subset of those in s1.df)
+baskets_only_lead <- temporal_rules_lead[, 1:(ncol(temporal_rules_lead) - 3)]
+basket_mat_lead <- as.vector(as.matrix(baskets_only_lead))
+freq_itemsets_in_rules_lead <- unique(basket_mat_lead[!is.na(basket_mat_lead)])
+
+write.csv(as.data.frame(freq_itemsets_in_rules_lead),
+          file = "FreqItemsetsInRulesLead.csv",
+          row.names = FALSE)
+

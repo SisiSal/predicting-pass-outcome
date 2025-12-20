@@ -1,0 +1,1683 @@
+36,1,2,Puck Recovery,BND
+36,2,6,Incomplete Play,BND,DZ2,Medium,fw,Indirect
+38,1,2,Puck Recovery,DZ
+38,2,6,Play,DZ,DZ2,Short,lat,Direct
+38,3,6,Play,DZ,DZ2,Short,lfw,Direct
+38,4,3,Dump In/Out,DZ,Lost
+40,1,2,Puck Recovery,BND
+40,2,6,Play,DZ,DZ2,Short,lfw,Direct
+40,3,6,Incomplete Play,DZ,DZ2,Medium,fw,Direct
+41,1,2,Puck Recovery,NZ
+41,2,3,Zone Entry,OZ,Carried
+41,3,2,Puck Recovery,NZ
+41,4,6,Play,NZ,NZ2,Long,lbw,Direct
+41,5,6,Incomplete Play,DZ,NZ2,Medium,fw,Indirect
+43,1,2,Puck Recovery,NZ
+43,2,6,Incomplete Play,NZ,NZ2,Short,lfw,Direct
+48,1,2,Puck Recovery,BND
+48,2,6,Play,DZ,DZ2,Short,fw,Direct
+48,3,6,Incomplete Play,DZ,DZ2,Short,lfw,Direct
+50,1,2,Puck Recovery,DZ
+50,2,6,Incomplete Play,DZ,BND2,Medium,lbw,Indirect
+54,1,2,Puck Recovery,DZ
+54,2,2,Puck Recovery,DZ
+56,1,2,Puck Recovery,BND
+56,2,6,Play,DZ,DZ2,Long,fw,Indirect
+56,3,3,Dump In/Out,DZ,Lost
+58,1,2,Puck Recovery,DZ
+58,2,6,Play,DZ,BND2,Long,lbw,Indirect
+58,3,6,Play,BND,BND2,Long,lfw,Indirect
+58,4,6,Incomplete Play,DZ,NZ2,Long,fw,Direct
+59,1,2,Puck Recovery,NZ
+59,2,3,Dump In/Out,NZ,Lost
+59,3,3,Zone Entry,NZ,Dumped
+61,1,2,Puck Recovery,BND
+61,2,6,Play,BND,DZ2,Medium,fw,Indirect
+61,3,6,Incomplete Play,DZ,DZ2,Medium,fw,Direct
+63,1,2,Puck Recovery,DZ
+63,2,6,Play,DZ,DZ2,Short,bw,Indirect
+63,3,6,Play,DZ,DZ2,Long,lfw,Direct
+63,4,6,Incomplete Play,DZ,NZ2,Medium,fw,Direct
+65,1,2,Takeaway,NZ
+65,2,3,Dump In/Out,NZ,Lost
+65,3,3,Zone Entry,OZ,Dumped
+67,1,2,Puck Recovery,DZ
+67,2,3,Zone Entry,NZ,Carried
+67,3,6,Incomplete Play,OZ,OZ2,Medium,lfw,Direct
+68,1,2,Puck Recovery,BNO
+68,2,6,Play,OZ,OZ2,Long,bw,Direct
+68,3,6,Incomplete Play,OZ,OZ2,Long,fw,Indirect
+70,1,2,Puck Recovery,OZ
+70,2,8,Shot,OZ,Ang(N),Long,Slapshot,On Net,traffic,not_one_timer
+72,1,2,Takeaway,BND
+72,2,6,Incomplete Play,DZ,DZ2,Short,fw,Direct
+73,1,2,Puck Recovery,DZ
+73,2,3,Dump In/Out,NZ,Lost
+73,3,3,Zone Entry,OZ,Dumped
+76,1,2,Takeaway,DZ
+76,2,3,Dump In/Out,NZ,Lost
+76,3,3,Zone Entry,NZ,Dumped
+78,1,2,Puck Recovery,BNO
+78,2,2,Puck Recovery,OZ
+78,3,6,Incomplete Play,OZ,OZ2,Short,lfw,Direct
+79,1,2,Puck Recovery,OZ
+79,2,6,Play,OZ,OZ2,Short,bw,Direct
+79,3,8,Shot,OZ,Ang(N),Medium,Wristshot,Blocked,traffic,not_one_timer
+80,1,2,Puck Recovery,OZ
+80,2,3,Penalty Taken,OZ,Roughing
+81,1,3,Faceoff Win,DZ,Backhand
+81,2,2,Puck Recovery,DZ
+81,3,6,Play,DZ,BND2,Long,lbw,Indirect
+81,4,3,Dump In/Out,BND,Lost
+85,1,2,Puck Recovery,DZ
+85,2,3,Dump In/Out,DZ,Lost
+87,1,3,Faceoff Win,NZ,Backhand
+87,2,2,Puck Recovery,NZ
+87,3,3,Dump In/Out,NZ,Lost
+123,1,3,Faceoff Win,NZ,Backhand
+123,2,2,Puck Recovery,DZ
+123,3,6,Incomplete Play,DZ,DZ2,Short,fw,Indirect
+126,1,2,Puck Recovery,DZ
+126,2,2,Puck Recovery,DZ
+126,3,6,Incomplete Play,DZ,DZ2,Short,fw,Indirect
+129,1,2,Puck Recovery,NZ
+129,2,3,Zone Entry,OZ,Carried
+129,3,6,Incomplete Play,OZ,OZ2,Short,lbw,Direct
+131,1,2,Puck Recovery,NZ
+131,2,6,Play,NZ,NZ2,Medium,lfw,Direct
+131,3,3,Zone Entry,OZ,Carried
+131,4,8,Shot,OZ,Ang(N),Short,Wristshot,On Net,no_traffic,not_one_timer
+134,1,3,Faceoff Win,DZ,Backhand
+134,2,2,Puck Recovery,BND
+134,3,6,Play,BND,BND2,Short,lbw,Indirect
+134,4,6,Incomplete Play,BND,DZ2,Long,lfw,Indirect
+135,1,2,Puck Recovery,DZ
+135,2,6,Play,DZ,NZ2,Long,fw,Indirect
+135,3,3,Zone Entry,OZ,Carried
+135,4,6,Incomplete Play,OZ,OZ2,Medium,lfw,Direct
+136,1,2,Puck Recovery,OZ
+136,2,2,Puck Recovery,OZ
+136,3,6,Play,OZ,OZ2,Short,lfw,Direct
+136,4,8,Shot,OZ,Ang(N),Long,Slapshot,Missed,traffic,one_timer
+138,1,2,Puck Recovery,BNO
+138,2,6,Incomplete Play,BNO,BNO2,Short,lfw,Indirect
+140,1,2,Puck Recovery,NZ
+140,2,6,Play,NZ,OZ2,Long,fw,Indirect
+140,3,3,Zone Entry,OZ,Carried
+140,4,6,Incomplete Play,OZ,OZ2,Short,lfw,Indirect
+142,1,2,Puck Recovery,NZ
+142,2,6,Incomplete Play,DZ,NZ2,Long,fw,Indirect
+144,1,2,Puck Recovery,DZ
+144,2,6,Play,DZ,NZ2,Long,fw,Direct
+144,3,3,Zone Entry,OZ,Carried
+144,4,6,Play,OZ,OZ2,Medium,bw,Direct
+144,5,8,Shot,OZ,Ang(N),Medium,Wristshot,Blocked,traffic,not_one_timer
+145,1,3,Faceoff Win,OZ,Backhand
+145,2,2,Puck Recovery,OZ
+145,3,6,Play,OZ,OZ2,Medium,bw,Indirect
+145,4,6,Play,OZ,OZ2,Long,lfw,Indirect
+145,5,6,Incomplete Play,OZ,OZ2,Long,bw,Direct
+146,1,2,Puck Recovery,BND
+146,2,6,Incomplete Play,BND,DZ2,Long,fw,Indirect
+148,1,2,Puck Recovery,DZ
+148,2,6,Incomplete Play,DZ,DZ2,Long,lfw,Direct
+151,1,2,Puck Recovery,DZ
+151,2,6,Play,NZ,NZ2,Medium,lfw,Direct
+151,3,3,Zone Entry,OZ,Carried
+156,1,2,Puck Recovery,BND
+156,2,6,Play,BND,DZ2,Medium,fw,Direct
+156,3,6,Incomplete Play,DZ,DZ2,Short,lat,Direct
+160,1,2,Puck Recovery,DZ
+160,2,6,Play,DZ,DZ2,Short,lfw,Direct
+160,3,6,Incomplete Play,DZ,DZ2,Short,fw,Direct
+163,1,2,Puck Recovery,NZ
+163,2,3,Dump In/Out,NZ,Lost
+163,3,3,Zone Entry,OZ,Dumped
+165,1,2,Puck Recovery,NZ
+165,2,3,Penalty Taken,OZ,Hooking
+167,1,2,Takeaway,DZ
+167,2,3,Dump In/Out,DZ,Lost
+169,1,2,Puck Recovery,DZ
+169,2,6,Incomplete Play,BND,DZ2,Short,fw,Indirect
+172,1,2,Puck Recovery,DZ
+172,2,3,Dump In/Out,DZ,Lost
+174,1,2,Puck Recovery,DZ
+174,2,3,Dump In/Out,DZ,Lost
+177,1,2,Puck Recovery,DZ
+177,2,3,Dump In/Out,DZ,Lost
+179,1,2,Puck Recovery,BND
+179,2,6,Play,BND,BND2,Short,lfw,Direct
+179,3,2,Puck Recovery,BND
+179,4,6,Incomplete Play,BND,BND2,Short,lfw,Direct
+181,1,2,Puck Recovery,BND
+181,2,6,Play,BND,DZ2,Short,fw,Indirect
+181,3,6,Play,DZ,NZ2,Medium,lfw,Direct
+181,4,6,Play,NZ,OZ2,Medium,lfw,Direct
+181,5,3,Zone Entry,OZ,Carried
+181,6,8,Shot,OZ,Ang(N),Medium,Wristshot,Missed,traffic,not_one_timer
+182,1,2,Puck Recovery,OZ
+182,2,8,Shot,OZ,Ang(M),Short,Snapshot,On Net,no_traffic,not_one_timer
+186,1,2,Puck Recovery,DZ
+186,2,6,Play,DZ,BND2,Long,lbw,Indirect
+186,3,6,Incomplete Play,BND,DZ2,Long,fw,Indirect
+188,1,2,Puck Recovery,DZ
+188,2,6,Play,DZ,DZ2,Long,lfw,Indirect
+188,3,3,Dump In/Out,DZ,Lost
+190,1,2,Puck Recovery,OZ
+190,2,6,Incomplete Play,OZ,OZ2,Short,fw,Direct
+192,1,2,Puck Recovery,OZ
+192,2,6,Incomplete Play,OZ,OZ2,Medium,lfw,Indirect
+194,1,2,Puck Recovery,OZ
+194,2,6,Play,OZ,OZ2,Long,lfw,Direct
+194,3,8,Shot,OZ,Ang(N),Medium,Wristshot,On Net,no_traffic,not_one_timer
+195,1,3,Faceoff Win,OZ,Backhand
+195,2,2,Puck Recovery,OZ
+195,3,6,Play,OZ,OZ2,Medium,bw,Direct
+195,4,6,Play,OZ,BNO2,Long,fw,Indirect
+199,1,2,Puck Recovery,DZ
+199,2,3,Dump In/Out,NZ,Lost
+201,1,2,Takeaway,DZ
+201,2,6,Incomplete Play,DZ,DZ2,Medium,fw,Direct
+202,1,2,Puck Recovery,DZ
+202,2,6,Play,NZ,OZ2,Short,lfw,Direct
+202,3,3,Zone Entry,OZ,Played
+202,4,6,Play,OZ,OZ2,Long,lfw,Indirect
+202,5,6,Incomplete Play,OZ,OZ2,Long,bw,Direct
+203,1,2,Puck Recovery,NZ
+203,2,6,Play,DZ,NZ2,Medium,lfw,Direct
+205,1,2,Puck Recovery,NZ
+205,2,6,Incomplete Play,NZ,NZ2,Short,fw,Direct
+206,1,2,Puck Recovery,BND
+206,2,6,Play,BND,DZ2,Long,fw,Indirect
+206,3,6,Play,DZ,NZ2,Medium,fw,Indirect
+206,4,6,Play,NZ,NZ2,Short,lfw,Direct
+206,5,3,Zone Entry,NZ,Carried
+206,6,3,Faceoff Win,NZ,Backhand
+206,7,2,Puck Recovery,NZ
+206,8,6,Play,NZ,NZ2,Short,lbw,Direct
+206,9,6,Incomplete Play,NZ,NZ2,Medium,fw,Direct
+208,1,2,Takeaway,DZ
+208,2,6,Play,DZ,NZ2,Short,fw,Direct
+208,3,3,Dump In/Out,NZ,Lost
+208,4,3,Zone Entry,NZ,Dumped
+210,1,2,Puck Recovery,DZ
+210,2,6,Play,BND,BND2,Long,lbw,Indirect
+210,3,6,Play,BND,NZ2,Long,fw,Direct
+210,4,6,Play,NZ,NZ2,Medium,lfw,Direct
+210,5,3,Zone Entry,NZ,Carried
+210,6,8,Shot,OZ,Ang(N),Medium,Wristshot,Missed,no_traffic,not_one_timer
+211,1,2,Puck Recovery,OZ
+211,2,6,Play,OZ,BNO2,Long,lfw,Indirect
+211,3,6,Play,BNO,OZ2,Long,bw,Indirect
+211,4,6,Play,OZ,OZ2,Medium,lbw,Direct
+211,5,6,Incomplete Play,OZ,BNO2,Long,fw,Indirect
+213,1,2,Puck Recovery,NZ
+213,2,6,Play,NZ,NZ2,Long,lbw,Direct
+213,3,6,Play,NZ,NZ2,Medium,fw,Indirect
+213,4,2,Puck Recovery,NZ
+213,5,6,Incomplete Play,NZ,NZ2,Long,lfw,Indirect
+215,1,3,Faceoff Win,OZ,Backhand
+215,2,2,Puck Recovery,OZ
+215,3,8,Shot,OZ,Ang(N),Long,Wristshot,On Net,traffic,not_one_timer
+216,1,2,Puck Recovery,OZ
+216,2,6,Play,OZ,OZ2,Short,fw,Direct
+216,3,6,Play,BNO,OZ2,Short,bw,Direct
+216,4,6,Incomplete Play,OZ,OZ2,Long,lbw,Direct
+217,1,2,Puck Recovery,OZ
+217,2,6,Play,OZ,OZ2,Medium,lat,Direct
+217,3,8,Shot,OZ,Ang(N),Long,Wristshot,On Net,traffic,not_one_timer
+218,1,3,Faceoff Win,OZ,Backhand
+218,2,2,Puck Recovery,OZ
+218,3,6,Play,OZ,OZ2,Medium,bw,Direct
+218,4,8,Shot,OZ,Ang(N),Long,Wristshot,On Net,traffic,not_one_timer
+219,1,2,Puck Recovery,OZ
+219,2,6,Play,OZ,BNO2,Long,fw,Indirect
+221,1,2,Puck Recovery,OZ
+221,2,6,Play,OZ,OZ2,Short,bw,Direct
+221,3,6,Incomplete Play,OZ,OZ2,Short,lbw,Direct
+222,1,2,Puck Recovery,OZ
+222,2,6,Play,OZ,OZ2,Long,lbw,Indirect
+222,3,6,Play,OZ,BNO2,Long,fw,Indirect
+222,4,6,Play,OZ,OZ2,Long,bw,Direct
+222,5,6,Play,OZ,OZ2,Short,fw,Direct
+222,6,6,Play,OZ,BNO2,Long,fw,Indirect
+224,1,2,Puck Recovery,DZ
+224,2,6,Play,DZ,NZ2,Short,fw,Direct
+224,3,6,Play,NZ,NZ2,Long,lbw,Direct
+224,4,3,Dump In/Out,NZ,Retained
+224,5,3,Zone Entry,NZ,Dumped
+224,6,2,Puck Recovery,OZ
+224,7,6,Incomplete Play,OZ,BNO2,Long,fw,Indirect
+226,1,2,Puck Recovery,OZ
+226,2,6,Play,OZ,OZ2,Short,fw,Indirect
+228,1,2,Puck Recovery,BND
+228,2,6,Play,DZ,NZ2,Medium,lfw,Direct
+228,3,3,Dump In/Out,NZ,Lost
+228,4,3,Zone Entry,OZ,Dumped
+230,1,2,Puck Recovery,OZ
+230,2,6,Play,OZ,BNO2,Long,fw,Indirect
+230,3,2,Puck Recovery,BNO
+232,1,2,Puck Recovery,DZ
+232,2,6,Incomplete Play,DZ,NZ2,Short,fw,Direct
+234,1,3,Faceoff Win,NZ,Backhand
+234,2,2,Puck Recovery,DZ
+234,3,6,Play,DZ,OZ2,Long,fw,Direct
+234,4,3,Zone Entry,NZ,Played
+234,5,6,Play,OZ,OZ2,Long,lfw,Indirect
+234,6,6,Play,OZ,OZ2,Long,lbw,Indirect
+234,7,8,Shot,OZ,Ang(N),Long,Snapshot,On Net,no_traffic,not_one_timer
+235,1,2,Puck Recovery,BNO
+235,2,2,Puck Recovery,OZ
+235,3,6,Incomplete Play,OZ,BNO2,Medium,lfw,Indirect
+237,1,2,Takeaway,DZ
+237,2,6,Incomplete Play,DZ,DZ2,Medium,fw,Direct
+238,1,2,Puck Recovery,DZ
+238,2,6,Play,DZ,DZ2,Medium,fw,Direct
+238,3,6,Play,NZ,NZ2,Short,fw,Direct
+238,4,3,Zone Entry,NZ,Carried
+238,5,6,Play,OZ,OZ2,Long,lfw,Direct
+238,6,6,Incomplete Play,OZ,OZ2,Medium,lfw,Direct
+240,1,2,Puck Recovery,DZ
+240,2,3,Dump In/Out,DZ,Lost
+242,1,2,Puck Recovery,DZ
+242,2,6,Incomplete Play,DZ,DZ2,Long,lfw,Direct
+245,1,2,Puck Recovery,DZ
+245,2,3,Dump In/Out,NZ,Lost
+250,1,3,Faceoff Win,OZ,Backhand
+250,2,2,Puck Recovery,BNO
+250,3,6,Incomplete Play,BNO,OZ2,Short,bw,Indirect
+252,1,2,Puck Recovery,BND
+252,2,6,Play,BND,BND2,Short,lat,Direct
+252,3,6,Play,DZ,DZ2,Medium,fw,Direct
+252,4,3,Dump In/Out,NZ,Retained
+252,5,3,Zone Entry,OZ,Dumped
+252,6,2,Puck Recovery,BNO
+252,7,6,Play,BNO,OZ2,Medium,bw,Indirect
+254,1,2,Puck Recovery,DZ
+254,2,6,Play,DZ,NZ2,Long,lfw,Direct
+254,3,3,Zone Entry,OZ,Carried
+254,4,6,Play,OZ,OZ2,Short,bw,Direct
+254,5,6,Play,OZ,OZ2,Short,bw,Direct
+254,6,6,Play,OZ,OZ2,Short,lfw,Direct
+254,7,6,Play,OZ,OZ2,Medium,bw,Indirect
+254,8,6,Play,OZ,OZ2,Long,lfw,Direct
+254,9,8,Shot,OZ,Ang(N),Medium,Wristshot,Blocked,traffic,not_one_timer
+255,1,2,Puck Recovery,OZ
+255,2,6,Play,OZ,OZ2,Medium,lfw,Direct
+255,3,6,Play,OZ,OZ2,Long,lbw,Direct
+255,4,8,Shot,OZ,Ang(N),Medium,Slapshot,Blocked,no_traffic,one_timer
+256,1,3,Faceoff Win,OZ,Backhand
+256,2,2,Puck Recovery,OZ
+256,3,6,Play,OZ,OZ2,Short,lfw,Direct
+256,4,6,Play,OZ,OZ2,Long,lfw,Direct
+256,5,8,Shot,OZ,Ang(N),Short,Snapshot,Blocked,traffic,not_one_timer
+257,1,2,Puck Recovery,OZ
+257,2,6,Play,OZ,OZ2,Long,bw,Direct
+257,3,6,Play,OZ,OZ2,Medium,fw,Direct
+257,4,8,Shot,OZ,Ang(M),Short,Deflection,On Net,traffic,one_timer
+258,1,2,Puck Recovery,OZ
+258,2,8,Shot,OZ,Ang(W),Short,Snapshot,On Net,no_traffic,not_one_timer
+259,1,2,Puck Recovery,BNO
+259,2,6,Play,BNO,BNO2,Short,lbw,Indirect
+259,3,6,Play,OZ,OZ2,Medium,bw,Direct
+259,4,6,Incomplete Play,OZ,OZ2,Medium,lbw,Direct
+261,1,2,Puck Recovery,DZ
+261,2,6,Play,BND,BND2,Short,lbw,Direct
+261,3,6,Play,DZ,NZ2,Medium,fw,Direct
+261,4,6,Play,NZ,NZ2,Long,lfw,Indirect
+261,5,3,Dump In/Out,NZ,Retained
+261,6,3,Zone Entry,NZ,Dumped
+261,7,2,Puck Recovery,OZ
+261,8,2,Puck Recovery,OZ
+261,9,6,Play,OZ,OZ2,Medium,bw,Indirect
+261,10,6,Play,OZ,OZ2,Long,lfw,Direct
+261,11,8,Shot,OZ,Ang(N),Medium,Wristshot,Blocked,traffic,not_one_timer
+262,1,2,Puck Recovery,OZ
+262,2,6,Incomplete Play,OZ,OZ2,Medium,lbw,Direct
+263,1,2,Puck Recovery,NZ
+263,2,6,Play,DZ,NZ2,Long,fw,Direct
+263,3,6,Incomplete Play,NZ,OZ2,Short,fw,Direct
+266,1,2,Puck Recovery,DZ
+266,2,6,Play,DZ,DZ2,Short,lfw,Direct
+266,3,6,Play,DZ,NZ2,Long,fw,Direct
+266,4,3,Dump In/Out,NZ,Lost
+266,5,3,Zone Entry,OZ,Dumped
+268,1,2,Puck Recovery,NZ
+268,2,6,Play,NZ,NZ2,Long,lfw,Direct
+268,3,3,Zone Entry,OZ,Carried
+268,4,8,Shot,OZ,Ang(N),Medium,Wristshot,On Net,no_traffic,not_one_timer
+270,1,2,Puck Recovery,BND
+270,2,6,Incomplete Play,BND,BND2,Short,lbw,Indirect
+271,1,2,Puck Recovery,DZ
+271,2,6,Incomplete Play,DZ,DZ2,Short,fw,Indirect
+273,1,2,Puck Recovery,DZ
+273,2,3,Dump In/Out,DZ,Lost
+277,1,2,Puck Recovery,NZ
+277,2,6,Incomplete Play,DZ,NZ2,Long,fw,Indirect
+278,1,2,Puck Recovery,DZ
+278,2,6,Play,BND,BND2,Long,lbw,Indirect
+278,3,6,Incomplete Play,DZ,NZ2,Long,fw,Direct
+279,1,3,Faceoff Win,DZ,Backhand
+279,2,2,Puck Recovery,DZ
+279,3,6,Play,DZ,BND2,Short,lbw,Direct
+279,4,6,Play,BND,DZ2,Medium,fw,Direct
+279,5,6,Play,DZ,NZ2,Medium,fw,Indirect
+279,6,3,Dump In/Out,NZ,Retained
+279,7,2,Puck Recovery,NZ
+279,8,3,Dump In/Out,NZ,Lost
+279,9,3,Zone Entry,OZ,Dumped
+281,1,2,Puck Recovery,OZ
+281,2,8,Shot,OZ,Ang(N),Medium,Wristshot,On Net,no_traffic,not_one_timer
+283,1,2,Puck Recovery,OZ
+283,2,6,Incomplete Play,OZ,OZ2,Long,lfw,Indirect
+285,1,3,Faceoff Win,DZ,Backhand
+285,2,2,Puck Recovery,DZ
+285,3,6,Play,DZ,BND2,Medium,bw,Indirect
+287,1,2,Puck Recovery,DZ
+287,2,3,Faceoff Win,NZ,Backhand
+287,3,2,Puck Recovery,NZ
+287,4,6,Play,NZ,DZ2,Medium,bw,Indirect
+287,5,6,Incomplete Play,DZ,NZ2,Long,fw,Direct
+292,1,2,Puck Recovery,BND
+292,2,3,Faceoff Win,OZ,Backhand
+292,3,2,Puck Recovery,OZ
+292,4,8,Shot,OZ,Ang(N),Long,Wristshot,Blocked,traffic,not_one_timer
+293,1,3,Faceoff Win,OZ,Backhand
+293,2,2,Puck Recovery,OZ
+293,3,6,Incomplete Play,OZ,OZ2,Short,fw,Indirect
+295,1,2,Puck Recovery,NZ
+295,2,6,Incomplete Play,NZ,NZ2,Long,lfw,Direct
+297,1,2,Puck Recovery,OZ
+297,2,6,Play,OZ,OZ2,Medium,bw,Direct
+297,3,8,Shot,OZ,Ang(N),Long,Wristshot,Blocked,no_traffic,not_one_timer
+298,1,2,Puck Recovery,OZ
+298,2,6,Play,OZ,OZ2,Short,bw,Direct
+298,3,8,Goal,OZ,Ang(N),Short,Snapshot,On Net,no_traffic,one_timer
+299,1,3,Faceoff Win,NZ,Backhand
+299,2,2,Puck Recovery,NZ
+299,3,6,Play,DZ,NZ2,Medium,lfw,Direct
+299,4,6,Play,NZ,NZ2,Short,fw,Direct
+299,5,6,Incomplete Play,NZ,NZ2,Long,lfw,Direct
+300,1,2,Puck Recovery,NZ
+300,2,3,Dump In/Out,NZ,Lost
+300,3,3,Zone Entry,OZ,Dumped
+302,1,2,Puck Recovery,NZ
+302,2,6,Play,DZ,NZ2,Short,fw,Direct
+302,3,3,Dump In/Out,NZ,Lost
+302,4,3,Zone Entry,NZ,Dumped
+304,1,3,Faceoff Win,OZ,Backhand
+304,2,2,Puck Recovery,OZ
+304,3,6,Play,OZ,OZ2,Short,fw,Direct
+304,4,6,Play,OZ,OZ2,Medium,bw,Indirect
+304,5,6,Play,OZ,OZ2,Medium,fw,Direct
+304,6,6,Play,OZ,OZ2,Long,bw,Indirect
+304,7,6,Play,OZ,OZ2,Long,lfw,Direct
+304,8,8,Shot,OZ,Ang(N),Medium,Wristshot,Blocked,traffic,not_one_timer
+305,1,3,Faceoff Win,OZ,Backhand
+305,2,2,Puck Recovery,OZ
+305,3,6,Play,OZ,OZ2,Long,fw,Direct
+305,4,6,Play,OZ,OZ2,Short,bw,Direct
+305,5,8,Shot,OZ,Ang(M),Short,Snapshot,Missed,no_traffic,one_timer
+306,1,2,Puck Recovery,OZ
+306,2,6,Play,OZ,BNO2,Long,fw,Indirect
+306,3,6,Play,OZ,OZ2,Medium,bw,Direct
+306,4,6,Play,OZ,OZ2,Short,lfw,Direct
+306,5,6,Play,OZ,OZ2,Medium,lbw,Direct
+306,6,8,Shot,OZ,Ang(N),Short,Wristshot,Missed,no_traffic,not_one_timer
+308,1,2,Puck Recovery,DZ
+308,2,6,Play,DZ,BND2,Medium,lbw,Indirect
+308,3,6,Play,DZ,NZ2,Long,fw,Direct
+308,4,3,Dump In/Out,NZ,Lost
+308,5,3,Zone Entry,NZ,Dumped
+310,1,2,Puck Recovery,OZ
+310,2,6,Play,OZ,BNO2,Medium,lfw,Direct
+310,3,6,Play,BNO,OZ2,Long,bw,Indirect
+310,4,6,Play,OZ,OZ2,Medium,fw,Direct
+310,5,6,Play,BNO,OZ2,Medium,bw,Direct
+310,6,6,Play,OZ,OZ2,Medium,bw,Direct
+310,7,6,Play,OZ,OZ2,Medium,lat,Direct
+310,8,6,Play,OZ,OZ2,Long,lfw,Direct
+310,9,6,Incomplete Play,OZ,OZ2,Medium,lfw,Direct
+313,1,2,Puck Recovery,BND
+313,2,6,Play,BND,BND2,Short,nm,Indirect
+313,3,6,Play,DZ,DZ2,Medium,fw,Direct
+313,4,6,Play,NZ,OZ2,Medium,lfw,Direct
+313,5,3,Zone Entry,NZ,Played
+313,6,6,Incomplete Play,OZ,OZ2,Long,lfw,Indirect
+315,1,2,Puck Recovery,DZ
+315,2,6,Play,DZ,NZ2,Medium,fw,Direct
+315,3,6,Play,NZ,NZ2,Short,fw,Direct
+315,4,3,Zone Entry,OZ,Carried
+315,5,6,Play,OZ,OZ2,Long,lat,Direct
+315,6,6,Play,OZ,OZ2,Long,lfw,Indirect
+315,7,6,Play,OZ,OZ2,Short,lbw,Direct
+315,8,6,Play,OZ,OZ2,Medium,fw,Direct
+315,9,8,Shot,OZ,Ang(N),Short,Wristshot,On Net,no_traffic,not_one_timer
+316,1,2,Puck Recovery,BNO
+316,2,6,Play,BNO,OZ2,Long,bw,Indirect
+316,3,6,Play,OZ,OZ2,Long,lbw,Direct
+316,4,6,Play,OZ,OZ2,Medium,lbw,Direct
+316,5,6,Play,OZ,OZ2,Short,lbw,Direct
+316,6,6,Play,OZ,OZ2,Medium,fw,Direct
+316,7,6,Incomplete Play,OZ,OZ2,Long,lfw,Indirect
+318,1,2,Takeaway,BNO
+318,2,6,Play,BNO,OZ2,Long,bw,Direct
+318,3,6,Play,OZ,OZ2,Medium,lat,Direct
+318,4,8,Shot,OZ,Ang(N),Long,Slapshot,On Net,no_traffic,one_timer
+322,1,2,Puck Recovery,NZ
+322,2,6,Play,NZ,NZ2,Short,lfw,Direct
+322,3,3,Zone Entry,OZ,Carried
+322,4,6,Play,OZ,BNO2,Medium,fw,Indirect
+322,5,6,Play,OZ,BNO2,Medium,lfw,Indirect
+322,6,6,Incomplete Play,BNO,OZ2,Long,bw,Direct
+324,1,2,Takeaway,NZ
+324,2,6,Incomplete Play,NZ,NZ2,Medium,fw,Direct
+326,1,2,Takeaway,DZ
+326,2,6,Incomplete Play,BND,DZ2,Medium,lfw,Indirect
+328,1,2,Takeaway,DZ
+328,2,6,Play,DZ,NZ2,Long,lfw,Direct
+328,3,3,Zone Entry,OZ,Carried
+328,4,2,Puck Recovery,NZ
+328,5,6,Play,NZ,DZ2,Medium,bw,Direct
+328,6,6,Play,DZ,NZ2,Long,fw,Indirect
+328,7,3,Dump In/Out,NZ,Lost
+328,8,3,Zone Entry,OZ,Dumped
+332,1,2,Puck Recovery,OZ
+332,2,6,Play,OZ,OZ2,Long,lfw,Indirect
+332,3,6,Play,OZ,OZ2,Medium,fw,Indirect
+332,4,6,Play,OZ,OZ2,Medium,lat,Direct
+332,5,8,Shot,OZ,Ang(N),Medium,Slapshot,On Net,no_traffic,one_timer
+334,1,2,Puck Recovery,NZ
+334,2,6,Play,NZ,NZ2,Medium,fw,Direct
+334,3,3,Dump In/Out,NZ,Retained
+334,4,3,Zone Entry,OZ,Dumped
+334,5,2,Puck Recovery,BNO
+334,6,6,Play,BNO,OZ2,Short,bw,Indirect
+334,7,6,Incomplete Play,OZ,OZ2,Long,bw,Indirect
+336,1,2,Puck Recovery,DZ
+336,2,6,Play,DZ,NZ2,Long,fw,Indirect
+336,3,3,Zone Entry,NZ,Carried
+336,4,8,Shot,OZ,Ang(M),Short,Wristshot,Missed,no_traffic,not_one_timer
+337,1,2,Puck Recovery,OZ
+337,2,6,Incomplete Play,OZ,BNO2,Long,fw,Indirect
+342,1,2,Takeaway,BND
+342,2,6,Play,DZ,DZ2,Medium,lfw,Direct
+342,3,6,Play,DZ,OZ2,Long,fw,Direct
+342,4,3,Zone Entry,NZ,Played
+342,5,6,Play,BNO,OZ2,Short,bw,Direct
+342,6,8,Shot,OZ,Ang(N),Short,Snapshot,On Net,no_traffic,not_one_timer
+343,1,2,Puck Recovery,OZ
+343,2,6,Incomplete Play,OZ,OZ2,Short,lbw,Direct
+344,1,2,Puck Recovery,BNO
+344,2,6,Play,BNO,OZ2,Long,bw,Indirect
+344,3,6,Play,OZ,OZ2,Short,lfw,Direct
+344,4,8,Shot,OZ,Ang(N),Long,Slapshot,On Net,no_traffic,one_timer
+345,1,3,Faceoff Win,OZ,Backhand
+345,2,2,Puck Recovery,OZ
+345,3,6,Play,BNO,OZ2,Short,lbw,Indirect
+345,4,6,Play,OZ,OZ2,Long,bw,Indirect
+345,5,6,Play,OZ,OZ2,Long,lbw,Direct
+345,6,8,Shot,OZ,Ang(N),Medium,Wristshot,On Net,no_traffic,not_one_timer
+347,1,2,Puck Recovery,NZ
+347,2,6,Play,NZ,NZ2,Medium,lfw,Direct
+347,3,3,Zone Entry,NZ,Carried
+347,4,6,Incomplete Play,BNO,OZ2,Short,bw,Direct
+349,1,2,Puck Recovery,NZ
+349,2,3,Dump In/Out,NZ,Retained
+349,3,3,Zone Entry,OZ,Dumped
+349,4,2,Puck Recovery,OZ
+349,5,8,Shot,OZ,Ang(W),Short,Wristshot,Missed,no_traffic,not_one_timer
+350,1,2,Puck Recovery,OZ
+350,2,6,Play,OZ,OZ2,Long,bw,Indirect
+350,3,8,Shot,OZ,Ang(N),Long,Wristshot,Blocked,traffic,not_one_timer
+352,1,2,Puck Recovery,DZ
+352,2,6,Play,DZ,DZ2,Long,lbw,Indirect
+352,3,6,Play,DZ,NZ2,Long,fw,Indirect
+352,4,3,Zone Entry,OZ,Carried
+352,5,2,Puck Recovery,OZ
+352,6,6,Incomplete Play,OZ,OZ2,Short,lbw,Direct
+355,1,2,Puck Recovery,DZ
+355,2,6,Incomplete Play,DZ,NZ2,Short,lfw,Direct
+359,1,2,Puck Recovery,DZ
+359,2,3,Zone Entry,OZ,Carried
+359,3,6,Incomplete Play,OZ,OZ2,Medium,fw,Direct
+360,1,2,Puck Recovery,OZ
+360,2,6,Play,OZ,OZ2,Medium,lfw,Direct
+360,3,6,Play,OZ,OZ2,Medium,bw,Direct
+360,4,6,Play,OZ,OZ2,Long,lbw,Direct
+360,5,8,Shot,OZ,Ang(N),Medium,Wristshot,Blocked,traffic,not_one_timer
+361,1,2,Puck Recovery,BNO
+361,2,6,Incomplete Play,OZ,OZ2,Short,lbw,Direct
+362,1,2,Puck Recovery,OZ
+362,2,8,Shot,OZ,Ang(N),Long,Wristshot,Missed,no_traffic,not_one_timer
+363,1,2,Puck Recovery,BNO
+363,2,6,Play,OZ,OZ2,Long,fw,Direct
+363,3,6,Incomplete Play,BNO,OZ2,Short,bw,Direct
+365,1,2,Puck Recovery,NZ
+365,2,6,Play,NZ,NZ2,Long,lfw,Direct
+365,3,3,Dump In/Out,NZ,Lost
+365,4,3,Zone Entry,NZ,Dumped
+367,1,3,Faceoff Win,NZ,Backhand
+367,2,2,Puck Recovery,DZ
+367,3,6,Play,DZ,NZ2,Medium,lfw,Direct
+367,4,3,Dump In/Out,NZ,Lost
+367,5,3,Zone Entry,OZ,Dumped
+369,1,2,Puck Recovery,NZ
+369,2,6,Play,DZ,DZ2,Medium,lfw,Direct
+369,3,6,Play,DZ,NZ2,Medium,fw,Indirect
+369,4,6,Play,NZ,NZ2,Short,lfw,Direct
+369,5,3,Zone Entry,OZ,Carried
+369,6,8,Shot,OZ,Ang(N),Medium,Wristshot,Blocked,traffic,not_one_timer
+370,1,2,Puck Recovery,OZ
+370,2,6,Incomplete Play,OZ,BNO2,Long,lfw,Indirect
+372,1,2,Puck Recovery,BNO
+372,2,6,Incomplete Play,BNO,OZ2,Medium,bw,Direct
+373,1,2,Puck Recovery,NZ
+373,2,6,Play,NZ,NZ2,Long,lfw,Direct
+373,3,3,Dump In/Out,NZ,Lost
+373,4,3,Zone Entry,OZ,Dumped
+375,1,2,Puck Recovery,BND
+375,2,6,Incomplete Play,BND,BND2,Short,lfw,Direct
+378,1,2,Puck Recovery,DZ
+378,2,3,Dump In/Out,DZ,Lost
+380,1,2,Takeaway,DZ
+380,2,3,Dump In/Out,DZ,Retained
+380,3,2,Puck Recovery,DZ
+380,4,6,Play,DZ,DZ2,Long,lfw,Indirect
+380,5,6,Play,DZ,DZ2,Medium,bw,Direct
+380,6,6,Incomplete Play,DZ,NZ2,Long,fw,Direct
+381,1,3,Faceoff Win,DZ,Backhand
+381,2,2,Puck Recovery,DZ
+381,3,6,Incomplete Play,DZ,DZ2,Medium,fw,Indirect
+383,1,2,Puck Recovery,BND
+383,2,6,Play,DZ,DZ2,Medium,fw,Direct
+383,3,6,Incomplete Play,DZ,DZ2,Medium,bw,Direct
+384,1,2,Puck Recovery,DZ
+384,2,6,Play,DZ,BND2,Long,lbw,Indirect
+384,3,6,Play,DZ,DZ2,Long,fw,Direct
+384,4,6,Play,DZ,NZ2,Medium,fw,Direct
+384,5,3,Dump In/Out,NZ,Lost
+384,6,3,Zone Entry,OZ,Dumped
+386,1,2,Puck Recovery,DZ
+386,2,6,Play,DZ,DZ2,Short,fw,Indirect
+386,3,6,Incomplete Play,DZ,DZ2,Short,bw,Indirect
+387,1,2,Puck Recovery,DZ
+387,2,6,Play,DZ,OZ2,Long,fw,Direct
+387,3,3,Zone Entry,OZ,Played
+387,4,2,Puck Recovery,OZ
+389,1,2,Takeaway,OZ
+389,2,6,Play,OZ,OZ2,Long,bw,Indirect
+389,3,8,Shot,OZ,Ang(N),Long,Wristshot,Missed,traffic,not_one_timer
+391,1,2,Puck Recovery,NZ
+391,2,6,Play,NZ,NZ2,Medium,fw,Direct
+391,3,6,Incomplete Play,NZ,NZ2,Medium,fw,Direct
+393,1,2,Puck Recovery,DZ
+393,2,6,Play,DZ,BND2,Long,lbw,Indirect
+393,3,6,Play,BND,DZ2,Long,fw,Indirect
+393,4,3,Dump In/Out,NZ,Lost
+393,5,3,Zone Entry,OZ,Dumped
+397,1,2,Puck Recovery,DZ
+397,2,6,Play,DZ,DZ2,Short,lbw,Direct
+397,3,6,Play,DZ,NZ2,Medium,fw,Direct
+397,4,3,Dump In/Out,NZ,Lost
+399,1,2,Takeaway,NZ
+399,2,6,Play,NZ,DZ2,Medium,lbw,Direct
+399,3,6,Play,DZ,OZ2,Long,lfw,Indirect
+399,4,3,Zone Entry,OZ,Carried
+401,1,2,Takeaway,NZ
+401,2,6,Incomplete Play,NZ,NZ2,Short,fw,Direct
+404,1,2,Puck Recovery,BNO
+404,2,6,Play,BNO,OZ2,Long,bw,Direct
+404,3,6,Incomplete Play,BNO,OZ2,Short,lbw,Direct
+406,1,3,Faceoff Win,OZ,Backhand
+406,2,2,Puck Recovery,OZ
+406,3,6,Play,OZ,OZ2,Long,fw,Indirect
+406,4,6,Incomplete Play,OZ,BNO2,Medium,fw,Direct
+408,1,2,Puck Recovery,DZ
+408,2,6,Play,DZ,NZ2,Long,fw,Direct
+408,3,3,Zone Entry,OZ,Carried
+408,4,6,Play,OZ,OZ2,Short,lfw,Direct
+408,5,6,Incomplete Play,OZ,OZ2,Long,lfw,Direct
+409,1,2,Puck Recovery,OZ
+409,2,6,Play,OZ,OZ2,Medium,lbw,Direct
+409,3,6,Play,OZ,BNO2,Long,fw,Indirect
+409,4,6,Incomplete Play,OZ,OZ2,Long,bw,Indirect
+411,1,2,Puck Recovery,OZ
+411,2,6,Play,OZ,OZ2,Medium,bw,Direct
+411,3,8,Shot,OZ,Ang(N),Long,Snapshot,Missed,traffic,one_timer
+412,1,2,Puck Recovery,BNO
+412,2,6,Incomplete Play,OZ,OZ2,Long,lbw,Direct
+414,1,2,Takeaway,DZ
+414,2,3,Dump In/Out,DZ,Retained
+414,3,2,Puck Recovery,DZ
+414,4,3,Dump In/Out,NZ,Lost
+416,1,2,Puck Recovery,NZ
+416,2,6,Play,NZ,NZ2,Short,lfw,Direct
+416,3,3,Zone Entry,OZ,Carried
+418,1,3,Faceoff Win,OZ,Backhand
+418,2,2,Puck Recovery,OZ
+418,3,6,Play,OZ,OZ2,Long,bw,Indirect
+418,4,6,Play,OZ,OZ2,Short,fw,Direct
+418,5,6,Play,OZ,OZ2,Long,lfw,Indirect
+418,6,6,Play,OZ,OZ2,Long,lfw,Indirect
+418,7,6,Play,OZ,OZ2,Long,lfw,Indirect
+418,8,6,Play,OZ,OZ2,Long,bw,Direct
+418,9,6,Incomplete Play,OZ,OZ2,Long,lfw,Direct
+419,1,2,Puck Recovery,NZ
+419,2,6,Play,NZ,NZ2,Medium,lfw,Direct
+419,3,6,Play,NZ,OZ2,Short,lfw,Direct
+419,4,3,Zone Entry,OZ,Played
+419,5,6,Play,OZ,OZ2,Medium,lbw,Direct
+419,6,6,Play,OZ,OZ2,Short,lbw,Direct
+419,7,6,Play,OZ,OZ2,Medium,lfw,Direct
+419,8,8,Shot,OZ,Ang(N),Long,Slapshot,Blocked,no_traffic,one_timer
+420,1,2,Puck Recovery,OZ
+420,2,6,Play,OZ,OZ2,Short,lbw,Direct
+420,3,6,Play,OZ,OZ2,Medium,lfw,Direct
+420,4,8,Shot,OZ,Ang(N),Medium,Fan,Missed,traffic,one_timer
+422,1,2,Puck Recovery,OZ
+422,2,2,Puck Recovery,NZ
+422,3,6,Play,DZ,DZ2,Short,fw,Direct
+422,4,6,Play,NZ,NZ2,Short,bw,Indirect
+422,5,3,Dump In/Out,NZ,Lost
+422,6,3,Zone Entry,OZ,Dumped
+424,1,2,Puck Recovery,OZ
+424,2,6,Play,OZ,OZ2,Short,lfw,Direct
+424,3,8,Shot,OZ,Ang(N),Medium,Wristshot,Blocked,traffic,not_one_timer
+425,1,2,Puck Recovery,BNO
+425,2,6,Play,BNO,OZ2,Long,lbw,Indirect
+425,3,6,Play,OZ,OZ2,Short,bw,Indirect
+425,4,6,Play,OZ,OZ2,Short,fw,Direct
+425,5,6,Play,OZ,OZ2,Medium,bw,Direct
+425,6,6,Play,OZ,OZ2,Long,lfw,Direct
+425,7,6,Incomplete Play,OZ,OZ2,Medium,lbw,Direct
+426,1,2,Puck Recovery,DZ
+426,2,6,Play,DZ,DZ2,Short,fw,Direct
+426,3,6,Play,DZ,NZ2,Medium,lfw,Direct
+426,4,3,Dump In/Out,NZ,Lost
+426,5,3,Zone Entry,OZ,Dumped
+428,1,2,Puck Recovery,BND
+428,2,6,Incomplete Play,BND,DZ2,Medium,lfw,Indirect
+430,1,2,Takeaway,DZ
+430,2,6,Play,DZ,DZ2,Medium,fw,Direct
+430,3,6,Play,NZ,NZ2,Medium,lfw,Direct
+430,4,3,Zone Entry,OZ,Carried
+430,5,6,Play,OZ,OZ2,Short,lfw,Direct
+430,6,6,Play,OZ,OZ2,Long,lbw,Direct
+430,7,8,Shot,OZ,Ang(N),Medium,Wristshot,On Net,no_traffic,not_one_timer
+431,1,3,Faceoff Win,OZ,Backhand
+431,2,2,Puck Recovery,OZ
+431,3,6,Play,OZ,OZ2,Short,bw,Direct
+431,4,6,Play,OZ,OZ2,Long,fw,Indirect
+431,5,6,Play,OZ,OZ2,Medium,bw,Direct
+431,6,8,Shot,OZ,Ang(N),Long,Wristshot,On Net,traffic,not_one_timer
+432,1,2,Puck Recovery,OZ
+432,2,6,Play,OZ,OZ2,Short,lbw,Direct
+432,3,6,Play,OZ,OZ2,Short,bw,Direct
+432,4,6,Incomplete Play,OZ,OZ2,Short,fw,Direct
+434,1,2,Puck Recovery,DZ
+434,2,6,Play,DZ,DZ2,Short,lfw,Direct
+434,3,6,Play,DZ,DZ2,Medium,lfw,Direct
+434,4,6,Play,NZ,NZ2,Long,lfw,Direct
+436,1,2,Puck Recovery,NZ
+436,2,6,Play,NZ,DZ2,Long,lbw,Direct
+436,3,6,Play,DZ,DZ2,Long,fw,Direct
+436,4,3,Dump In/Out,NZ,Lost
+436,5,3,Zone Entry,OZ,Dumped
+438,1,2,Puck Recovery,DZ
+438,2,3,Zone Entry,OZ,Carried
+438,3,8,Shot,OZ,Ang(N),Long,Wristshot,On Net,no_traffic,not_one_timer
+441,1,2,Puck Recovery,NZ
+441,2,6,Play,NZ,NZ2,Long,lfw,Indirect
+441,3,3,Dump In/Out,NZ,Lost
+441,4,3,Zone Entry,OZ,Dumped
+443,1,3,Faceoff Win,OZ,Backhand
+443,2,2,Puck Recovery,OZ
+443,3,6,Play,OZ,OZ2,Medium,lbw,Direct
+443,4,6,Play,OZ,OZ2,Short,lfw,Direct
+443,5,8,Shot,OZ,Ang(N),Long,Slapshot,On Net,traffic,one_timer
+445,1,2,Takeaway,OZ
+445,2,6,Play,OZ,OZ2,Medium,fw,Direct
+445,3,6,Incomplete Play,OZ,OZ2,Medium,lbw,Direct
+446,1,3,Faceoff Win,OZ,Backhand
+446,2,2,Puck Recovery,OZ
+446,3,6,Play,OZ,OZ2,Long,lbw,Indirect
+446,4,6,Play,OZ,BNO2,Long,fw,Indirect
+446,5,6,Play,OZ,BNO2,Long,fw,Indirect
+446,6,6,Incomplete Play,BNO,BNO2,Medium,lbw,Indirect
+449,1,2,Puck Recovery,NZ
+449,2,6,Play,NZ,NZ2,Short,lbw,Direct
+449,3,3,Dump In/Out,NZ,Lost
+453,1,2,Puck Recovery,OZ
+453,2,6,Incomplete Play,OZ,NZ2,Short,bw,Direct
+454,1,2,Puck Recovery,NZ
+454,2,6,Play,NZ,NZ2,Short,bw,Direct
+454,3,6,Play,NZ,NZ2,Long,lfw,Direct
+454,4,6,Play,DZ,DZ2,Medium,lbw,Direct
+454,5,3,Dump In/Out,NZ,Retained
+454,6,3,Zone Entry,OZ,Dumped
+454,7,2,Puck Recovery,OZ
+458,1,2,Puck Recovery,DZ
+458,2,6,Play,DZ,NZ2,Long,fw,Direct
+458,3,3,Dump In/Out,NZ,Lost
+458,4,3,Zone Entry,OZ,Dumped
+460,1,2,Puck Recovery,BND
+460,2,6,Play,BND,BND2,Short,lfw,Direct
+460,3,6,Play,BND,DZ2,Medium,fw,Indirect
+462,1,2,Puck Recovery,DZ
+462,2,3,Dump In/Out,DZ,Lost
+464,1,2,Puck Recovery,DZ
+464,2,6,Play,DZ,NZ2,Medium,fw,Direct
+464,3,3,Dump In/Out,NZ,Retained
+464,4,3,Zone Entry,OZ,Dumped
+464,5,2,Puck Recovery,BNO
+464,6,2,Puck Recovery,BNO
+474,1,2,Puck Recovery,DZ
+474,2,6,Play,DZ,DZ2,Short,lfw,Direct
+474,3,6,Incomplete Play,DZ,NZ2,Long,fw,Direct
+476,1,2,Puck Recovery,DZ
+476,2,6,Play,DZ,DZ2,Long,lat,Direct
+476,3,6,Incomplete Play,DZ,DZ2,Long,fw,Indirect
+478,1,2,Puck Recovery,DZ
+478,2,6,Play,DZ,DZ2,Long,lfw,Direct
+478,3,6,Play,DZ,DZ2,Medium,fw,Direct
+478,4,3,Dump In/Out,NZ,Lost
+478,5,3,Zone Entry,OZ,Dumped
+480,1,2,Puck Recovery,NZ
+480,2,6,Play,NZ,NZ2,Long,lbw,Direct
+480,3,6,Play,DZ,NZ2,Medium,fw,Indirect
+480,4,3,Dump In/Out,NZ,Lost
+480,5,3,Zone Entry,OZ,Dumped
+482,1,2,Puck Recovery,NZ
+482,2,6,Play,NZ,NZ2,Medium,lbw,Direct
+482,3,6,Play,DZ,DZ2,Medium,lbw,Direct
+482,4,6,Play,NZ,NZ2,Medium,lfw,Direct
+482,5,3,Zone Entry,OZ,Carried
+482,6,6,Incomplete Play,OZ,OZ2,Medium,fw,Direct
+484,1,2,Puck Recovery,BND
+484,2,6,Incomplete Play,BND,DZ2,Medium,fw,Indirect
+488,1,2,Takeaway,DZ
+488,2,6,Play,DZ,DZ2,Short,fw,Direct
+488,3,6,Incomplete Play,NZ,NZ2,Short,fw,Direct
+491,1,2,Puck Recovery,BNO
+491,2,6,Play,OZ,OZ2,Long,lbw,Direct
+491,3,8,Shot,OZ,Ang(N),Long,Wristshot,On Net,no_traffic,not_one_timer
+493,1,2,Puck Recovery,NZ
+493,2,6,Play,NZ,OZ2,Short,lfw,Direct
+493,3,3,Zone Entry,OZ,Played
+495,1,2,Puck Recovery,DZ
+495,2,6,Play,DZ,DZ2,Short,nm,Indirect
+495,3,6,Incomplete Play,BND,DZ2,Long,fw,Indirect
+497,1,2,Takeaway,NZ
+497,2,6,Play,NZ,OZ2,Short,fw,Direct
+497,3,3,Zone Entry,OZ,Played
+497,4,3,Dump In/Out,OZ,Lost
+499,1,2,Takeaway,OZ
+499,2,6,Play,OZ,OZ2,Short,lfw,Direct
+499,3,8,Shot,OZ,Ang(N),Medium,Snapshot,On Net,no_traffic,one_timer
+500,1,3,Faceoff Win,OZ,Forehand
+500,2,2,Puck Recovery,OZ
+500,3,6,Play,OZ,BNO2,Medium,fw,Indirect
+500,4,6,Incomplete Play,OZ,BNO2,Short,lfw,Indirect
+502,1,2,Takeaway,OZ
+502,2,6,Play,OZ,OZ2,Medium,fw,Indirect
+504,1,2,Puck Recovery,NZ
+504,2,3,Zone Entry,NZ,Carried
+504,3,6,Incomplete Play,OZ,OZ2,Medium,lfw,Direct
+506,1,2,Puck Recovery,OZ
+506,2,8,Shot,OZ,Ang(N),Long,Wristshot,Blocked,traffic,not_one_timer
+509,1,2,Puck Recovery,OZ
+509,2,6,Play,OZ,OZ2,Medium,lfw,Direct
+509,3,8,Shot,OZ,Ang(N),Medium,Slapshot,On Net,no_traffic,one_timer
+512,1,2,Puck Recovery,NZ
+512,2,6,Play,NZ,NZ2,Medium,lbw,Direct
+512,3,6,Play,DZ,NZ2,Long,lfw,Direct
+512,4,3,Dump In/Out,NZ,Lost
+512,5,3,Zone Entry,OZ,Dumped
+514,1,2,Puck Recovery,OZ
+514,2,6,Play,OZ,OZ2,Medium,bw,Direct
+514,3,8,Shot,OZ,Ang(M),Short,Wristshot,Blocked,traffic,not_one_timer
+516,1,2,Puck Recovery,BND
+516,2,6,Play,BND,DZ2,Medium,fw,Direct
+516,3,6,Play,DZ,DZ2,Short,lfw,Direct
+516,4,3,Dump In/Out,NZ,Lost
+518,1,2,Puck Recovery,DZ
+518,2,6,Play,DZ,NZ2,Medium,fw,Direct
+518,3,6,Play,NZ,NZ2,Medium,lfw,Direct
+518,4,3,Zone Entry,NZ,Carried
+518,5,6,Incomplete Play,BNO,OZ2,Short,bw,Direct
+520,1,2,Takeaway,NZ
+520,2,6,Play,NZ,NZ2,Short,fw,Direct
+520,3,3,Zone Entry,OZ,Carried
+520,4,8,Shot,OZ,Ang(N),Long,Wristshot,Blocked,traffic,not_one_timer
+521,1,2,Puck Recovery,OZ
+521,2,6,Play,OZ,BNO2,Medium,lfw,Indirect
+523,1,2,Puck Recovery,NZ
+523,2,3,Dump In/Out,NZ,Lost
+525,1,3,Faceoff Win,DZ,Backhand
+525,2,2,Puck Recovery,BND
+527,1,2,Takeaway,DZ
+527,2,3,Dump In/Out,NZ,Lost
+527,3,3,Zone Entry,OZ,Dumped
+535,1,2,Takeaway,DZ
+535,2,6,Play,DZ,DZ2,Short,fw,Direct
+535,3,3,Dump In/Out,DZ,Lost
+537,1,2,Puck Recovery,DZ
+537,2,3,Dump In/Out,DZ,Lost
+539,1,3,Faceoff Win,DZ,Backhand
+539,2,2,Puck Recovery,DZ
+539,3,3,Dump In/Out,BND,Lost
+542,1,2,Puck Recovery,DZ
+542,2,3,Dump In/Out,DZ,Lost
+544,1,2,Takeaway,DZ
+544,2,6,Play,DZ,DZ2,Short,fw,Direct
+544,3,3,Dump In/Out,DZ,Lost
+546,1,3,Faceoff Win,DZ,Backhand
+546,2,2,Puck Recovery,BND
+546,3,6,Incomplete Play,BND,DZ2,Long,fw,Indirect
+549,1,2,Puck Recovery,NZ
+549,2,3,Zone Entry,OZ,Carried
+549,3,6,Incomplete Play,OZ,OZ2,Short,lbw,Direct
+580,1,2,Puck Recovery,BND
+580,2,6,Play,BND,BND2,Short,nm,Indirect
+580,3,6,Play,DZ,DZ2,Short,lbw,Direct
+580,4,6,Play,DZ,NZ2,Long,fw,Direct
+580,5,3,Zone Entry,OZ,Carried
+580,6,8,Shot,OZ,Ang(W),Short,Snapshot,On Net,no_traffic,not_one_timer
+581,1,2,Puck Recovery,BNO
+581,2,6,Play,OZ,OZ2,Short,lbw,Direct
+583,1,2,Puck Recovery,OZ
+583,2,6,Play,OZ,BNO2,Long,fw,Indirect
+583,3,6,Play,BNO,OZ2,Long,bw,Direct
+583,4,6,Play,OZ,OZ2,Medium,fw,Direct
+583,5,6,Incomplete Play,OZ,OZ2,Medium,lfw,Direct
+584,1,2,Puck Recovery,NZ
+584,2,6,Play,NZ,NZ2,Long,lfw,Indirect
+584,3,3,Zone Entry,NZ,Carried
+584,4,6,Play,OZ,OZ2,Long,lfw,Indirect
+584,5,6,Incomplete Play,OZ,OZ2,Short,bw,Direct
+586,1,2,Puck Recovery,OZ
+586,2,6,Play,OZ,OZ2,Short,fw,Direct
+586,3,2,Puck Recovery,OZ
+586,4,6,Play,OZ,BNO2,Medium,lfw,Indirect
+586,5,6,Play,BNO,OZ2,Short,lbw,Direct
+586,6,6,Play,OZ,OZ2,Long,bw,Direct
+586,7,6,Incomplete Play,OZ,OZ2,Medium,lfw,Direct
+588,1,2,Puck Recovery,OZ
+588,2,2,Puck Recovery,NZ
+588,3,6,Play,NZ,NZ2,Long,lfw,Direct
+588,4,3,Zone Entry,OZ,Carried
+588,5,6,Play,OZ,OZ2,Long,lfw,Direct
+588,6,8,Shot,OZ,Ang(W),Short,Snapshot,On Net,no_traffic,not_one_timer
+590,1,2,Puck Recovery,DZ
+590,2,6,Play,BND,BND2,Short,lbw,Indirect
+590,3,3,Zone Entry,OZ,Carried
+590,4,6,Play,BNO,OZ2,Medium,bw,Indirect
+590,5,6,Play,OZ,BNO2,Medium,fw,Direct
+592,1,2,Puck Recovery,DZ
+592,2,6,Play,DZ,DZ2,Medium,fw,Direct
+592,3,6,Play,NZ,DZ2,Short,bw,Direct
+592,4,2,Puck Recovery,NZ
+592,5,6,Play,DZ,NZ2,Medium,lfw,Direct
+592,6,3,Zone Entry,NZ,Carried
+594,1,2,Puck Recovery,BND
+594,2,6,Play,BND,BND2,Medium,lfw,Indirect
+594,3,6,Play,BND,DZ2,Medium,fw,Indirect
+594,4,6,Play,DZ,DZ2,Short,lbw,Direct
+594,5,6,Play,DZ,DZ2,Short,fw,Indirect
+594,6,6,Play,DZ,DZ2,Long,lfw,Direct
+594,7,3,Dump In/Out,NZ,Lost
+594,8,3,Zone Entry,OZ,Dumped
+596,1,3,Faceoff Win,DZ,Backhand
+596,2,2,Puck Recovery,DZ
+596,3,6,Play,DZ,DZ2,Short,bw,Direct
+596,4,6,Play,DZ,DZ2,Long,lbw,Indirect
+596,5,6,Play,DZ,NZ2,Long,fw,Direct
+596,6,3,Dump In/Out,NZ,Lost
+596,7,3,Zone Entry,OZ,Dumped
+602,1,2,Puck Recovery,DZ
+602,2,3,Dump In/Out,NZ,Lost
+602,3,3,Zone Entry,OZ,Dumped
+604,1,2,Takeaway,NZ
+604,2,6,Incomplete Play,NZ,NZ2,Short,lfw,Direct
+610,1,2,Takeaway,BND
+610,2,6,Play,BND,DZ2,Medium,fw,Direct
+610,3,3,Dump In/Out,DZ,Lost
+612,1,2,Puck Recovery,BND
+612,2,6,Play,BND,DZ2,Long,lfw,Indirect
+612,3,3,Dump In/Out,DZ,Lost
+614,1,3,Faceoff Win,DZ,Backhand
+614,2,2,Puck Recovery,DZ
+614,3,6,Incomplete Play,DZ,DZ2,Short,lfw,Direct
+615,1,2,Puck Recovery,NZ
+615,2,3,Dump In/Out,NZ,Lost
+615,3,3,Zone Entry,OZ,Dumped
+617,1,2,Puck Recovery,NZ
+617,2,6,Play,DZ,NZ2,Medium,fw,Indirect
+619,1,2,Puck Recovery,DZ
+619,2,6,Play,DZ,BND2,Medium,bw,Indirect
+619,3,6,Play,BND,DZ2,Medium,lfw,Direct
+619,4,6,Play,DZ,DZ2,Medium,fw,Direct
+619,5,6,Incomplete Play,DZ,DZ2,Short,lfw,Direct
+622,1,2,Puck Recovery,BND
+622,2,3,Faceoff Win,OZ,Backhand
+622,3,2,Puck Recovery,OZ
+622,4,8,Shot,OZ,Ang(N),Medium,Wristshot,On Net,no_traffic,not_one_timer
+623,1,2,Puck Recovery,OZ
+623,2,6,Play,OZ,OZ2,Medium,fw,Direct
+623,3,2,Puck Recovery,BNO
+623,4,6,Play,BNO,OZ2,Long,bw,Indirect
+623,5,6,Play,OZ,OZ2,Medium,lbw,Direct
+623,6,6,Incomplete Play,OZ,OZ2,Medium,fw,Direct
+625,1,2,Puck Recovery,OZ
+625,2,6,Play,OZ,OZ2,Short,lfw,Direct
+625,3,6,Incomplete Play,OZ,OZ2,Short,fw,Direct
+628,1,2,Puck Recovery,DZ
+628,2,6,Play,DZ,DZ2,Medium,lfw,Indirect
+628,3,6,Incomplete Play,DZ,DZ2,Short,lfw,Direct
+630,1,2,Takeaway,NZ
+630,2,3,Zone Entry,OZ,Carried
+630,3,6,Play,OZ,OZ2,Short,lfw,Direct
+630,4,8,Shot,OZ,Ang(M),Short,Wristshot,Blocked,traffic,not_one_timer
+632,1,2,Puck Recovery,DZ
+632,2,6,Play,DZ,NZ2,Medium,fw,Direct
+632,3,3,Penalty Taken,NZ,Too many men on the ice
+637,1,2,Takeaway,DZ
+637,2,3,Dump In/Out,DZ,Lost
+639,1,2,Puck Recovery,DZ
+639,2,6,Play,DZ,NZ2,Medium,fw,Indirect
+639,3,3,Dump In/Out,NZ,Lost
+641,1,2,Puck Recovery,BND
+641,2,3,Dump In/Out,BND,Retained
+641,3,2,Puck Recovery,DZ
+641,4,3,Zone Entry,OZ,Carried
+641,5,6,Incomplete Play,OZ,OZ2,Medium,lfw,Direct
+644,1,2,Takeaway,DZ
+644,2,3,Dump In/Out,DZ,Lost
+647,1,2,Puck Recovery,DZ
+647,2,3,Dump In/Out,DZ,Lost
+651,1,2,Puck Recovery,BND
+651,2,6,Incomplete Play,BND,DZ2,Long,lfw,Indirect
+654,1,2,Puck Recovery,BND
+654,2,6,Play,BND,BND2,Short,lat,Direct
+654,3,6,Play,BND,DZ2,Long,fw,Direct
+654,4,6,Play,NZ,NZ2,Medium,lfw,Direct
+654,5,3,Zone Entry,OZ,Carried
+654,6,6,Incomplete Play,OZ,OZ2,Medium,lbw,Direct
+655,1,2,Puck Recovery,OZ
+655,2,8,Shot,OZ,Ang(M),Short,Wristshot,Missed,traffic,not_one_timer
+657,1,2,Puck Recovery,BND
+657,2,6,Play,BND,BND2,Long,lfw,Indirect
+659,1,2,Puck Recovery,BND
+659,2,6,Play,BND,DZ2,Medium,fw,Direct
+659,3,3,Dump In/Out,NZ,Lost
+659,4,3,Zone Entry,NZ,Dumped
+661,1,2,Puck Recovery,DZ
+661,2,6,Play,DZ,NZ2,Long,fw,Direct
+661,3,3,Dump In/Out,NZ,Lost
+665,1,2,Puck Recovery,BND
+665,2,6,Play,BND,BND2,Short,lfw,Direct
+665,3,6,Incomplete Play,BND,DZ2,Medium,fw,Indirect
+666,1,2,Puck Recovery,DZ
+666,2,6,Play,DZ,DZ2,Medium,lfw,Direct
+666,3,3,Dump In/Out,NZ,Lost
+666,4,3,Zone Entry,OZ,Dumped
+668,1,2,Takeaway,OZ
+668,2,6,Play,OZ,OZ2,Medium,bw,Direct
+668,3,6,Play,OZ,OZ2,Short,lfw,Direct
+668,4,8,Shot,OZ,Ang(N),Short,Wristshot,On Net,no_traffic,not_one_timer
+669,1,2,Puck Recovery,BNO
+669,2,6,Play,BNO,OZ2,Long,lbw,Indirect
+669,3,6,Play,OZ,OZ2,Long,bw,Direct
+669,4,8,Shot,OZ,Ang(N),Long,Wristshot,On Net,traffic,not_one_timer
+671,1,2,Puck Recovery,OZ
+671,2,6,Play,OZ,OZ2,Medium,bw,Direct
+671,3,6,Play,OZ,OZ2,Long,lfw,Direct
+671,4,8,Shot,OZ,Ang(N),Long,Slapshot,On Net,no_traffic,not_one_timer
+673,1,2,Puck Recovery,OZ
+673,2,6,Play,OZ,OZ2,Short,fw,Direct
+673,3,8,Shot,OZ,Ang(N),Medium,Snapshot,On Net,no_traffic,not_one_timer
+674,1,2,Puck Recovery,OZ
+674,2,6,Incomplete Play,OZ,BNO2,Long,fw,Indirect
+675,1,2,Puck Recovery,OZ
+675,2,6,Incomplete Play,OZ,BNO2,Medium,lfw,Indirect
+677,1,2,Puck Recovery,BND
+677,2,6,Incomplete Play,BND,DZ2,Short,lfw,Indirect
+682,1,2,Puck Recovery,NZ
+682,2,3,Dump In/Out,NZ,Lost
+684,1,2,Puck Recovery,NZ
+684,2,3,Dump In/Out,NZ,Lost
+684,3,3,Zone Entry,OZ,Dumped
+688,1,2,Puck Recovery,OZ
+688,2,6,Play,OZ,OZ2,Short,bw,Direct
+688,3,6,Play,OZ,OZ2,Long,lfw,Direct
+688,4,6,Play,OZ,BNO2,Long,fw,Indirect
+688,5,6,Play,OZ,OZ2,Short,bw,Direct
+688,6,8,Shot,OZ,Ang(N),Medium,Slapshot,Blocked,traffic,one_timer
+690,1,2,Puck Recovery,OZ
+690,2,6,Play,OZ,OZ2,Medium,bw,Direct
+690,3,8,Shot,OZ,Ang(N),Long,Slapshot,On Net,traffic,one_timer
+692,1,2,Puck Recovery,DZ
+692,2,6,Play,BND,DZ2,Long,lfw,Indirect
+692,3,3,Dump In/Out,DZ,Lost
+696,1,2,Puck Recovery,DZ
+696,2,6,Incomplete Play,DZ,DZ2,Short,lbw,Direct
+699,1,2,Takeaway,DZ
+699,2,6,Play,DZ,DZ2,Medium,lfw,Direct
+699,3,3,Dump In/Out,NZ,Retained
+699,4,3,Zone Entry,OZ,Dumped
+699,5,2,Puck Recovery,BNO
+701,1,2,Puck Recovery,BND
+701,2,6,Play,BND,BND2,Short,lbw,Direct
+701,3,6,Play,BND,BND2,Short,lfw,Direct
+701,4,6,Incomplete Play,DZ,NZ2,Long,fw,Direct
+703,1,2,Puck Recovery,BND
+703,2,6,Play,BND,DZ2,Long,fw,Indirect
+703,3,6,Play,DZ,NZ2,Medium,lfw,Direct
+703,4,3,Zone Entry,NZ,Carried
+703,5,6,Play,OZ,OZ2,Long,lfw,Indirect
+705,1,2,Puck Recovery,NZ
+705,2,3,Dump In/Out,NZ,Lost
+707,1,2,Puck Recovery,DZ
+707,2,6,Incomplete Play,DZ,NZ2,Long,lfw,Direct
+709,1,2,Puck Recovery,NZ
+709,2,6,Play,NZ,NZ2,Short,fw,Direct
+709,3,6,Play,NZ,NZ2,Short,fw,Direct
+709,4,3,Dump In/Out,NZ,Lost
+709,5,3,Zone Entry,OZ,Dumped
+712,1,2,Puck Recovery,DZ
+712,2,3,Dump In/Out,DZ,Lost
+714,1,2,Puck Recovery,DZ
+714,2,6,Play,DZ,DZ2,Short,lbw,Direct
+714,3,6,Play,DZ,BND2,Medium,lbw,Indirect
+714,4,6,Play,DZ,NZ2,Long,fw,Direct
+714,5,6,Play,NZ,NZ2,Short,lfw,Direct
+714,6,6,Play,NZ,NZ2,Short,lfw,Direct
+714,7,3,Zone Entry,OZ,Carried
+714,8,6,Play,OZ,OZ2,Long,lfw,Indirect
+714,9,6,Play,OZ,BNO2,Short,fw,Indirect
+714,10,6,Play,BNO,OZ2,Medium,lbw,Direct
+718,1,2,Puck Recovery,BND
+718,2,3,Dump In/Out,BND,Lost
+720,1,2,Puck Recovery,BND
+720,2,6,Play,BND,BND2,Medium,lat,Indirect
+720,3,6,Incomplete Play,DZ,DZ2,Short,fw,Direct
+722,1,6,Play,DZ,BND2,Short,lbw,Indirect
+722,2,3,Penalty Taken,DZ,Cross-checking
+724,1,2,Puck Recovery,DZ
+724,2,3,Dump In/Out,DZ,Lost
+727,1,3,Faceoff Win,NZ,Backhand
+727,2,2,Puck Recovery,DZ
+727,3,6,Play,DZ,DZ2,Short,bw,Direct
+727,4,3,Dump In/Out,DZ,Lost
+735,1,3,Faceoff Win,NZ,Forehand
+735,2,2,Puck Recovery,NZ
+735,3,3,Dump In/Out,NZ,Lost
+737,1,2,Puck Recovery,DZ
+737,2,6,Play,DZ,DZ2,Long,lat,Indirect
+737,3,3,Dump In/Out,DZ,Lost
+744,1,2,Puck Recovery,DZ
+744,2,6,Play,DZ,DZ2,Long,lbw,Indirect
+744,3,2,Puck Recovery,BND
+744,4,6,Incomplete Play,BND,BND2,Short,lbw,Direct
+745,1,2,Puck Recovery,BND
+745,2,6,Incomplete Play,BND,BND2,Short,lfw,Direct
+748,1,2,Puck Recovery,DZ
+748,2,6,Play,DZ,NZ2,Medium,lfw,Direct
+748,3,3,Zone Entry,OZ,Carried
+748,4,6,Incomplete Play,OZ,OZ2,Short,lfw,Direct
+749,1,2,Puck Recovery,OZ
+749,2,6,Play,OZ,OZ2,Long,bw,Direct
+749,3,6,Play,OZ,OZ2,Long,lfw,Direct
+749,4,6,Play,OZ,OZ2,Medium,fw,Direct
+749,5,8,Shot,OZ,Ang(M),Short,Snapshot,Blocked,traffic,not_one_timer
+751,1,2,Puck Recovery,NZ
+751,2,3,Zone Entry,OZ,Carried
+751,3,6,Play,OZ,BNO2,Long,fw,Indirect
+753,1,2,Takeaway,OZ
+753,2,6,Play,OZ,OZ2,Short,lfw,Direct
+753,3,6,Play,OZ,OZ2,Long,bw,Direct
+753,4,6,Play,OZ,OZ2,Medium,lbw,Direct
+753,5,6,Play,OZ,OZ2,Medium,lfw,Direct
+753,6,6,Play,OZ,OZ2,Medium,fw,Direct
+753,7,8,Shot,OZ,Ang(M),Short,Deflection,On Net,no_traffic,one_timer
+755,1,2,Puck Recovery,DZ
+755,2,3,Dump In/Out,DZ,Lost
+758,1,2,Takeaway,DZ
+758,2,6,Play,DZ,DZ2,Medium,fw,Indirect
+758,3,6,Incomplete Play,DZ,NZ2,Medium,fw,Indirect
+760,1,2,Puck Recovery,BND
+760,2,6,Play,BND,DZ2,Short,lfw,Indirect
+760,3,6,Incomplete Play,DZ,DZ2,Medium,fw,Indirect
+764,1,2,Puck Recovery,DZ
+764,2,6,Play,DZ,DZ2,Short,fw,Direct
+766,1,2,Puck Recovery,DZ
+766,2,6,Incomplete Play,DZ,NZ2,Medium,fw,Direct
+767,1,2,Puck Recovery,DZ
+767,2,3,Zone Entry,OZ,Carried
+767,3,6,Play,OZ,OZ2,Short,lfw,Direct
+769,1,2,Puck Recovery,DZ
+769,2,6,Play,DZ,DZ2,Medium,lfw,Direct
+769,3,6,Play,DZ,NZ2,Long,fw,Direct
+769,4,6,Play,NZ,NZ2,Short,lfw,Direct
+769,5,3,Zone Entry,OZ,Carried
+772,1,2,Takeaway,DZ
+772,2,3,Faceoff Win,DZ,Backhand
+772,3,2,Puck Recovery,DZ
+772,4,6,Play,BND,DZ2,Long,fw,Indirect
+774,1,2,Puck Recovery,DZ
+774,2,6,Incomplete Play,DZ,NZ2,Long,fw,Direct
+776,1,3,Faceoff Win,DZ,Backhand
+776,2,2,Puck Recovery,DZ
+776,3,6,Incomplete Play,DZ,DZ2,Long,fw,Direct
+777,1,2,Puck Recovery,DZ
+777,2,6,Incomplete Play,DZ,DZ2,Long,fw,Indirect
+778,1,2,Puck Recovery,DZ
+778,2,6,Play,DZ,BND2,Long,lbw,Indirect
+778,3,6,Incomplete Play,BND,DZ2,Long,fw,Indirect
+780,1,2,Puck Recovery,DZ
+780,2,6,Play,DZ,DZ2,Short,lfw,Direct
+780,3,6,Incomplete Play,DZ,NZ2,Medium,fw,Direct
+782,1,2,Puck Recovery,NZ
+782,2,3,Zone Entry,OZ,Carried
+782,3,2,Puck Recovery,BNO
+782,4,6,Play,BNO,OZ2,Short,bw,Direct
+782,5,6,Play,OZ,OZ2,Short,lbw,Direct
+782,6,8,Shot,OZ,Ang(N),Short,Snapshot,Blocked,traffic,not_one_timer
+784,1,2,Puck Recovery,OZ
+784,2,6,Play,OZ,OZ2,Medium,fw,Direct
+784,3,6,Incomplete Play,OZ,BNO2,Long,lfw,Indirect
+785,1,2,Puck Recovery,OZ
+785,2,6,Incomplete Play,OZ,OZ2,Medium,lfw,Direct
+787,1,2,Puck Recovery,NZ
+787,2,6,Play,DZ,DZ2,Long,lfw,Direct
+787,3,6,Play,NZ,NZ2,Medium,fw,Direct
+787,4,3,Dump In/Out,NZ,Retained
+787,5,3,Zone Entry,OZ,Dumped
+787,6,2,Puck Recovery,BNO
+787,7,6,Incomplete Play,BNO,OZ2,Short,lbw,Indirect
+789,1,2,Puck Recovery,NZ
+789,2,3,Dump In/Out,NZ,Lost
+791,1,2,Puck Recovery,BND
+791,2,6,Play,BND,DZ2,Medium,fw,Indirect
+791,3,3,Dump In/Out,DZ,Lost
+793,1,2,Puck Recovery,NZ
+793,2,6,Play,NZ,NZ2,Medium,lfw,Direct
+793,3,6,Play,NZ,NZ2,Medium,fw,Direct
+797,1,3,Faceoff Win,OZ,Backhand
+797,2,2,Puck Recovery,OZ
+797,3,8,Shot,OZ,Ang(N),Long,Wristshot,Blocked,no_traffic,not_one_timer
+799,1,2,Puck Recovery,BND
+799,2,6,Incomplete Play,BND,BND2,Short,fw,Direct
+801,1,2,Puck Recovery,DZ
+801,2,3,Zone Entry,OZ,Carried
+801,3,6,Play,OZ,BNO2,Medium,lfw,Indirect
+801,4,6,Play,BNO,OZ2,Short,lbw,Direct
+801,5,6,Play,OZ,OZ2,Long,bw,Direct
+801,6,8,Shot,OZ,Ang(N),Long,Slapshot,On Net,traffic,not_one_timer
+803,1,2,Puck Recovery,OZ
+803,2,6,Incomplete Play,OZ,BNO2,Long,fw,Indirect
+805,1,2,Puck Recovery,OZ
+805,2,6,Incomplete Play,OZ,OZ2,Short,fw,Indirect
+807,1,2,Puck Recovery,NZ
+807,2,6,Play,NZ,NZ2,Medium,lfw,Direct
+807,3,3,Zone Entry,OZ,Carried
+807,4,6,Play,OZ,OZ2,Short,lfw,Direct
+809,1,2,Puck Recovery,DZ
+809,2,6,Incomplete Play,BND,DZ2,Long,lfw,Indirect
+813,1,2,Puck Recovery,DZ
+813,2,6,Play,DZ,NZ2,Long,fw,Indirect
+813,3,6,Play,NZ,NZ2,Short,lbw,Direct
+813,4,3,Zone Entry,OZ,Carried
+813,5,6,Incomplete Play,OZ,BNO2,Long,fw,Indirect
+815,1,2,Puck Recovery,BND
+815,2,6,Play,BND,BND2,Medium,lfw,Indirect
+815,3,6,Play,BND,DZ2,Long,fw,Direct
+815,4,6,Play,DZ,NZ2,Medium,fw,Direct
+815,5,6,Play,NZ,NZ2,Medium,lfw,Direct
+815,6,6,Incomplete Play,NZ,NZ2,Short,lfw,Direct
+817,1,2,Puck Recovery,DZ
+817,2,6,Play,DZ,NZ2,Medium,fw,Direct
+817,3,6,Play,NZ,NZ2,Short,lfw,Direct
+817,4,3,Zone Entry,OZ,Carried
+817,5,6,Incomplete Play,OZ,OZ2,Short,lat,Direct
+819,1,2,Takeaway,DZ
+819,2,6,Play,DZ,DZ2,Medium,fw,Indirect
+819,3,6,Play,DZ,DZ2,Short,lfw,Direct
+819,4,3,Dump In/Out,NZ,Lost
+819,5,3,Zone Entry,OZ,Dumped
+821,1,2,Puck Recovery,NZ
+821,2,2,Puck Recovery,DZ
+821,3,3,Dump In/Out,DZ,Retained
+821,4,2,Puck Recovery,BNO
+821,5,6,Incomplete Play,BNO,OZ2,Short,bw,Direct
+822,1,2,Puck Recovery,OZ
+822,2,6,Incomplete Play,OZ,BNO2,Long,lfw,Indirect
+823,1,2,Puck Recovery,BNO
+823,2,6,Play,OZ,OZ2,Short,bw,Direct
+823,3,6,Play,OZ,BNO2,Short,fw,Direct
+823,4,6,Play,OZ,OZ2,Long,bw,Direct
+823,5,6,Play,OZ,OZ2,Short,lbw,Direct
+823,6,8,Shot,OZ,Ang(W),Short,Snapshot,On Net,no_traffic,one_timer
+825,1,2,Puck Recovery,NZ
+825,2,6,Play,NZ,NZ2,Short,lfw,Direct
+825,3,6,Incomplete Play,NZ,NZ2,Short,lfw,Direct
+826,1,2,Puck Recovery,NZ
+826,2,3,Zone Entry,OZ,Carried
+826,3,6,Play,OZ,OZ2,Short,fw,Direct
+826,4,6,Incomplete Play,OZ,OZ2,Short,lbw,Direct
+828,1,2,Puck Recovery,NZ
+828,2,6,Play,NZ,NZ2,Long,lbw,Direct
+828,3,6,Play,DZ,NZ2,Long,fw,Direct
+828,4,6,Play,NZ,OZ2,Medium,fw,Indirect
+828,5,3,Zone Entry,OZ,Played
+828,6,6,Incomplete Play,OZ,OZ2,Medium,fw,Indirect
+830,1,2,Puck Recovery,DZ
+830,2,6,Play,DZ,DZ2,Short,lfw,Direct
+832,1,2,Puck Recovery,DZ
+832,2,6,Incomplete Play,BND,DZ2,Long,lfw,Indirect
+834,1,2,Puck Recovery,DZ
+834,2,2,Puck Recovery,DZ
+834,3,2,Puck Recovery,DZ
+834,4,3,Dump In/Out,DZ,Lost
+836,1,2,Puck Recovery,NZ
+836,2,3,Zone Entry,OZ,Carried
+836,3,2,Puck Recovery,OZ
+836,4,6,Play,OZ,OZ2,Medium,lbw,Direct
+836,5,8,Shot,OZ,Ang(N),Medium,Wristshot,Missed,traffic,not_one_timer
+837,1,2,Puck Recovery,OZ
+837,2,6,Play,OZ,OZ2,Short,fw,Indirect
+837,3,6,Incomplete Play,OZ,BNO2,Long,fw,Indirect
+839,1,3,Faceoff Win,OZ,Backhand
+839,2,2,Puck Recovery,OZ
+839,3,6,Play,OZ,OZ2,Medium,lfw,Direct
+839,4,6,Play,OZ,OZ2,Long,lfw,Indirect
+839,5,6,Play,OZ,OZ2,Short,bw,Direct
+839,6,6,Play,OZ,OZ2,Long,lfw,Indirect
+839,7,6,Play,OZ,OZ2,Medium,lbw,Direct
+839,8,8,Shot,OZ,Ang(N),Medium,Wristshot,Blocked,traffic,not_one_timer
+841,1,2,Puck Recovery,OZ
+841,2,6,Incomplete Play,OZ,OZ2,Medium,lfw,Direct
+842,1,2,Puck Recovery,OZ
+842,2,6,Incomplete Play,OZ,OZ2,Short,lfw,Direct
+844,1,2,Takeaway,OZ
+844,2,6,Play,OZ,OZ2,Medium,lfw,Direct
+844,3,8,Shot,OZ,Ang(N),Medium,Slapshot,On Net,no_traffic,one_timer
+845,1,3,Faceoff Win,OZ,Backhand
+845,2,2,Puck Recovery,OZ
+845,3,6,Play,OZ,OZ2,Medium,lbw,Direct
+845,4,8,Shot,OZ,Ang(N),Medium,Slapshot,On Net,no_traffic,not_one_timer
+846,1,3,Faceoff Win,OZ,Backhand
+846,2,2,Puck Recovery,OZ
+846,3,6,Play,OZ,OZ2,Medium,fw,Indirect
+846,4,8,Shot,OZ,Ang(M),Short,Wristshot,On Net,no_traffic,not_one_timer
+850,1,2,Puck Recovery,DZ
+850,2,3,Dump In/Out,DZ,Lost
+852,1,2,Puck Recovery,DZ
+852,2,6,Play,DZ,DZ2,Short,fw,Direct
+852,3,3,Dump In/Out,NZ,Lost
+854,1,2,Puck Recovery,OZ
+854,2,3,Zone Entry,OZ,Carried
+854,3,6,Incomplete Play,OZ,OZ2,Short,fw,Direct
+856,1,3,Faceoff Win,OZ,Backhand
+856,2,2,Puck Recovery,OZ
+856,3,6,Play,BNO,BNO2,Short,lbw,Direct
+858,1,2,Takeaway,BNO
+858,2,6,Play,BNO,OZ2,Long,bw,Indirect
+858,3,6,Play,OZ,OZ2,Medium,bw,Indirect
+858,4,6,Incomplete Play,OZ,OZ2,Short,nm,Indirect
+860,1,2,Takeaway,OZ
+860,2,6,Play,OZ,OZ2,Medium,bw,Direct
+860,3,6,Play,OZ,OZ2,Long,lfw,Direct
+860,4,8,Shot,OZ,Ang(N),Long,Wristshot,Blocked,traffic,not_one_timer
+861,1,2,Puck Recovery,OZ
+861,2,6,Incomplete Play,OZ,BNO2,Long,fw,Indirect
+864,1,2,Puck Recovery,NZ
+864,2,6,Play,NZ,NZ2,Short,fw,Indirect
+864,3,3,Zone Entry,OZ,Carried
+864,4,6,Incomplete Play,OZ,OZ2,Short,lbw,Direct
+865,1,2,Puck Recovery,OZ
+865,2,6,Play,OZ,OZ2,Medium,lfw,Direct
+867,1,2,Puck Recovery,OZ
+867,2,6,Play,NZ,NZ2,Long,lbw,Direct
+867,3,6,Incomplete Play,DZ,NZ2,Long,fw,Direct
+870,1,2,Puck Recovery,DZ
+870,2,3,Dump In/Out,NZ,Lost
+872,1,2,Puck Recovery,BND
+872,2,6,Play,BND,DZ2,Medium,lfw,Direct
+872,3,6,Play,DZ,NZ2,Long,fw,Indirect
+872,4,6,Play,NZ,OZ2,Short,fw,Indirect
+872,5,3,Zone Entry,OZ,Played
+872,6,8,Shot,OZ,Ang(W),Short,Wristshot,On Net,no_traffic,not_one_timer
+874,1,2,Puck Recovery,NZ
+874,2,2,Puck Recovery,NZ
+874,3,3,Dump In/Out,NZ,Lost
+874,4,3,Zone Entry,OZ,Dumped
+876,1,2,Puck Recovery,BND
+876,2,6,Play,BND,DZ2,Short,lfw,Indirect
+876,3,6,Play,DZ,DZ2,Short,bw,Indirect
+876,4,3,Dump In/Out,DZ,Lost
+941,1,3,Faceoff Win,NZ,Backhand
+941,2,2,Puck Recovery,NZ
+941,3,6,Play,NZ,DZ2,Long,lbw,Direct
+941,4,6,Play,DZ,NZ2,Long,fw,Indirect
+941,5,3,Dump In/Out,NZ,Lost
+941,6,3,Zone Entry,NZ,Dumped
+943,1,2,Puck Recovery,DZ
+943,2,6,Play,DZ,NZ2,Long,fw,Direct
+943,3,3,Dump In/Out,NZ,Retained
+943,4,3,Zone Entry,OZ,Dumped
+943,5,2,Puck Recovery,OZ
+943,6,8,Shot,OZ,Ang(N),Long,Snapshot,Missed,no_traffic,not_one_timer
+945,1,2,Puck Recovery,BNO
+945,2,6,Incomplete Play,BNO,OZ2,Short,lbw,Direct
+946,1,2,Puck Recovery,OZ
+946,2,8,Shot,OZ,Ang(N),Long,Slapshot,Missed,traffic,not_one_timer
+947,1,2,Puck Recovery,OZ
+947,2,8,Shot,OZ,Ang(N),Long,Snapshot,Missed,traffic,not_one_timer
+949,1,3,Faceoff Win,OZ,Feet
+949,2,2,Puck Recovery,OZ
+949,3,6,Incomplete Play,OZ,BNO2,Long,fw,Indirect
+953,1,2,Puck Recovery,DZ
+953,2,3,Dump In/Out,DZ,Retained
+953,3,2,Puck Recovery,NZ
+953,4,6,Play,NZ,OZ2,Short,fw,Direct
+953,5,3,Zone Entry,NZ,Played
+955,1,2,Takeaway,BND
+955,2,6,Play,BND,DZ2,Long,lfw,Indirect
+955,3,6,Play,DZ,DZ2,Short,lfw,Direct
+955,4,6,Play,NZ,NZ2,Long,lfw,Direct
+955,5,3,Zone Entry,OZ,Carried
+955,6,6,Play,OZ,OZ2,Short,bw,Direct
+957,1,2,Puck Recovery,OZ
+957,2,2,Puck Recovery,NZ
+957,3,3,Zone Entry,OZ,Carried
+957,4,6,Incomplete Play,OZ,OZ2,Long,fw,Indirect
+959,1,2,Puck Recovery,BND
+959,2,6,Play,BND,BND2,Short,lfw,Indirect
+959,3,6,Play,BND,DZ2,Medium,fw,Indirect
+962,1,2,Puck Recovery,DZ
+962,2,6,Incomplete Play,DZ,DZ2,Short,fw,Direct
+964,1,2,Takeaway,NZ
+964,2,6,Play,NZ,DZ2,Medium,bw,Direct
+964,3,6,Play,DZ,DZ2,Long,lbw,Direct
+964,4,6,Play,DZ,DZ2,Medium,lbw,Direct
+969,1,2,Puck Recovery,BND
+969,2,6,Incomplete Play,BND,BND2,Short,lbw,Indirect
+971,1,2,Takeaway,DZ
+971,2,3,Dump In/Out,DZ,Lost
+973,1,2,Puck Recovery,DZ
+973,2,3,Dump In/Out,DZ,Lost
+975,1,2,Takeaway,DZ
+975,2,6,Incomplete Play,NZ,NZ2,Medium,lfw,Direct
+978,1,2,Puck Recovery,DZ
+978,2,6,Play,DZ,NZ2,Long,fw,Direct
+978,3,3,Zone Entry,OZ,Carried
+978,4,8,Shot,OZ,Ang(M),Short,Wristshot,Blocked,traffic,not_one_timer
+980,1,2,Puck Recovery,DZ
+980,2,3,Dump In/Out,DZ,Lost
+982,1,2,Puck Recovery,NZ
+982,2,3,Zone Entry,OZ,Carried
+982,3,6,Play,OZ,OZ2,Short,lfw,Direct
+982,4,6,Play,OZ,OZ2,Short,lbw,Direct
+984,1,2,Puck Recovery,DZ
+984,2,3,Dump In/Out,DZ,Lost
+986,1,2,Puck Recovery,BND
+986,2,6,Play,BND,BND2,Short,lbw,Indirect
+986,3,3,Dump In/Out,BND,Lost
+988,1,2,Puck Recovery,NZ
+988,2,6,Play,NZ,OZ2,Short,fw,Direct
+988,3,3,Zone Entry,OZ,Played
+988,4,6,Incomplete Play,OZ,OZ2,Short,lfw,Direct
+990,1,2,Puck Recovery,BND
+990,2,6,Play,BND,BND2,Short,lfw,Direct
+990,3,6,Play,BND,DZ2,Medium,lfw,Indirect
+993,1,2,Puck Recovery,BND
+993,2,6,Play,BND,DZ2,Long,fw,Indirect
+1036,1,3,Faceoff Win,NZ,Backhand
+1036,2,2,Puck Recovery,NZ
+1036,3,6,Incomplete Play,NZ,NZ2,Medium,fw,Indirect
+1038,1,2,Puck Recovery,NZ
+1038,2,3,Faceoff Win,NZ,Backhand
+1038,3,2,Puck Recovery,DZ
+1038,4,6,Incomplete Play,DZ,DZ2,Medium,lfw,Direct
+1040,1,2,Puck Recovery,DZ
+1040,2,6,Play,DZ,DZ2,Medium,fw,Direct
+1040,3,3,Dump In/Out,DZ,Lost
+1042,1,2,Puck Recovery,DZ
+1042,2,6,Play,DZ,DZ2,Short,lfw,Direct
+1042,3,3,Dump In/Out,NZ,Lost
+1042,4,3,Zone Entry,NZ,Dumped
+1044,1,2,Puck Recovery,BND
+1044,2,6,Play,BND,DZ2,Long,fw,Indirect
+1044,3,3,Dump In/Out,DZ,Lost
+1046,1,2,Puck Recovery,NZ
+1046,2,3,Zone Entry,OZ,Carried
+1046,3,6,Play,OZ,OZ2,Short,lfw,Direct
+1046,4,8,Shot,OZ,Ang(W),Short,Deflection,On Net,no_traffic,one_timer
+1048,1,2,Puck Recovery,BND
+1048,2,6,Play,BND,DZ2,Long,lfw,Indirect
+1048,3,2,Puck Recovery,BND
+1048,4,6,Play,BND,BND2,Medium,lfw,Direct
+1048,5,6,Incomplete Play,BND,DZ2,Medium,fw,Indirect
+1050,1,2,Puck Recovery,DZ
+1050,2,6,Incomplete Play,BND,BND2,Medium,lbw,Indirect
+1054,1,2,Puck Recovery,BND
+1054,2,6,Incomplete Play,BND,DZ2,Medium,lfw,Indirect
+1056,1,2,Puck Recovery,BND
+1056,2,3,Dump In/Out,DZ,Lost
+1058,1,2,Puck Recovery,BND
+1058,2,6,Play,DZ,DZ2,Medium,fw,Direct
+1060,1,2,Puck Recovery,DZ
+1060,2,2,Puck Recovery,DZ
+1060,3,3,Dump In/Out,DZ,Lost
+1062,1,2,Takeaway,DZ
+1062,2,6,Incomplete Play,DZ,DZ2,Short,fw,Direct
+1066,1,2,Puck Recovery,DZ
+1066,2,2,Puck Recovery,DZ
+1066,3,6,Play,DZ,NZ2,Medium,fw,Direct
+1066,4,3,Dump In/Out,NZ,Lost
+1066,5,3,Zone Entry,NZ,Dumped
+1068,1,2,Puck Recovery,BND
+1068,2,6,Play,BND,BND2,Short,lfw,Direct
+1068,3,3,Dump In/Out,NZ,Retained
+1068,4,3,Zone Entry,OZ,Dumped
+1068,5,2,Puck Recovery,OZ
+1068,6,2,Puck Recovery,BNO
+1070,1,2,Puck Recovery,DZ
+1070,2,3,Dump In/Out,DZ,Lost
+1072,1,2,Puck Recovery,NZ
+1072,2,3,Dump In/Out,NZ,Retained
+1072,3,2,Puck Recovery,OZ
+1074,1,2,Puck Recovery,BND
+1074,2,6,Play,BND,DZ2,Long,fw,Indirect
+1074,3,3,Dump In/Out,DZ,Lost
+1078,1,2,Puck Recovery,DZ
+1078,2,2,Puck Recovery,DZ
+1078,3,6,Play,DZ,DZ2,Short,lfw,Direct
+1078,4,3,Dump In/Out,DZ,Lost
+1080,1,2,Puck Recovery,DZ
+1080,2,6,Play,DZ,BND2,Medium,lbw,Indirect
+1080,3,6,Incomplete Play,BND,DZ2,Long,lfw,Indirect
+1082,1,2,Puck Recovery,DZ
+1082,2,2,Puck Recovery,BND
+1084,1,2,Puck Recovery,DZ
+1084,2,3,Dump In/Out,DZ,Lost
+1086,1,3,Faceoff Win,DZ,Backhand
+1086,2,2,Puck Recovery,DZ
+1086,3,3,Faceoff Win,DZ,Backhand
+1086,4,2,Puck Recovery,DZ
+1086,5,6,Incomplete Play,DZ,DZ2,Short,lfw,Indirect
+1088,1,2,Puck Recovery,DZ
+1088,2,3,Dump In/Out,DZ,Lost
+1097,1,3,Faceoff Win,NZ,Backhand
+1097,2,2,Puck Recovery,NZ
+1097,3,6,Play,NZ,NZ2,Medium,lfw,Direct
+1097,4,6,Play,NZ,NZ2,Short,fw,Direct
+1097,5,2,Puck Recovery,NZ
+1097,6,6,Play,NZ,NZ2,Short,bw,Direct
+1097,7,6,Play,NZ,DZ2,Long,lbw,Direct
+1097,8,6,Play,DZ,NZ2,Long,fw,Direct
+1097,9,3,Dump In/Out,NZ,Lost
+1097,10,3,Faceoff Win,NZ,Backhand
+1097,11,2,Puck Recovery,NZ
+1097,12,6,Play,NZ,NZ2,Short,lfw,Direct
+1099,1,2,Puck Recovery,DZ
+1099,2,6,Play,DZ,NZ2,Long,fw,Direct
+1099,3,3,Dump In/Out,NZ,Lost
+1099,4,3,Zone Entry,OZ,Dumped
+1101,1,2,Puck Recovery,BND
+1101,2,6,Play,BND,DZ2,Medium,lfw,Direct
+1101,3,6,Play,DZ,DZ2,Medium,fw,Indirect
+1103,1,2,Puck Recovery,DZ
+1103,2,6,Play,DZ,NZ2,Short,fw,Indirect
+1103,3,3,Dump In/Out,OZ,Lost
+1103,4,3,Zone Entry,OZ,Dumped
+1105,1,2,Puck Recovery,BND
+1105,2,6,Play,BND,DZ2,Medium,lfw,Indirect
+1105,3,6,Play,DZ,DZ2,Medium,fw,Direct
+1105,4,3,Dump In/Out,DZ,Lost
+1107,1,2,Puck Recovery,BND
+1107,2,6,Play,BND,BND2,Short,lfw,Direct
+1107,3,6,Play,DZ,DZ2,Medium,fw,Direct
+1107,4,6,Incomplete Play,DZ,NZ2,Medium,fw,Indirect
+1109,1,2,Takeaway,BND
+1109,2,6,Incomplete Play,BND,DZ2,Long,lfw,Indirect
+1111,1,2,Puck Recovery,DZ
+1111,2,3,Zone Entry,OZ,Carried
+1111,3,8,Shot,OZ,Ang(N),Medium,Snapshot,Missed,no_traffic,not_one_timer
+1112,1,2,Puck Recovery,BNO
+1112,2,6,Play,OZ,OZ2,Medium,bw,Direct
+1112,3,8,Shot,OZ,Ang(N),Long,Wristshot,Blocked,traffic,not_one_timer
+1113,1,3,Faceoff Win,OZ,Backhand
+1113,2,2,Puck Recovery,OZ
+1113,3,8,Shot,OZ,Ang(N),Medium,Wristshot,Blocked,traffic,not_one_timer
+1115,1,2,Puck Recovery,OZ
+1115,2,6,Incomplete Play,OZ,OZ2,Short,fw,Indirect
+1116,1,2,Puck Recovery,OZ
+1116,2,6,Play,OZ,OZ2,Medium,lfw,Direct
+1116,3,8,Shot,OZ,Ang(M),Medium,Snapshot,Missed,traffic,not_one_timer
+1117,1,2,Puck Recovery,BNO
+1117,2,6,Play,BNO,OZ2,Long,bw,Indirect
+1117,3,8,Shot,OZ,Ang(N),Long,Wristshot,Blocked,traffic,not_one_timer
+1118,1,2,Puck Recovery,OZ
+1118,2,6,Incomplete Play,OZ,OZ2,Short,lfw,Direct
+1120,1,2,Puck Recovery,DZ
+1120,2,6,Play,DZ,DZ2,Short,bw,Direct
+1120,3,6,Play,DZ,BND2,Long,lbw,Indirect
+1120,4,3,Dump In/Out,DZ,Lost
+1122,1,2,Puck Recovery,BND
+1122,2,6,Play,BND,DZ2,Long,fw,Indirect
+1122,3,6,Play,DZ,DZ2,Short,fw,Direct
+1122,4,6,Play,DZ,DZ2,Medium,lbw,Direct
+1122,5,3,Dump In/Out,NZ,Lost
+1122,6,3,Zone Entry,NZ,Dumped
+1124,1,2,Puck Recovery,OZ
+1124,2,6,Play,OZ,OZ2,Medium,lfw,Direct
+1124,3,8,Shot,OZ,Ang(N),Medium,Wristshot,On Net,no_traffic,not_one_timer
+1126,1,2,Puck Recovery,NZ
+1126,2,3,Dump In/Out,NZ,Lost
+1126,3,3,Zone Entry,NZ,Dumped
+1128,1,2,Puck Recovery,BND
+1128,2,6,Play,BND,DZ2,Long,fw,Indirect
+1130,1,2,Puck Recovery,BND
+1130,2,6,Play,BND,BND2,Short,lfw,Direct
+1130,3,6,Play,BND,NZ2,Long,fw,Indirect
+1130,4,6,Incomplete Play,NZ,NZ2,Long,lfw,Direct
+1131,1,2,Puck Recovery,NZ
+1131,2,3,Dump In/Out,NZ,Lost
+1131,3,3,Zone Entry,NZ,Dumped
+1133,1,2,Puck Recovery,BND
+1133,2,6,Play,DZ,NZ2,Long,fw,Indirect
+1135,1,2,Takeaway,DZ
+1135,2,3,Dump In/Out,NZ,Lost
+1135,3,3,Zone Entry,NZ,Dumped
+1139,1,2,Puck Recovery,BND
+1139,2,6,Play,BND,BND2,Short,nm,Indirect
+1139,3,6,Play,DZ,DZ2,Medium,fw,Direct
+1139,4,6,Play,DZ,DZ2,Long,lfw,Direct
+1139,5,3,Dump In/Out,NZ,Lost
+1139,6,3,Zone Entry,OZ,Dumped
+1548,1,3,Faceoff Win,NZ,Backhand
+1548,2,2,Puck Recovery,NZ
+1548,3,6,Play,NZ,NZ2,Medium,lfw,Direct
+1548,4,6,Play,NZ,NZ2,Medium,fw,Direct
+1548,5,3,Dump In/Out,NZ,Lost
+1548,6,3,Zone Entry,OZ,Dumped
+1550,1,2,Takeaway,OZ
+1550,2,6,Incomplete Play,OZ,OZ2,Medium,lfw,Direct
+1551,1,2,Puck Recovery,NZ
+1551,2,6,Incomplete Play,DZ,NZ2,Long,lfw,Direct
+1562,1,2,Takeaway,BND
+1562,2,6,Incomplete Play,BND,DZ2,Long,fw,Indirect
+1566,1,3,Faceoff Win,DZ,Forehand
+1566,2,2,Puck Recovery,DZ
+1566,3,3,Zone Entry,OZ,Carried
+1568,1,2,Puck Recovery,BND
+1568,2,6,Incomplete Play,BND,DZ2,Long,fw,Indirect
+1572,1,2,Puck Recovery,BND
+1572,2,6,Incomplete Play,BND,DZ2,Short,lfw,Direct
+1574,1,2,Puck Recovery,DZ
+1574,2,3,Dump In/Out,DZ,Lost
+1576,1,2,Puck Recovery,DZ
+1576,2,6,Play,DZ,DZ2,Long,lbw,Direct
+1576,3,6,Play,DZ,NZ2,Long,fw,Direct
+1576,4,3,Dump In/Out,NZ,Retained
+1576,5,3,Zone Entry,OZ,Dumped
+1576,6,2,Puck Recovery,BNO
+1578,1,2,Puck Recovery,BNO
+1578,2,2,Puck Recovery,OZ
+1578,3,6,Play,OZ,OZ2,Long,lbw,Indirect
+1578,4,6,Play,OZ,BNO2,Medium,lfw,Indirect
+1578,5,6,Play,OZ,OZ2,Long,bw,Direct
+1578,6,6,Play,OZ,OZ2,Long,lfw,Direct
+1578,7,6,Play,OZ,BNO2,Long,fw,Indirect
+1578,8,6,Play,BNO,OZ2,Long,bw,Direct
+1578,9,8,Shot,OZ,Ang(N),Medium,Slapshot,On Net,no_traffic,one_timer
+1579,1,2,Puck Recovery,OZ
+1579,2,6,Play,OZ,OZ2,Medium,fw,Direct
+1579,3,8,Shot,OZ,Ang(N),Short,Wristshot,On Net,no_traffic,not_one_timer
+1581,1,2,Puck Recovery,OZ
+1581,2,6,Play,OZ,BNO2,Medium,fw,Indirect
+1581,3,6,Play,BNO,OZ2,Short,bw,Direct
+1581,4,8,Shot,OZ,Ang(M),Short,Snapshot,Blocked,no_traffic,one_timer
+1582,1,2,Puck Recovery,OZ
+1582,2,6,Play,OZ,BNO2,Short,fw,Indirect
+1582,3,6,Incomplete Play,OZ,OZ2,Long,lbw,Indirect
+1584,1,2,Puck Recovery,BND
+1584,2,6,Play,BND,BND2,Short,nm,Indirect
+1584,3,6,Play,BND,BND2,Short,lbw,Direct
+1586,1,3,Faceoff Win,DZ,Backhand
+1586,2,2,Puck Recovery,DZ
+1586,3,3,Dump In/Out,DZ,Lost
+1588,1,2,Puck Recovery,BND
+1588,2,3,Dump In/Out,BND,Lost
+1590,1,2,Takeaway,DZ
+1590,2,6,Play,DZ,NZ2,Long,fw,Indirect
+1590,3,6,Play,NZ,NZ2,Long,lfw,Indirect
+1590,4,3,Zone Entry,OZ,Carried
+1592,1,2,Puck Recovery,BND
+1592,2,6,Play,BND,DZ2,Medium,lfw,Direct
+1592,3,6,Play,DZ,NZ2,Long,fw,Direct
+1592,4,3,Dump In/Out,NZ,Lost
+1592,5,3,Faceoff Win,OZ,Backhand
+1592,6,2,Puck Recovery,OZ
+1592,7,6,Play,OZ,OZ2,Medium,bw,Direct
+1592,8,6,Play,OZ,BNO2,Long,fw,Indirect
+1592,9,6,Play,BNO,OZ2,Long,bw,Indirect
+1592,10,6,Incomplete Play,OZ,BNO2,Long,fw,Indirect
+1597,1,2,Puck Recovery,BND
+1597,2,3,Dump In/Out,BND,Lost
+1602,1,3,Faceoff Win,DZ,Backhand
+1602,2,2,Puck Recovery,DZ
+1602,3,6,Play,DZ,DZ2,Long,lfw,Indirect
+1602,4,6,Play,DZ,NZ2,Medium,fw,Indirect
+1602,5,3,Dump In/Out,NZ,Lost
+1604,1,2,Puck Recovery,DZ
+1604,2,2,Puck Recovery,DZ
+1604,3,3,Dump In/Out,DZ,Lost
+1606,1,2,Puck Recovery,NZ
+1606,2,3,Dump In/Out,NZ,Lost
+1609,1,2,Puck Recovery,DZ
+1609,2,6,Play,DZ,BND2,Short,lbw,Indirect
+1609,3,6,Play,BND,BND2,Medium,lfw,Indirect
