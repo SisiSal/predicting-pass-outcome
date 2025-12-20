@@ -585,51 +585,116 @@ event_categories <- ggplot(event_counts, aes(x = reorder(event, n), y = n)) +
 event_categories
 
 #histogram of distances for passes and incomplete passes distance
-hist_distance_passes <- ggplot(events_play, aes(x = distance)) +
+events_complete_play <- events_play %>% filter(event == "Play")
+
+hist_distance_complete_passes <- ggplot(events_complete_play, aes(x = distance)) +
   geom_histogram(binwidth = 5, fill = "steelblue", color = "black") +
   labs(
-    title = "Distribution of Distances for Plays and Incomplete Plays",
-    x = "Distance",
+    title = "(a)",
+    subtitle = "Complete Plays",
+    x = "Distance (ft)",
     y = "Frequency"
   ) +
   theme_minimal() +
   theme(
-    plot.title = element_text(hjust = 0.5)
+    plot.title = element_text(hjust = 0.5, size = 14, face = "bold"),
+    plot.subtitle = element_text(hjust = 0.5, size = 14)
   )
 
-hist_distance_passes
+hist_distance_complete_passes
 
-#histogram of distances for shots and goals distance
-hist_distance_shots <- ggplot(events_shots_goals, aes(x = distance)) +
+events_incomplete_play <- events_play %>% filter(event == "Incomplete Play")
+
+hist_distance_incomplete_passes <- ggplot(events_incomplete_play, aes(x = distance)) +
   geom_histogram(binwidth = 5, fill = "steelblue", color = "black") +
   labs(
-    title = "Distribution of Distances for Shots and Goals",
-    x = "Distance",
+    title = "(b)",
+    subtitle = "Incomplete Plays",
+    x = "Distance (ft)",
     y = "Frequency"
   ) +
   theme_minimal() +
   theme(
-    plot.title = element_text(hjust = 0.5)
+    plot.title = element_text(hjust = 0.5, size = 14, face = "bold"),
+    plot.subtitle = element_text(hjust = 0.5, size = 14)
+  )
+
+hist_distance_incomplete_passes
+
+distribution_charts_passes <- hist_distance_complete_passes + hist_distance_incomplete_passes +
+  plot_annotation(
+    title = "Distribution of Distances for Complete and Incomplete Plays",
+    theme = theme(
+      plot.title = element_text(size = 16, face = "bold", hjust = 0.5),
+    )
+  )
+
+distribution_charts_passes
+
+#histogram of distances for shots and goals distance
+
+events_shots <- events_shots_goals %>% filter(event == "Shot")
+
+hist_distance_shots <- ggplot(events_shots, aes(x = distance)) +
+  geom_histogram(binwidth = 5, fill = "#7Bd9F6", color = "black") +
+  labs(
+    title = "(a)",
+    subtitle = "Shots",
+    x = "Distance (ft)",
+    y = "Frequency"
+  ) +
+  theme_minimal() +
+  theme(
+    plot.title = element_text(hjust = 0.5, size = 14, face = "bold"),
+    plot.subtitle = element_text(hjust = 0.5, size = 14)
   )
 
 hist_distance_shots
+
+events_goals <- events_shots_goals %>% filter(event == "Goal")
+
+hist_distance_goals <- ggplot(events_goals, aes(x = distance)) +
+  geom_histogram(binwidth = 5, fill = "#7Bd9F6", color = "black") +
+  labs(
+    title = "(b)",
+    subtitle = "Goals",
+    x = "Distance (ft)",
+    y = "Frequency"
+  ) +
+  theme_minimal() +
+  theme(
+    plot.title = element_text(hjust = 0.5, size = 14, face = "bold"),
+    plot.subtitle = element_text(hjust = 0.5, size = 14)
+  )
+
+hist_distance_goals
+
+distribution_charts_shots <- hist_distance_shots + hist_distance_goals +
+  plot_annotation(
+    title = "Distribution of Distances for Shots and Goals",
+    theme = theme(
+      plot.title = element_text(size = 16, face = "bold", hjust = 0.5),
+    )
+  )
+
+distribution_charts_shots
+
 
 #histogram of angles for shots and goals
 hist_angles_shots <- ggplot((events_distance %>% filter(event %in% c("Shot", "Goal"))), 
        aes(x = post_angle)) +
   geom_histogram(binwidth = 1, fill = "steelblue", color = "black") +
-  labs(title = "Distribution of Shot Angles",
+  labs(
+    title = "Distribution of Shot and Goal Angles",
        x = "Angle",
        y = "Frequency") +
   theme_minimal()  +
   theme(
-    plot.title = element_text(hjust = 0.5)
+    plot.title = element_text(hjust = 0.5),
   )
 
 hist_angles_shots
-
-distribution_charts <- hist_distance_passes + hist_distance_shots + hist_angles_shots
-
+  
 #plot shots and goals location
 location_shots <- ggplot(events_distance %>% filter(event %in% c("Shot", "Goal")),
                          aes(x = x1_att, y = y1_att)) +
@@ -666,12 +731,14 @@ location_shots <- ggplot(events_distance %>% filter(event %in% c("Shot", "Goal")
     name = NULL
   ) +
   labs(
-    title = "Shot and Goal Locations",
+    title = "(a)",
+    subtitle = "Shot and Goal Locations",
     x = "X coordinate",
     y = "Y coordinate",
   ) +
   theme(
-    plot.title = element_text(hjust = 0.5),
+    plot.title = element_text(hjust = 0.5, size = 14, face = "bold"),
+    plot.subtitle = element_text(hjust = 0.5, size = 14),
     legend.position = "bottom",
     legend.title = element_text(face = "bold")
   )
@@ -680,7 +747,7 @@ location_shots
 
 #plot shot location by angle category
 location_angle_shots <- ggplot(events_distance %>% filter(event %in% c("Shot", "Goal")),
-       aes(x = x1_att, y = y1_att, color = angle_threshold)) +
+       aes(x = x1_att, y = y1_att, color = angle_theshold)) +
   geom_point(alpha = 0.6, size = 1) +
   geom_rect(
     xmin = 25, xmax = 100,
@@ -696,13 +763,15 @@ location_angle_shots <- ggplot(events_distance %>% filter(event %in% c("Shot", "
   coord_fixed() +
   theme_minimal() +
   labs(
-    title = "Shot Locations by Angle Category",
+    title = "(b)", 
+    subtitle = "Shot and Goal Locations \nby Angle Category",
     x = "X coordinate",
     y = "Y coordinate",
     color = NULL
   ) +
   theme(
-    plot.title = element_text(hjust = 0.5),
+    plot.title = element_text(hjust = 0.5, size = 14, face = "bold"),
+    plot.subtitle = element_text(hjust = 0.5, size = 14),
     legend.position = "bottom",
     legend.title = element_text(face = "bold")
   )
@@ -727,20 +796,28 @@ shot_distance <- ggplot(events_distance %>% filter(event %in% c("Shot", "Goal"))
   coord_fixed() +
   theme_minimal() +
   labs(
-    title = "Shot Locations by Distance Category",
+    title = "(c)",
+    subtitle = "Shot and Goal Locations \nby Distance Category",
     x = "X coordinate",
     y = "Y coordinate",
     color = NULL
   ) +
   theme(
-    plot.title = element_text(hjust = 0.5),
+    plot.title = element_text(hjust = 0.5, size = 14, face = "bold"),
+    plot.subtitle = element_text(hjust = 0.5, size = 14),
     legend.position = "bottom",
     legend.title = element_text(face = "bold")
   )
 
 shot_distance
 
-location_charts <- location_shots + location_angle_shots + shot_distance
+location_charts <- location_shots + location_angle_shots + shot_distance + 
+  plot_annotation(
+    title = "Locations of Shots and Goals",
+    theme = theme(
+      plot.title = element_text(size = 16, face = "bold", hjust = 0.5),
+    )
+  )
 location_charts
 
 #check correlation between angle and distance
