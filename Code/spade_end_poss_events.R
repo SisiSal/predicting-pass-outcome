@@ -157,6 +157,23 @@ temporal_rules_ip <- temporal_rules_ip[
         -temporal_rules_ip$support,
         temporal_rules_ip$Predicted_Items), ]
 
+#keep only those that contain event name in prev items and IPlay in predicted items
+allowed_events <- c(
+  "FoW", "PRec", "ZEnt", "IPlay", "DIO",
+  "TAw", "PenT", "Shot", "Play", "Goal"
+)
+
+event_pattern <- paste(allowed_events, collapse = "|")
+
+temporal_rules_ip <- as.data.frame(temporal_rules_ip) %>%
+  filter(
+    if_all(
+      starts_with("Previous_Items"),
+      ~ is.na(.) | grepl(event_pattern, ., fixed = FALSE)
+    ),
+    grepl("IPlay", Predicted_Items)
+  )
+
 write.csv(as.data.frame(temporal_rules_ip),
           file = "TemporalRulesIP.csv",
           row.names = FALSE,
@@ -222,6 +239,17 @@ temporal_rules_sh <- temporal_rules_sh[
         -temporal_rules_sh$support,
         temporal_rules_sh$Predicted_Items), ]
 
+#keep only those that contain event name in prev items and Shot in predicted items
+temporal_rules_sh <- as.data.frame(temporal_rules_sh) %>%
+  filter(
+    if_all(
+      starts_with("Previous_Items"),
+      ~ is.na(.) | grepl(event_pattern, ., fixed = FALSE)
+    ),
+    grepl("Shot", Predicted_Items)
+  )
+
+
 write.csv(as.data.frame(temporal_rules_sh),
           file = "TemporalRulesSH.csv",
           row.names = FALSE,
@@ -284,6 +312,17 @@ temporal_rules_go <- temporal_rules_go[
         -temporal_rules_go$confidence,
         -temporal_rules_go$support,
         temporal_rules_go$Predicted_Items), ]
+
+#keep only those that contain event name in prev items and Goal in predicted items
+temporal_rules_go <- as.data.frame(temporal_rules_go) %>%
+  filter(
+    if_all(
+      starts_with("Previous_Items"),
+      ~ is.na(.) | grepl(event_pattern, ., fixed = FALSE)
+    ),
+    grepl("Goal", Predicted_Items)
+  )
+
 
 write.csv(as.data.frame(temporal_rules_go),
           file = "TemporalRulesGO.csv",
